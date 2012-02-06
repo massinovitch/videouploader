@@ -5,11 +5,14 @@
 -- -----------------------------------------------------------
 -- Entity Designer DDL Script for MySQL Server 4.1 and higher
 -- -----------------------------------------------------------
--- Date Created: 01/20/2012 20:34:08
+-- Date Created: 02/06/2012 23:14:07
 -- Generated from EDMX file: C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderModel\Model.edmx
 -- Target version: 2.0.0.0
 -- --------------------------------------------------
 
+DROP DATABASE IF EXISTS `videouploader`;
+CREATE DATABASE `videouploader`;
+USE `videouploader`;
 
 -- --------------------------------------------------
 -- Dropping existing FOREIGN KEY constraints
@@ -59,9 +62,9 @@ CREATE TABLE `Droit` (
 CREATE TABLE `Groupe` (
     `IdGroupe` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `Nom` longtext  NOT NULL,
-    `Descritpion` longtext  NOT NULL,
-    `DateCreation` time  NOT NULL,
-    `DateMAJ` time  NOT NULL,
+    `Descritpion` longtext  NULL,
+    `DateCreation` datetime  NOT NULL,
+    `DateMAJ` datetime  NOT NULL,
     `DroitIdDroit` int  NOT NULL
 );
 
@@ -73,8 +76,8 @@ CREATE TABLE `User` (
     `Prenom` longtext  NOT NULL,
     `Login` longtext  NOT NULL,
     `Password` longtext  NOT NULL,
-    `DateCreation` time  NOT NULL,
-    `DateMAJ` time  NOT NULL,
+    `DateCreation` datetime  NOT NULL,
+    `DateMAJ` datetime  NOT NULL,
     `GroupeIdGroupe` int  NOT NULL
 );
 
@@ -83,8 +86,8 @@ CREATE TABLE `User` (
 CREATE TABLE `Element` (
     `IdElement` bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `Nom` longtext  NOT NULL,
-    `DateCreation` time  NOT NULL,
-    `DateMAJ` time  NOT NULL,
+    `DateCreation` datetime  NOT NULL,
+    `DateMAJ` datetime  NOT NULL,
     `UserIdUser` int  NOT NULL
 );
 
@@ -93,7 +96,7 @@ CREATE TABLE `Element` (
 CREATE TABLE `Comment` (
     `IdComment` bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `Contenu` longtext  NOT NULL,
-    `DateCreation` time  NOT NULL,
+    `DateCreation` datetime  NOT NULL,
     `ItemIdElement` bigint  NOT NULL,
     `UserIdUser` int  NOT NULL
 );
@@ -101,10 +104,10 @@ CREATE TABLE `Comment` (
 -- Creating table 'Element_Item'
 
 CREATE TABLE `Element_Item` (
-    `Descriptin` longtext  NOT NULL,
-    `Fichier` varbinary(100)  NOT NULL,
-    `UrlHD` longtext  NOT NULL,
-    `UrlLD` longtext  NOT NULL,
+    `Descriptin` longtext  NULL,
+    `Fichier` varbinary(100)  NULL,
+    `UrlHD` longtext  NULL,
+    `UrlLD` longtext  NULL,
     `Type` longtext  NOT NULL,
     `IdElement` bigint  NOT NULL
 );
