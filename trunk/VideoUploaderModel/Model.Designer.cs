@@ -33,7 +33,7 @@ namespace VideoUploaderModel
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
-    public partial class ModelContext : ObjectContext, IDisposable
+    public partial class ModelContext : ObjectContext
     {
         #region Constructeurs
     
@@ -223,7 +223,7 @@ namespace VideoUploaderModel
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="itemIdElement">Valeur initiale de la propriété ItemIdElement.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
-        public static Comment CreateComment(global::System.Int64 idComment, global::System.String contenu, global::System.TimeSpan dateCreation, global::System.Int64 itemIdElement, global::System.Int32 userIdUser)
+        public static Comment CreateComment(global::System.Int64 idComment, global::System.String contenu, global::System.DateTime dateCreation, global::System.Int64 itemIdElement, global::System.Int32 userIdUser)
         {
             Comment comment = new Comment();
             comment.IdComment = idComment;
@@ -293,7 +293,7 @@ namespace VideoUploaderModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.TimeSpan DateCreation
+        public global::System.DateTime DateCreation
         {
             get
             {
@@ -308,8 +308,8 @@ namespace VideoUploaderModel
                 OnDateCreationChanged();
             }
         }
-        private global::System.TimeSpan _DateCreation;
-        partial void OnDateCreationChanging(global::System.TimeSpan value);
+        private global::System.DateTime _DateCreation;
+        partial void OnDateCreationChanging(global::System.DateTime value);
         partial void OnDateCreationChanged();
     
         /// <summary>
@@ -700,7 +700,7 @@ namespace VideoUploaderModel
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
-        public static Element CreateElement(global::System.Int64 idElement, global::System.String nom, global::System.TimeSpan dateCreation, global::System.TimeSpan dateMAJ, global::System.Int32 userIdUser)
+        public static Element CreateElement(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser)
         {
             Element element = new Element();
             element.IdElement = idElement;
@@ -770,7 +770,7 @@ namespace VideoUploaderModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.TimeSpan DateCreation
+        public global::System.DateTime DateCreation
         {
             get
             {
@@ -785,8 +785,8 @@ namespace VideoUploaderModel
                 OnDateCreationChanged();
             }
         }
-        private global::System.TimeSpan _DateCreation;
-        partial void OnDateCreationChanging(global::System.TimeSpan value);
+        private global::System.DateTime _DateCreation;
+        partial void OnDateCreationChanging(global::System.DateTime value);
         partial void OnDateCreationChanged();
     
         /// <summary>
@@ -794,7 +794,7 @@ namespace VideoUploaderModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.TimeSpan DateMAJ
+        public global::System.DateTime DateMAJ
         {
             get
             {
@@ -809,8 +809,8 @@ namespace VideoUploaderModel
                 OnDateMAJChanged();
             }
         }
-        private global::System.TimeSpan _DateMAJ;
-        partial void OnDateMAJChanging(global::System.TimeSpan value);
+        private global::System.DateTime _DateMAJ;
+        partial void OnDateMAJChanging(global::System.DateTime value);
         partial void OnDateMAJChanged();
     
         /// <summary>
@@ -900,7 +900,7 @@ namespace VideoUploaderModel
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
-        public static Folder CreateFolder(global::System.Int64 idElement, global::System.String nom, global::System.TimeSpan dateCreation, global::System.TimeSpan dateMAJ, global::System.Int32 userIdUser)
+        public static Folder CreateFolder(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser)
         {
             Folder folder = new Folder();
             folder.IdElement = idElement;
@@ -930,16 +930,14 @@ namespace VideoUploaderModel
         /// </summary>
         /// <param name="idGroupe">Valeur initiale de la propriété IdGroupe.</param>
         /// <param name="nom">Valeur initiale de la propriété Nom.</param>
-        /// <param name="descritpion">Valeur initiale de la propriété Descritpion.</param>
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="droitIdDroit">Valeur initiale de la propriété DroitIdDroit.</param>
-        public static Groupe CreateGroupe(global::System.Int32 idGroupe, global::System.String nom, global::System.String descritpion, global::System.TimeSpan dateCreation, global::System.TimeSpan dateMAJ, global::System.Int32 droitIdDroit)
+        public static Groupe CreateGroupe(global::System.Int32 idGroupe, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 droitIdDroit)
         {
             Groupe groupe = new Groupe();
             groupe.IdGroupe = idGroupe;
             groupe.Nom = nom;
-            groupe.Descritpion = descritpion;
             groupe.DateCreation = dateCreation;
             groupe.DateMAJ = dateMAJ;
             groupe.DroitIdDroit = droitIdDroit;
@@ -1003,7 +1001,7 @@ namespace VideoUploaderModel
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Descritpion
         {
@@ -1015,7 +1013,7 @@ namespace VideoUploaderModel
             {
                 OnDescritpionChanging(value);
                 ReportPropertyChanging("Descritpion");
-                _Descritpion = StructuralObject.SetValidValue(value, false);
+                _Descritpion = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Descritpion");
                 OnDescritpionChanged();
             }
@@ -1029,7 +1027,7 @@ namespace VideoUploaderModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.TimeSpan DateCreation
+        public global::System.DateTime DateCreation
         {
             get
             {
@@ -1044,8 +1042,8 @@ namespace VideoUploaderModel
                 OnDateCreationChanged();
             }
         }
-        private global::System.TimeSpan _DateCreation;
-        partial void OnDateCreationChanging(global::System.TimeSpan value);
+        private global::System.DateTime _DateCreation;
+        partial void OnDateCreationChanging(global::System.DateTime value);
         partial void OnDateCreationChanged();
     
         /// <summary>
@@ -1053,7 +1051,7 @@ namespace VideoUploaderModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.TimeSpan DateMAJ
+        public global::System.DateTime DateMAJ
         {
             get
             {
@@ -1068,8 +1066,8 @@ namespace VideoUploaderModel
                 OnDateMAJChanged();
             }
         }
-        private global::System.TimeSpan _DateMAJ;
-        partial void OnDateMAJChanging(global::System.TimeSpan value);
+        private global::System.DateTime _DateMAJ;
+        partial void OnDateMAJChanging(global::System.DateTime value);
         partial void OnDateMAJChanged();
     
         /// <summary>
@@ -1159,12 +1157,8 @@ namespace VideoUploaderModel
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
-        /// <param name="descriptin">Valeur initiale de la propriété Descriptin.</param>
-        /// <param name="fichier">Valeur initiale de la propriété Fichier.</param>
-        /// <param name="urlHD">Valeur initiale de la propriété UrlHD.</param>
-        /// <param name="urlLD">Valeur initiale de la propriété UrlLD.</param>
         /// <param name="type">Valeur initiale de la propriété Type.</param>
-        public static Item CreateItem(global::System.Int64 idElement, global::System.String nom, global::System.TimeSpan dateCreation, global::System.TimeSpan dateMAJ, global::System.Int32 userIdUser, global::System.String descriptin, global::System.Byte[] fichier, global::System.String urlHD, global::System.String urlLD, global::System.String type)
+        public static Item CreateItem(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser, global::System.String type)
         {
             Item item = new Item();
             item.IdElement = idElement;
@@ -1172,10 +1166,6 @@ namespace VideoUploaderModel
             item.DateCreation = dateCreation;
             item.DateMAJ = dateMAJ;
             item.UserIdUser = userIdUser;
-            item.Descriptin = descriptin;
-            item.Fichier = fichier;
-            item.UrlHD = urlHD;
-            item.UrlLD = urlLD;
             item.Type = type;
             return item;
         }
@@ -1186,7 +1176,7 @@ namespace VideoUploaderModel
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Descriptin
         {
@@ -1198,7 +1188,7 @@ namespace VideoUploaderModel
             {
                 OnDescriptinChanging(value);
                 ReportPropertyChanging("Descriptin");
-                _Descriptin = StructuralObject.SetValidValue(value, false);
+                _Descriptin = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Descriptin");
                 OnDescriptinChanged();
             }
@@ -1210,7 +1200,7 @@ namespace VideoUploaderModel
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.Byte[] Fichier
         {
@@ -1222,7 +1212,7 @@ namespace VideoUploaderModel
             {
                 OnFichierChanging(value);
                 ReportPropertyChanging("Fichier");
-                _Fichier = StructuralObject.SetValidValue(value, false);
+                _Fichier = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Fichier");
                 OnFichierChanged();
             }
@@ -1234,7 +1224,7 @@ namespace VideoUploaderModel
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String UrlHD
         {
@@ -1246,7 +1236,7 @@ namespace VideoUploaderModel
             {
                 OnUrlHDChanging(value);
                 ReportPropertyChanging("UrlHD");
-                _UrlHD = StructuralObject.SetValidValue(value, false);
+                _UrlHD = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("UrlHD");
                 OnUrlHDChanged();
             }
@@ -1258,7 +1248,7 @@ namespace VideoUploaderModel
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String UrlLD
         {
@@ -1270,7 +1260,7 @@ namespace VideoUploaderModel
             {
                 OnUrlLDChanging(value);
                 ReportPropertyChanging("UrlLD");
-                _UrlLD = StructuralObject.SetValidValue(value, false);
+                _UrlLD = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("UrlLD");
                 OnUrlLDChanged();
             }
@@ -1328,7 +1318,7 @@ namespace VideoUploaderModel
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="groupeIdGroupe">Valeur initiale de la propriété GroupeIdGroupe.</param>
-        public static User CreateUser(global::System.Int32 idUser, global::System.String nom, global::System.String prenom, global::System.String login, global::System.String password, global::System.TimeSpan dateCreation, global::System.TimeSpan dateMAJ, global::System.Int32 groupeIdGroupe)
+        public static User CreateUser(global::System.Int32 idUser, global::System.String nom, global::System.String prenom, global::System.String login, global::System.String password, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 groupeIdGroupe)
         {
             User user = new User();
             user.IdUser = idUser;
@@ -1473,7 +1463,7 @@ namespace VideoUploaderModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.TimeSpan DateCreation
+        public global::System.DateTime DateCreation
         {
             get
             {
@@ -1488,8 +1478,8 @@ namespace VideoUploaderModel
                 OnDateCreationChanged();
             }
         }
-        private global::System.TimeSpan _DateCreation;
-        partial void OnDateCreationChanging(global::System.TimeSpan value);
+        private global::System.DateTime _DateCreation;
+        partial void OnDateCreationChanging(global::System.DateTime value);
         partial void OnDateCreationChanged();
     
         /// <summary>
@@ -1497,7 +1487,7 @@ namespace VideoUploaderModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.TimeSpan DateMAJ
+        public global::System.DateTime DateMAJ
         {
             get
             {
@@ -1512,8 +1502,8 @@ namespace VideoUploaderModel
                 OnDateMAJChanged();
             }
         }
-        private global::System.TimeSpan _DateMAJ;
-        partial void OnDateMAJChanging(global::System.TimeSpan value);
+        private global::System.DateTime _DateMAJ;
+        partial void OnDateMAJChanging(global::System.DateTime value);
         partial void OnDateMAJChanged();
     
         /// <summary>

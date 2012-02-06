@@ -61,9 +61,9 @@
     </Key>
     <Property Name="IdGroupe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nom" Type="longtext" Nullable="false" />
-    <Property Name="Descritpion" Type="longtext" Nullable="false" />
-    <Property Name="DateCreation" Type="time" Nullable="false" />
-    <Property Name="DateMAJ" Type="time" Nullable="false" />
+    <Property Name="Descritpion" Type="longtext" Nullable="true" />
+    <Property Name="DateCreation" Type="datetime" Nullable="false" />
+    <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="DroitIdDroit" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
@@ -75,8 +75,8 @@
     <Property Name="Prenom" Type="longtext" Nullable="false" />
     <Property Name="Login" Type="longtext" Nullable="false" />
     <Property Name="Password" Type="longtext" Nullable="false" />
-    <Property Name="DateCreation" Type="time" Nullable="false" />
-    <Property Name="DateMAJ" Type="time" Nullable="false" />
+    <Property Name="DateCreation" Type="datetime" Nullable="false" />
+    <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="GroupeIdGroupe" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Element">
@@ -85,8 +85,8 @@
     </Key>
     <Property Name="IdElement" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nom" Type="longtext" Nullable="false" />
-    <Property Name="DateCreation" Type="time" Nullable="false" />
-    <Property Name="DateMAJ" Type="time" Nullable="false" />
+    <Property Name="DateCreation" Type="datetime" Nullable="false" />
+    <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="UserIdUser" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Comment">
@@ -95,7 +95,7 @@
     </Key>
     <Property Name="IdComment" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Contenu" Type="longtext" Nullable="false" />
-    <Property Name="DateCreation" Type="time" Nullable="false" />
+    <Property Name="DateCreation" Type="datetime" Nullable="false" />
     <Property Name="ItemIdElement" Type="bigint" Nullable="false" />
     <Property Name="UserIdUser" Type="int" Nullable="false" />
   </EntityType>
@@ -103,10 +103,10 @@
     <Key>
       <PropertyRef Name="IdElement" />
     </Key>
-    <Property Name="Descriptin" Type="longtext" Nullable="false" />
-    <Property Name="Fichier" Type="varbinary" Nullable="false" />
-    <Property Name="UrlHD" Type="longtext" Nullable="false" />
-    <Property Name="UrlLD" Type="longtext" Nullable="false" />
+    <Property Name="Descriptin" Type="longtext" Nullable="true" />
+    <Property Name="Fichier" Type="varbinary" Nullable="true" />
+    <Property Name="UrlHD" Type="longtext" Nullable="true" />
+    <Property Name="UrlLD" Type="longtext" Nullable="true" />
     <Property Name="Type" Type="longtext" Nullable="false" />
     <Property Name="IdElement" Type="bigint" Nullable="false" />
   </EntityType>
@@ -250,9 +250,9 @@
           </Key>
           <Property Type="Int32" Name="IdGroupe" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Nom" Nullable="false" />
-          <Property Type="String" Name="Descritpion" Nullable="false" />
-          <Property Type="Time" Name="DateCreation" Nullable="false" />
-          <Property Type="Time" Name="DateMAJ" Nullable="false" />
+          <Property Type="String" Name="Descritpion" Nullable="true" />
+          <Property Type="DateTime" Name="DateCreation" Nullable="false" />
+          <Property Type="DateTime" Name="DateMAJ" Nullable="false" />
           <NavigationProperty Name="Droit" Relationship="Model.DroitGroupe" FromRole="Groupe" ToRole="Droit" />
           <Property Type="Int32" Name="DroitIdDroit" Nullable="false" />
         </EntityType>
@@ -265,8 +265,8 @@
           <Property Type="String" Name="Prenom" Nullable="false" />
           <Property Type="String" Name="Login" Nullable="false" />
           <Property Type="String" Name="Password" Nullable="false" />
-          <Property Type="Time" Name="DateCreation" Nullable="false" />
-          <Property Type="Time" Name="DateMAJ" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreation" Nullable="false" />
+          <Property Type="DateTime" Name="DateMAJ" Nullable="false" />
           <NavigationProperty Name="Groupe" Relationship="Model.GroupeUser" FromRole="User" ToRole="Groupe" />
           <Property Type="Int32" Name="GroupeIdGroupe" Nullable="false" />
         </EntityType>
@@ -276,16 +276,16 @@
           </Key>
           <Property Type="Int64" Name="IdElement" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Nom" Nullable="false" />
-          <Property Type="Time" Name="DateCreation" Nullable="false" />
-          <Property Type="Time" Name="DateMAJ" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreation" Nullable="false" />
+          <Property Type="DateTime" Name="DateMAJ" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Model.UserFolder" FromRole="Folder" ToRole="User" />
           <Property Type="Int32" Name="UserIdUser" Nullable="false" />
         </EntityType>
         <EntityType Name="Item" BaseType="Model.Element">
-          <Property Type="String" Name="Descriptin" Nullable="false" />
-          <Property Type="Binary" Name="Fichier" Nullable="false" />
-          <Property Type="String" Name="UrlHD" Nullable="false" />
-          <Property Type="String" Name="UrlLD" Nullable="false" />
+          <Property Type="String" Name="Descriptin" Nullable="true" />
+          <Property Type="Binary" Name="Fichier" Nullable="true" />
+          <Property Type="String" Name="UrlHD" Nullable="true" />
+          <Property Type="String" Name="UrlLD" Nullable="true" />
           <Property Type="String" Name="Type" Nullable="false" />
         </EntityType>
         <EntityType Name="Comment">
@@ -294,7 +294,7 @@
           </Key>
           <Property Type="Int64" Name="IdComment" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Contenu" Nullable="false" />
-          <Property Type="Time" Name="DateCreation" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreation" Nullable="false" />
           <NavigationProperty Name="Item" Relationship="Model.ItemComment" FromRole="Comment" ToRole="Item" />
           <Property Type="Int64" Name="ItemIdElement" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Model.UserComment" FromRole="Comment" ToRole="User" />
