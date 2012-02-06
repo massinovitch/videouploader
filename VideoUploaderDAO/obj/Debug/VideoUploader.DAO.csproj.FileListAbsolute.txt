@@ -1,0 +1,14 @@
+C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\bin\Debug\VideoUploaderDAO.dll
+C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\bin\Debug\VideoUploaderDAO.pdb
+C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\bin\Debug\VideoUploaderModel.dll
+C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\bin\Debug\VideoUploaderModel.pdb
+C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\obj\Debug\VideoUploaderDAO.dll
+C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\obj\Debug\VideoUploaderDAO.pdb
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\bin\Debug\VideoUploaderDAO.dll
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\bin\Debug\VideoUploaderDAO.pdb
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\bin\Debug\VideoUploaderModel.dll
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\bin\Debug\VideoUploaderModel.pdb
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\obj\Debug\VideoUploaderDAO.dll
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\obj\Debug\VideoUploaderDAO.pdb
