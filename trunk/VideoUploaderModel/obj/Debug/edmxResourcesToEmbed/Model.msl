@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContext">
+    <EntitySetMapping Name="Droit">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Droit)">
+        <MappingFragment StoreEntitySet="Droit">
+          <ScalarProperty Name="IdDroit" ColumnName="IdDroit" />
+          <ScalarProperty Name="LirePublic" ColumnName="LirePublic" />
+          <ScalarProperty Name="EcrirePublic" ColumnName="EcrirePublic" />
+          <ScalarProperty Name="SuppPublic" ColumnName="SuppPublic" />
+          <ScalarProperty Name="LirePrive" ColumnName="LirePrive" />
+          <ScalarProperty Name="EcrirePrive" ColumnName="EcrirePrive" />
+          <ScalarProperty Name="SuppPrive" ColumnName="SuppPrive" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groupe">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Groupe)">
+        <MappingFragment StoreEntitySet="Groupe">
+          <ScalarProperty Name="IdGroupe" ColumnName="IdGroupe" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Descritpion" ColumnName="Descritpion" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="DateMAJ" ColumnName="DateMAJ" />
+          <ScalarProperty Name="DroitIdDroit" ColumnName="DroitIdDroit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.User)">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="DateMAJ" ColumnName="DateMAJ" />
+          <ScalarProperty Name="GroupeIdGroupe" ColumnName="GroupeIdGroupe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Element">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Element)">
+        <MappingFragment StoreEntitySet="Element">
+          <ScalarProperty Name="IdElement" ColumnName="IdElement" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="DateMAJ" ColumnName="DateMAJ" />
+          <ScalarProperty Name="UserIdUser" ColumnName="UserIdUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Item)">
+        <MappingFragment StoreEntitySet="Element_Item">
+          <ScalarProperty Name="IdElement" ColumnName="IdElement" />
+          <ScalarProperty Name="Descriptin" ColumnName="Descriptin" />
+          <ScalarProperty Name="Fichier" ColumnName="Fichier" />
+          <ScalarProperty Name="UrlHD" ColumnName="UrlHD" />
+          <ScalarProperty Name="UrlLD" ColumnName="UrlLD" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Folder)">
+        <MappingFragment StoreEntitySet="Element_Folder">
+          <ScalarProperty Name="IdElement" ColumnName="IdElement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comment">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Comment)">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="IdComment" ColumnName="IdComment" />
+          <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="ItemIdElement" ColumnName="ItemIdElement" />
+          <ScalarProperty Name="UserIdUser" ColumnName="UserIdUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

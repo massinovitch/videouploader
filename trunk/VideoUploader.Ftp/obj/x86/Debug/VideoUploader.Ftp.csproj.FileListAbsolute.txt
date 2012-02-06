@@ -1,0 +1,5 @@
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploader.Ftp\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploader.Ftp\bin\Debug\VideoUploader.Ftp.exe
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploader.Ftp\bin\Debug\VideoUploader.Ftp.pdb
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploader.Ftp\obj\x86\Debug\VideoUploader.Ftp.exe
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploader.Ftp\obj\x86\Debug\VideoUploader.Ftp.pdb

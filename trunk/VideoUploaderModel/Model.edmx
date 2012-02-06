@@ -1,0 +1,505 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Droit" EntityType="Model.Store.Droit" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groupe" EntityType="Model.Store.Groupe" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="Model.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Element" EntityType="Model.Store.Element" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Comment" EntityType="Model.Store.Comment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Element_Item" EntityType="Model.Store.Element_Item" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Element_Folder" EntityType="Model.Store.Element_Folder" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="DroitGroupe" Association="Model.Store.DroitGroupe">
+      <End Role="Droit" EntitySet="Droit" />
+      <End Role="Groupe" EntitySet="Groupe" />
+    </AssociationSet>
+    <AssociationSet Name="GroupeUser" Association="Model.Store.GroupeUser">
+      <End Role="Groupe" EntitySet="Groupe" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="UserFolder" Association="Model.Store.UserFolder">
+      <End Role="User" EntitySet="User" />
+      <End Role="Folder" EntitySet="Element" />
+    </AssociationSet>
+    <AssociationSet Name="ItemComment" Association="Model.Store.ItemComment">
+      <End Role="Item" EntitySet="Element_Item" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="UserComment" Association="Model.Store.UserComment">
+      <End Role="User" EntitySet="User" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Item_inherits_Element" Association="Model.Store.FK_Item_inherits_Element">
+      <End Role="Element" EntitySet="Element" />
+      <End Role="Item" EntitySet="Element_Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Folder_inherits_Element" Association="Model.Store.FK_Folder_inherits_Element">
+      <End Role="Element" EntitySet="Element" />
+      <End Role="Folder" EntitySet="Element_Folder" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Droit">
+    <Key>
+      <PropertyRef Name="IdDroit" />
+    </Key>
+    <Property Name="IdDroit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LirePublic" Type="bool" Nullable="false" />
+    <Property Name="EcrirePublic" Type="bool" Nullable="false" />
+    <Property Name="SuppPublic" Type="bool" Nullable="false" />
+    <Property Name="LirePrive" Type="bool" Nullable="false" />
+    <Property Name="EcrirePrive" Type="bool" Nullable="false" />
+    <Property Name="SuppPrive" Type="bool" Nullable="false" />
+    <Property Name="Admin" Type="bool" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groupe">
+    <Key>
+      <PropertyRef Name="IdGroupe" />
+    </Key>
+    <Property Name="IdGroupe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="longtext" Nullable="false" />
+    <Property Name="Descritpion" Type="longtext" Nullable="false" />
+    <Property Name="DateCreation" Type="time" Nullable="false" />
+    <Property Name="DateMAJ" Type="time" Nullable="false" />
+    <Property Name="DroitIdDroit" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="longtext" Nullable="false" />
+    <Property Name="Prenom" Type="longtext" Nullable="false" />
+    <Property Name="Login" Type="longtext" Nullable="false" />
+    <Property Name="Password" Type="longtext" Nullable="false" />
+    <Property Name="DateCreation" Type="time" Nullable="false" />
+    <Property Name="DateMAJ" Type="time" Nullable="false" />
+    <Property Name="GroupeIdGroupe" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Element">
+    <Key>
+      <PropertyRef Name="IdElement" />
+    </Key>
+    <Property Name="IdElement" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="longtext" Nullable="false" />
+    <Property Name="DateCreation" Type="time" Nullable="false" />
+    <Property Name="DateMAJ" Type="time" Nullable="false" />
+    <Property Name="UserIdUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="IdComment" />
+    </Key>
+    <Property Name="IdComment" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Contenu" Type="longtext" Nullable="false" />
+    <Property Name="DateCreation" Type="time" Nullable="false" />
+    <Property Name="ItemIdElement" Type="bigint" Nullable="false" />
+    <Property Name="UserIdUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Element_Item">
+    <Key>
+      <PropertyRef Name="IdElement" />
+    </Key>
+    <Property Name="Descriptin" Type="longtext" Nullable="false" />
+    <Property Name="Fichier" Type="varbinary" Nullable="false" />
+    <Property Name="UrlHD" Type="longtext" Nullable="false" />
+    <Property Name="UrlLD" Type="longtext" Nullable="false" />
+    <Property Name="Type" Type="longtext" Nullable="false" />
+    <Property Name="IdElement" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Element_Folder">
+    <Key>
+      <PropertyRef Name="IdElement" />
+    </Key>
+    <Property Name="IdElement" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="DroitGroupe">
+    <End Role="Droit" Type="Model.Store.Droit" Multiplicity="1" />
+    <End Role="Groupe" Type="Model.Store.Groupe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Droit">
+        <PropertyRef Name="IdDroit" />
+      </Principal>
+      <Dependent Role="Groupe">
+        <PropertyRef Name="DroitIdDroit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GroupeUser">
+    <End Role="Groupe" Type="Model.Store.Groupe" Multiplicity="1" />
+    <End Role="User" Type="Model.Store.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groupe">
+        <PropertyRef Name="IdGroupe" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="GroupeIdGroupe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserFolder">
+    <End Role="User" Type="Model.Store.User" Multiplicity="1" />
+    <End Role="Folder" Type="Model.Store.Element" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Folder">
+        <PropertyRef Name="UserIdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ItemComment">
+    <End Role="Item" Type="Model.Store.Element_Item" Multiplicity="1" />
+    <End Role="Comment" Type="Model.Store.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="IdElement" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ItemIdElement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserComment">
+    <End Role="User" Type="Model.Store.User" Multiplicity="1" />
+    <End Role="Comment" Type="Model.Store.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="UserIdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Item_inherits_Element">
+    <End Role="Element" Type="Model.Store.Element" Multiplicity="1" />
+    <End Role="Item" Type="Model.Store.Element_Item" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Element">
+        <PropertyRef Name="IdElement" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="IdElement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Folder_inherits_Element">
+    <End Role="Element" Type="Model.Store.Element" Multiplicity="1" />
+    <End Role="Folder" Type="Model.Store.Element_Folder" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Element">
+        <PropertyRef Name="IdElement" />
+      </Principal>
+      <Dependent Role="Folder">
+        <PropertyRef Name="IdElement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="ModelContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Droit" EntityType="Model.Droit" />
+          <EntitySet Name="Groupe" EntityType="Model.Groupe" />
+          <EntitySet Name="User" EntityType="Model.User" />
+          <EntitySet Name="Element" EntityType="Model.Element" />
+          <EntitySet Name="Comment" EntityType="Model.Comment" />
+          <AssociationSet Name="DroitGroupe" Association="Model.DroitGroupe">
+            <End Role="Droit" EntitySet="Droit" />
+            <End Role="Groupe" EntitySet="Groupe" />
+          </AssociationSet>
+          <AssociationSet Name="GroupeUser" Association="Model.GroupeUser">
+            <End Role="Groupe" EntitySet="Groupe" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="UserFolder" Association="Model.UserFolder">
+            <End Role="User" EntitySet="User" />
+            <End Role="Folder" EntitySet="Element" />
+          </AssociationSet>
+          <AssociationSet Name="ItemComment" Association="Model.ItemComment">
+            <End Role="Item" EntitySet="Element" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="UserComment" Association="Model.UserComment">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Droit">
+          <Key>
+            <PropertyRef Name="IdDroit" />
+          </Key>
+          <Property Type="Int32" Name="IdDroit" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="LirePublic" Nullable="false" />
+          <Property Type="Boolean" Name="EcrirePublic" Nullable="false" />
+          <Property Type="Boolean" Name="SuppPublic" Nullable="false" />
+          <Property Type="Boolean" Name="LirePrive" Nullable="false" />
+          <Property Type="Boolean" Name="EcrirePrive" Nullable="false" />
+          <Property Type="Boolean" Name="SuppPrive" Nullable="false" />
+          <Property Type="Boolean" Name="Admin" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groupe">
+          <Key>
+            <PropertyRef Name="IdGroupe" />
+          </Key>
+          <Property Type="Int32" Name="IdGroupe" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nom" Nullable="false" />
+          <Property Type="String" Name="Descritpion" Nullable="false" />
+          <Property Type="Time" Name="DateCreation" Nullable="false" />
+          <Property Type="Time" Name="DateMAJ" Nullable="false" />
+          <NavigationProperty Name="Droit" Relationship="Model.DroitGroupe" FromRole="Groupe" ToRole="Droit" />
+          <Property Type="Int32" Name="DroitIdDroit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Type="Int32" Name="IdUser" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nom" Nullable="false" />
+          <Property Type="String" Name="Prenom" Nullable="false" />
+          <Property Type="String" Name="Login" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" />
+          <Property Type="Time" Name="DateCreation" Nullable="false" />
+          <Property Type="Time" Name="DateMAJ" Nullable="false" />
+          <NavigationProperty Name="Groupe" Relationship="Model.GroupeUser" FromRole="User" ToRole="Groupe" />
+          <Property Type="Int32" Name="GroupeIdGroupe" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Element">
+          <Key>
+            <PropertyRef Name="IdElement" />
+          </Key>
+          <Property Type="Int64" Name="IdElement" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nom" Nullable="false" />
+          <Property Type="Time" Name="DateCreation" Nullable="false" />
+          <Property Type="Time" Name="DateMAJ" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model.UserFolder" FromRole="Folder" ToRole="User" />
+          <Property Type="Int32" Name="UserIdUser" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item" BaseType="Model.Element">
+          <Property Type="String" Name="Descriptin" Nullable="false" />
+          <Property Type="Binary" Name="Fichier" Nullable="false" />
+          <Property Type="String" Name="UrlHD" Nullable="false" />
+          <Property Type="String" Name="UrlLD" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="IdComment" />
+          </Key>
+          <Property Type="Int64" Name="IdComment" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Contenu" Nullable="false" />
+          <Property Type="Time" Name="DateCreation" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Model.ItemComment" FromRole="Comment" ToRole="Item" />
+          <Property Type="Int64" Name="ItemIdElement" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model.UserComment" FromRole="Comment" ToRole="User" />
+          <Property Type="Int32" Name="UserIdUser" Nullable="false" />
+        </EntityType>
+        <Association Name="DroitGroupe">
+          <End Type="Model.Droit" Role="Droit" Multiplicity="1" />
+          <End Type="Model.Groupe" Role="Groupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Droit">
+              <PropertyRef Name="IdDroit" />
+            </Principal>
+            <Dependent Role="Groupe">
+              <PropertyRef Name="DroitIdDroit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupeUser">
+          <End Type="Model.Groupe" Role="Groupe" Multiplicity="1" />
+          <End Type="Model.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groupe">
+              <PropertyRef Name="IdGroupe" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="GroupeIdGroupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserFolder">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Element" Role="Folder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Folder">
+              <PropertyRef Name="UserIdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Folder" BaseType="Model.Element" />
+        <Association Name="ItemComment">
+          <End Type="Model.Item" Role="Item" Multiplicity="1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="IdElement" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ItemIdElement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserComment">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserIdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContext">
+    <EntitySetMapping Name="Droit">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Droit)">
+        <MappingFragment StoreEntitySet="Droit">
+          <ScalarProperty Name="IdDroit" ColumnName="IdDroit" />
+          <ScalarProperty Name="LirePublic" ColumnName="LirePublic" />
+          <ScalarProperty Name="EcrirePublic" ColumnName="EcrirePublic" />
+          <ScalarProperty Name="SuppPublic" ColumnName="SuppPublic" />
+          <ScalarProperty Name="LirePrive" ColumnName="LirePrive" />
+          <ScalarProperty Name="EcrirePrive" ColumnName="EcrirePrive" />
+          <ScalarProperty Name="SuppPrive" ColumnName="SuppPrive" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groupe">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Groupe)">
+        <MappingFragment StoreEntitySet="Groupe">
+          <ScalarProperty Name="IdGroupe" ColumnName="IdGroupe" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Descritpion" ColumnName="Descritpion" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="DateMAJ" ColumnName="DateMAJ" />
+          <ScalarProperty Name="DroitIdDroit" ColumnName="DroitIdDroit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.User)">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="DateMAJ" ColumnName="DateMAJ" />
+          <ScalarProperty Name="GroupeIdGroupe" ColumnName="GroupeIdGroupe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Element">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Element)">
+        <MappingFragment StoreEntitySet="Element">
+          <ScalarProperty Name="IdElement" ColumnName="IdElement" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="DateMAJ" ColumnName="DateMAJ" />
+          <ScalarProperty Name="UserIdUser" ColumnName="UserIdUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Item)">
+        <MappingFragment StoreEntitySet="Element_Item">
+          <ScalarProperty Name="IdElement" ColumnName="IdElement" />
+          <ScalarProperty Name="Descriptin" ColumnName="Descriptin" />
+          <ScalarProperty Name="Fichier" ColumnName="Fichier" />
+          <ScalarProperty Name="UrlHD" ColumnName="UrlHD" />
+          <ScalarProperty Name="UrlLD" ColumnName="UrlLD" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Folder)">
+        <MappingFragment StoreEntitySet="Element_Folder">
+          <ScalarProperty Name="IdElement" ColumnName="IdElement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comment">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Comment)">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="IdComment" ColumnName="IdComment" />
+          <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="ItemIdElement" ColumnName="ItemIdElement" />
+          <ScalarProperty Name="UserIdUser" ColumnName="UserIdUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToMySQL.tt" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Model" ZoomLevel="94" >
+        <EntityTypeShape EntityType="Model.Droit" Width="1.875" PointX="0.75" PointY="0.75" Height="2.3848893229166666" />
+        <EntityTypeShape EntityType="Model.Groupe" Width="1.5" PointX="3.125" PointY="0.75" Height="1.9802864583333331" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="5.25" PointY="1.375" Height="2.3648893229166665" />
+        <EntityTypeShape EntityType="Model.Element" Width="1.5" PointX="7.875" PointY="1.375" Height="1.787985026041667" />
+        <EntityTypeShape EntityType="Model.Item" Width="1.5" PointX="6.5" PointY="4.5" Height="1.9802864583333326" />
+        <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="2.875" PointY="4.25" Height="2.3648893229166656" />
+        <AssociationConnector Association="Model.DroitGroupe">
+          <ConnectorPoint PointX="2.625" PointY="1.9324446614583335" />
+          <ConnectorPoint PointX="3.125" PointY="1.9324446614583335" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.GroupeUser">
+          <ConnectorPoint PointX="4.625" PointY="2.2449446614583337" />
+          <ConnectorPoint PointX="5.25" PointY="2.2449446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.UserFolder">
+          <ConnectorPoint PointX="6.75" PointY="2.4612939453125" />
+          <ConnectorPoint PointX="7.875" PointY="2.4612939453125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Model.Folder" Width="1.5" PointX="10" PointY="4.5" Height="1.038779296875" />
+        <InheritanceConnector EntityType="Model.Item" >
+          <ConnectorPoint PointX="8.625" PointY="3.547587890625" />
+          <ConnectorPoint PointX="8.625" PointY="4.125" />
+          <ConnectorPoint PointX="7.25" PointY="4.125" />
+          <ConnectorPoint PointX="7.25" PointY="4.5" />
+        </InheritanceConnector>
+        <AssociationConnector Association="Model.ItemComment">
+          <ConnectorPoint PointX="6.5" PointY="5.4901432291666659" />
+          <ConnectorPoint PointX="4.375" PointY="5.4901432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.UserComment">
+          <ConnectorPoint PointX="5.25" PointY="3.6509407552083335" />
+          <ConnectorPoint PointX="2.96875" PointY="3.6509407552083335" />
+          <ConnectorPoint PointX="2.96875" PointY="4.25" />
+        </AssociationConnector>
+        <InheritanceConnector EntityType="Model.Folder" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
