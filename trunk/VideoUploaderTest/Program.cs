@@ -12,7 +12,7 @@ namespace VideoUploaderTest
         static void Main(string[] args)
         {
             UserRepository userTest = new UserRepository();
-            /*
+            
             var user = new User
             {
                 IdUser = 1,
@@ -20,12 +20,12 @@ namespace VideoUploaderTest
                 Nom = "sekhi",
                 Prenom = "massinissa",
                 GroupeIdGroupe = 1,
-                DateCreation = new TimeSpan(11012012),
-                DateMAJ = new TimeSpan(22565265),
+                DateCreation = DateTime.Now,
+                DateMAJ = DateTime.Now,
                 Password = "pass"
             };
             userTest.Create(user);
-            */
+            
             var userSearch = new User
             {
                 Login = "massinovicth",

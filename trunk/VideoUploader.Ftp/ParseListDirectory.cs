@@ -19,35 +19,49 @@ namespace VideoUploader.Ftp
         */
         public FileStruct[] GetList(string datastring)
         {
-            List<FileStruct> myListArray = new List<FileStruct>();
-            string[] dataRecords = datastring.Split('\n');
-            FileListStyle _directoryListStyle = GuessFileListStyle(dataRecords);
-            foreach (string s in dataRecords)
+            try
             {
-                if (_directoryListStyle != FileListStyle.Unknown && s != "")
+                List<FileStruct> myListArray = new List<FileStruct>();
+                string[] dataRecords = datastring.Split('\n');
+                FileListStyle _directoryListStyle = GuessFileListStyle(dataRecords);
+                foreach (string s in dataRecords)
                 {
-                    FileStruct f = new FileStruct();
-                    f.Name = "..";
-                    switch (_directoryListStyle)
+                    if (_directoryListStyle != FileListStyle.Unknown && s != "")
                     {
-                        case FileListStyle.UnixStyle:
-                            f = ParseFileStructFromUnixStyleRecord(s);
-                            break;
-                        case FileListStyle.WindowsStyle:
-                            f = ParseFileStructFromWindowsStyleRecord(s);
-                            break;
-                    }
-                    if (!(f.Name == "." || f.Name == ".."))
-                    {
-                        myListArray.Add(f);
+                        FileStruct f = new FileStruct();
+                        f.Name = "..";
+                        switch (_directoryListStyle)
+                        {
+                            case FileListStyle.UnixStyle:
+                                f = ParseFileStructFromUnixStyleRecord(s);
+                                break;
+                            case FileListStyle.WindowsStyle:
+                                f = ParseFileStructFromWindowsStyleRecord(s);
+                                break;
+                        }
+                        if (!(f.Name == "." || f.Name == ".."))
+                        {
+                            myListArray.Add(f);
+                        }
                     }
                 }
+                return myListArray.ToArray(); ;
             }
-            return myListArray.ToArray(); ;
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         private FileListStyle GuessFileListStyle(string[] recordList)
         {
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
             foreach (string s in recordList)
             {
                 if (s.Length > 10
@@ -66,6 +80,13 @@ namespace VideoUploader.Ftp
 
         private FileStruct ParseFileStructFromWindowsStyleRecord(string Record)
         {
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
             ///Assuming the record style as 
             /// 02-03-04  07:46PM       <DIR>          Append
             FileStruct f = new FileStruct();
@@ -92,6 +113,13 @@ namespace VideoUploader.Ftp
 
         private FileStruct ParseFileStructFromUnixStyleRecord(string Record)
         {
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
             ///Assuming record style as
             /// dr-xr-xr-x   1 owner    group               0 Nov 25  2002 bussys
             FileStruct f = new FileStruct();
@@ -110,6 +138,13 @@ namespace VideoUploader.Ftp
 
         private string _cutSubstringFromStringWithTrim(ref string s, char c, int startIndex)
         {
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
             int pos1 = s.IndexOf(c, startIndex);
             string retString = s.Substring(0, pos1);
             s = (s.Substring(pos1)).Trim();

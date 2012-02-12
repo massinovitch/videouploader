@@ -50,7 +50,7 @@ namespace VideoUploader.Ftp
             }
             catch (Exception)
             {
-                //TODO : gérer l'exception
+                throw;
             }
 
         }
@@ -99,7 +99,7 @@ namespace VideoUploader.Ftp
             }
             catch (Exception)
             {
-                //TODO : gérer l'exception
+                throw;
             }
         }
 
@@ -135,7 +135,7 @@ namespace VideoUploader.Ftp
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
 
@@ -144,18 +144,25 @@ namespace VideoUploader.Ftp
         */
         public void DeleteDirectory(string directoryPath)
         {
-            foreach (FileStruct fileOrDir in GetListDirectories(directoryPath))
+            try
             {
-                if (fileOrDir.IsDirectory)
+                foreach (FileStruct fileOrDir in GetListDirectories(directoryPath))
                 {
-                    DeleteDirectory(directoryPath + "/" + fileOrDir.Name);
+                    if (fileOrDir.IsDirectory)
+                    {
+                        DeleteDirectory(directoryPath + "/" + fileOrDir.Name);
+                    }
+                    else
+                    {
+                        DeleteFile(directoryPath + "/" + fileOrDir.Name);
+                    }
                 }
-                else
-                {
-                    DeleteFile(directoryPath + "/" + fileOrDir.Name);
-                }
+                DeleteDirectoryEmpty(directoryPath);
             }
-            DeleteDirectoryEmpty(directoryPath);
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         /*
@@ -177,6 +184,7 @@ namespace VideoUploader.Ftp
             }
             catch (Exception)
             {
+                throw;
             }
         }
 
@@ -200,6 +208,7 @@ namespace VideoUploader.Ftp
             }
             catch (Exception)
             {
+                throw;
             }
 
         }
@@ -224,6 +233,7 @@ namespace VideoUploader.Ftp
             }
             catch (Exception)
             {
+                throw;
             }
         }
 

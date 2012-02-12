@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using VideoUploader.Log;
-namespace VideoUploader.Ftp
+
+namespace VideoUploader.Log
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Log.Log.MonitoringLogger.Info("massinissa");
+            Log.MonitoringLogger.Info("massinissa");
         }
     }
 }

@@ -12,3 +12,4 @@ C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUplo
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\obj\Debug\VideoUploaderDAO.dll
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\obj\Debug\VideoUploaderDAO.pdb
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderDAO\bin\Debug\log4net.dll

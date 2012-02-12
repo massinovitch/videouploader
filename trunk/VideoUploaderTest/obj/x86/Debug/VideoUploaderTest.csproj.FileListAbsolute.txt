@@ -9,8 +9,6 @@ C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploader
 C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\obj\x86\Debug\VideoUploaderTest.exe
 C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\obj\x86\Debug\VideoUploaderTest.pdb
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\bin\Debug\VideoUploaderTest.exe.config
-C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\obj\x86\Debug\VideoUploaderTest.exe
-C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\obj\x86\Debug\VideoUploaderTest.pdb
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\bin\Debug\VideoUploaderTest.exe
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\bin\Debug\VideoUploaderTest.pdb
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\bin\Debug\VideoUploaderDAO.dll
@@ -18,3 +16,6 @@ C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUplo
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\bin\Debug\VideoUploaderDAO.pdb
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\bin\Debug\VideoUploaderModel.pdb
 C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\obj\x86\Debug\VideoUploaderTest.exe
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\obj\x86\Debug\VideoUploaderTest.pdb
+C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderTest\bin\Debug\log4net.dll
