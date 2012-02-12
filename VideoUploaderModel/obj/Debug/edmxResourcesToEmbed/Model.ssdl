@@ -56,9 +56,9 @@
     </Key>
     <Property Name="IdGroupe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nom" Type="longtext" Nullable="false" />
-    <Property Name="Descritpion" Type="longtext" Nullable="false" />
-    <Property Name="DateCreation" Type="time" Nullable="false" />
-    <Property Name="DateMAJ" Type="time" Nullable="false" />
+    <Property Name="Descritpion" Type="longtext" Nullable="true" />
+    <Property Name="DateCreation" Type="datetime" Nullable="false" />
+    <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="DroitIdDroit" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
@@ -70,8 +70,8 @@
     <Property Name="Prenom" Type="longtext" Nullable="false" />
     <Property Name="Login" Type="longtext" Nullable="false" />
     <Property Name="Password" Type="longtext" Nullable="false" />
-    <Property Name="DateCreation" Type="time" Nullable="false" />
-    <Property Name="DateMAJ" Type="time" Nullable="false" />
+    <Property Name="DateCreation" Type="datetime" Nullable="false" />
+    <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="GroupeIdGroupe" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Element">
@@ -80,8 +80,8 @@
     </Key>
     <Property Name="IdElement" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nom" Type="longtext" Nullable="false" />
-    <Property Name="DateCreation" Type="time" Nullable="false" />
-    <Property Name="DateMAJ" Type="time" Nullable="false" />
+    <Property Name="DateCreation" Type="datetime" Nullable="false" />
+    <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="UserIdUser" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Comment">
@@ -90,7 +90,7 @@
     </Key>
     <Property Name="IdComment" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Contenu" Type="longtext" Nullable="false" />
-    <Property Name="DateCreation" Type="time" Nullable="false" />
+    <Property Name="DateCreation" Type="datetime" Nullable="false" />
     <Property Name="ItemIdElement" Type="bigint" Nullable="false" />
     <Property Name="UserIdUser" Type="int" Nullable="false" />
   </EntityType>
@@ -98,10 +98,10 @@
     <Key>
       <PropertyRef Name="IdElement" />
     </Key>
-    <Property Name="Descriptin" Type="longtext" Nullable="false" />
-    <Property Name="Fichier" Type="varbinary" Nullable="false" />
-    <Property Name="UrlHD" Type="longtext" Nullable="false" />
-    <Property Name="UrlLD" Type="longtext" Nullable="false" />
+    <Property Name="Descriptin" Type="longtext" Nullable="true" />
+    <Property Name="Fichier" Type="varbinary" Nullable="true" />
+    <Property Name="UrlHD" Type="longtext" Nullable="true" />
+    <Property Name="UrlLD" Type="longtext" Nullable="true" />
     <Property Name="Type" Type="longtext" Nullable="false" />
     <Property Name="IdElement" Type="bigint" Nullable="false" />
   </EntityType>
