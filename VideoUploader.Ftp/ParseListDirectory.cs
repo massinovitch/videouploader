@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using log4net;
 
 namespace VideoUploader.Ftp
 {
@@ -17,10 +18,15 @@ namespace VideoUploader.Ftp
         /*
          * parse la string récupérée à partir de WebRequestMethods.Ftp.ListDirectoryDetails(datastring) et renvoi list de fichiers et de répertoires
         */
+        private static readonly ILog log = LogManager.GetLogger(typeof(ParseListDirectory));
         public FileStruct[] GetList(string datastring)
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin GetList");
+                }
                 List<FileStruct> myListArray = new List<FileStruct>();
                 string[] dataRecords = datastring.Split('\n');
                 FileListStyle _directoryListStyle = GuessFileListStyle(dataRecords);
@@ -51,12 +57,23 @@ namespace VideoUploader.Ftp
             {
                 throw;
             }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End GetList");
+                }
+            }
         }
 
         private FileListStyle GuessFileListStyle(string[] recordList)
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin GuessFileListStyle");
+                }
                 foreach (string s in recordList)
                 {
                     if (s.Length > 10
@@ -76,12 +93,23 @@ namespace VideoUploader.Ftp
             {
                 throw;
             }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End GuessFileListStyle");
+                }
+            }
         }
 
         private FileStruct ParseFileStructFromWindowsStyleRecord(string Record)
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin ParseFileStructFromWindowsStyleRecord");
+                }
                 ///Assuming the record style as 
                 /// 02-03-04  07:46PM       <DIR>          Append
                 FileStruct f = new FileStruct();
@@ -109,12 +137,23 @@ namespace VideoUploader.Ftp
             {
                 throw;
             }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End ParseFileStructFromWindowsStyleRecord");
+                }
+            }
         }
 
         private FileStruct ParseFileStructFromUnixStyleRecord(string Record)
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin ParseFileStructFromUnixStyleRecord");
+                }
                 ///Assuming record style as
                 /// dr-xr-xr-x   1 owner    group               0 Nov 25  2002 bussys
                 FileStruct f = new FileStruct();
@@ -134,12 +173,23 @@ namespace VideoUploader.Ftp
             {
                 throw;
             }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End ParseFileStructFromUnixStyleRecord");
+                }
+            }
         }
 
         private string _cutSubstringFromStringWithTrim(ref string s, char c, int startIndex)
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin _cutSubstringFromStringWithTrim");
+                }
                 int pos1 = s.IndexOf(c, startIndex);
                 string retString = s.Substring(0, pos1);
                 s = (s.Substring(pos1)).Trim();
@@ -148,6 +198,13 @@ namespace VideoUploader.Ftp
             catch (Exception ex)
             {
                 throw;
+            }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End _cutSubstringFromStringWithTrim");
+                }
             }
         }
     }

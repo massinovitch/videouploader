@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
+using log4net;
 
 namespace VideoUploader.Ftp
 {
@@ -12,6 +13,7 @@ namespace VideoUploader.Ftp
         public string Server { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        private static readonly ILog log = LogManager.GetLogger(typeof(FTP));
 
 
         /*
@@ -22,6 +24,12 @@ namespace VideoUploader.Ftp
         {
             try
             {
+                /*La construction de chaîne de caractères est très consommatrice en ressources.
+                Afin de ne pas en construire inutilement, vérifier que le logger est bien configuré avec un niveau de log suffisant*/
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin Download");
+                }
                 Uri serverUri = new Uri("ftp://" + this.Server + "/" + srcFilePath);
                 FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(serverUri);
                 reqFTP.Credentials = new NetworkCredential(this.Username, this.Password);
@@ -48,9 +56,17 @@ namespace VideoUploader.Ftp
                 responseStream.Close();
                 fs.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error("Download : ", ex);
                 throw;
+            }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End Download");
+                }
             }
 
         }
@@ -63,6 +79,10 @@ namespace VideoUploader.Ftp
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin Upload");
+                }
                 FtpWebRequest reqFTP;
                 Uri serverUri = new Uri("ftp://" + this.Server + "/" + destFilePath);
                 reqFTP = (FtpWebRequest)FtpWebRequest.Create(serverUri);
@@ -101,6 +121,13 @@ namespace VideoUploader.Ftp
             {
                 throw;
             }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End Upload");
+                }
+            }
         }
 
         /*
@@ -111,6 +138,10 @@ namespace VideoUploader.Ftp
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin GetListDirectories");
+                }
                 Uri serverUri = new Uri("ftp://" + this.Server + "/" + directoryPath + "/");
                 FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(serverUri);
                 reqFTP.Credentials = new NetworkCredential(this.Username, this.Password);
@@ -137,6 +168,13 @@ namespace VideoUploader.Ftp
             {
                 throw;
             }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End GetListDirectories");
+                }
+            }
         }
 
         /*
@@ -146,6 +184,10 @@ namespace VideoUploader.Ftp
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin DeleteDirectory");
+                }
                 foreach (FileStruct fileOrDir in GetListDirectories(directoryPath))
                 {
                     if (fileOrDir.IsDirectory)
@@ -163,6 +205,13 @@ namespace VideoUploader.Ftp
             {
                 throw;
             }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End DeleteDirectory");
+                }
+            }
         }
 
         /*
@@ -173,6 +222,10 @@ namespace VideoUploader.Ftp
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin DeleteDirectoryEmpty");
+                }
                 Uri serverUri = new Uri("ftp://" + this.Server + "/" + directoryPath);
                 FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(serverUri);
                 reqFTP.Credentials = new NetworkCredential(this.Username, this.Password);
@@ -186,6 +239,13 @@ namespace VideoUploader.Ftp
             {
                 throw;
             }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End DeleteDirectoryEmpty");
+                }
+            }
         }
 
 
@@ -197,6 +257,10 @@ namespace VideoUploader.Ftp
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin DeleteFile");
+                }
                 Uri serverUri = new Uri("ftp://" + this.Server + "/" + filePath);
                 FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(serverUri);
                 reqFTP.Credentials = new NetworkCredential(this.Username, this.Password);
@@ -210,6 +274,13 @@ namespace VideoUploader.Ftp
             {
                 throw;
             }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End DeleteFile");
+                }
+            }
 
         }
 
@@ -221,6 +292,10 @@ namespace VideoUploader.Ftp
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin RenameDirectory");
+                }
                 Uri serverUri = new Uri("ftp://" + this.Server + "/" + oldDirectoryPath);
                 FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(serverUri);
                 reqFTP.Credentials = new NetworkCredential(this.Username, this.Password);
@@ -234,6 +309,13 @@ namespace VideoUploader.Ftp
             catch (Exception)
             {
                 throw;
+            }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End RenameDirectory");
+                }
             }
         }
 
