@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoUploader.Ftp", "VideoU
 		{71CFA94E-86E0-46C5-8943-EDAA5D2A5047} = {71CFA94E-86E0-46C5-8943-EDAA5D2A5047}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoUploader.Log", "VideoUploader.Log\VideoUploader.Log.csproj", "{58C63D09-AB39-4C4D-96DD-038832E55CC0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,16 +65,6 @@ Global
 		{7A22D1C2-71B0-4143-B06D-0C068899D53F}.Release|Mixed Platforms.Build.0 = Release|x86
 		{7A22D1C2-71B0-4143-B06D-0C068899D53F}.Release|x86.ActiveCfg = Release|x86
 		{7A22D1C2-71B0-4143-B06D-0C068899D53F}.Release|x86.Build.0 = Release|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Debug|x86.ActiveCfg = Debug|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Debug|x86.Build.0 = Debug|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Release|Any CPU.ActiveCfg = Release|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Release|Mixed Platforms.Build.0 = Release|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Release|x86.ActiveCfg = Release|x86
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
