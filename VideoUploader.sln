@@ -4,13 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoUploader.Model", "VideoUploaderModel\VideoUploader.Model.csproj", "{71CFA94E-86E0-46C5-8943-EDAA5D2A5047}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoUploader.DAO", "VideoUploaderDAO\VideoUploader.DAO.csproj", "{4A2EEFA9-2700-48DA-973D-E6201670D261}"
-	ProjectSection(ProjectDependencies) = postProject
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0} = {58C63D09-AB39-4C4D-96DD-038832E55CC0}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoUploaderTest", "VideoUploaderTest\VideoUploaderTest.csproj", "{D8353F64-E17E-43E0-860B-08E0E231EE15}"
 	ProjectSection(ProjectDependencies) = postProject
-		{58C63D09-AB39-4C4D-96DD-038832E55CC0} = {58C63D09-AB39-4C4D-96DD-038832E55CC0}
 		{7A22D1C2-71B0-4143-B06D-0C068899D53F} = {7A22D1C2-71B0-4143-B06D-0C068899D53F}
 	EndProjectSection
 EndProject

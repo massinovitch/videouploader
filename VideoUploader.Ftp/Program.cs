@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using VideoUploader.Log;
+using log4net;
 namespace VideoUploader.Ftp
 {
     class Program
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(Program));
         static void Main(string[] args)
         {
-            Log.Log.MonitoringLogger.Info("massinissa");
+            log.Info("massinissa");
         }
     }
 }
