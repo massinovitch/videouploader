@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Impl\BaseRepository.cs" />
-    <Compile Include="Impl\ElementRepository.cs" />
     <Compile Include="Impl\GroupeRepository.cs" />
     <Compile Include="Interface\IBaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
