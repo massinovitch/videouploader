@@ -8,10 +8,11 @@ using VideoUploader.DAO;
 using System.Linq.Expressions;
 using VideoUploader.Util;
 using System.Data.Objects;
+using VideoUploaderDAO.Util;
 
 namespace VideoUploader
 {
-    public class UserRepository : BaseRepository <User>
+    public class UserRepository : BaseRepository <User,EntitySearch>
     {
         //création d'un utilisateur
         public override void Create(User user)
@@ -103,65 +104,53 @@ namespace VideoUploader
         }
 
         //Récupérer une liste d'utilisateurs avec un critère de recherche
-        public override List<User> FindByCriteria(User criteria)
+        public override List<User> FindByCriteria(EntitySearch criteria)
         {
             try
             {
                 using (var context = new ModelContext())
                 {
-
-                    StringBuilder queryString =
-                        new StringBuilder(@"SELECT VALUE User FROM ModelContext.User as user");
-
-                    bool whereClause = false;
+                    StringBuilder queryString = new StringBuilder(@"SELECT VALUE User FROM ModelContext.User as user");
+                    SelectBuilder sb = new SelectBuilder();
+                    User user = (User)criteria.Entity;
                     // Critère Nom
-                    if (criteria.Nom != null)
+                    if (user.Nom != null && !user.Nom.Equals(""))
                     {
-                        queryString.Append(" WHERE user.Nom LIKE '" + criteria.Nom.ToString() + "'");
-                        whereClause = true;
+                        sb.AndSearchLike("user.Nom", user.Nom.ToString());
                     }
                     // Critère Prenom
-                    if (criteria.Prenom != null)
+                    if (user.Prenom != null && !user.Prenom.Equals(""))
                     {
-                        if (whereClause == true)
-                        {
-                            queryString.Append(" AND user.Prenom LIKE '" + criteria.Prenom.ToString() + "'");
-                        }
-                        else
-                        {
-                            queryString.Append(" WHERE user.Prenom LIKE '" + criteria.Prenom.ToString() + "'");
-                            whereClause = true;
-                        }
+                        sb.AndSearchLike("user.Prenom", user.Prenom.ToString());
                     }
                     // Critère Login
-                    if (criteria.Login != null)
+                    if (user.Login != null && !user.Login.Equals(""))
                     {
-                        if (whereClause == true)
+                        sb.AndSearchLike("user.Login", user.Login.ToString());                        
+                    }
+                    // Critère de date de creation
+                    if (criteria.DateDebut != null && !criteria.DateDebut.Equals(""))
+                    {
+                        if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
                         {
-                            queryString.Append(" AND user.Login LIKE '" + criteria.Login.ToString() + "'");
+                            sb.AndSearchBetween("cast(user.DateCreation as System.String)", criteria.DateDebut, criteria.DateFin);
                         }
                         else
                         {
-                            queryString.Append(" WHERE user.Login LIKE '" + criteria.Login.ToString() + "'");
-                            whereClause = true;
+                            sb.AndSearchAfter("cast(user.DateCreation as System.String)", criteria.DateDebut);
                         }
                     }
-                    // Critère Groupe
-                    if (criteria.GroupeIdGroupe != 0)
+                    else if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
                     {
-                        if (whereClause == true)
-                        {
-                            queryString.Append(" AND cast(user.GroupeIdGroupe as System.String) = '" + criteria.GroupeIdGroupe.ToString() + "'");
-                        }
-                        else
-                        {
-                            queryString.Append(" WHERE cast(user.GroupeIdGroupe as System.String) = '" + criteria.GroupeIdGroupe.ToString() + "'");
-                            whereClause = true;
-                        }
+                        sb.AndSearchBefore("cast(user.DateCreation as System.String)", criteria.DateFin);                        
                     }
-                    //var users = context.User.ToList();
-                    //return users;
 
+                    // Critère Groupe
+                    if (user.GroupeIdGroupe != 0)
+                    {
+                        sb.AndSearch("cast(user.GroupeIdGroupe as System.String)", user.GroupeIdGroupe.ToString());
+                    }
+                    queryString.Append(sb.getQueryString());
                     ObjectQuery<User> query = new ObjectQuery<User>(queryString.ToString(), context);
                     return query.ToList();
                 }
