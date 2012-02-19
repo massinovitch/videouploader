@@ -9,16 +9,24 @@ using System.Linq.Expressions;
 using VideoUploader.Util;
 using System.Data.Objects;
 using VideoUploaderDAO.Util;
+using log4net;
 
 namespace VideoUploader
 {
     public class UserRepository : BaseRepository <User,EntitySearch>
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(FTP));
         //création d'un utilisateur
         public override void Create(User user)
         {
             try
             {
+                /*La construction de chaîne de caractères est très consommatrice en ressources.
+                Afin de ne pas en construire inutilement, vérifier que le logger est bien configuré avec un niveau de log suffisant*/
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin Create");
+                }
                 using (var context = new ModelContext())
                 {
                     context.AddToUser(user);
@@ -27,7 +35,15 @@ namespace VideoUploader
             }
             catch (Exception ex)
             {
+                log.Error("Create : ", ex);
                 throw;
+            }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End Create");
+                }
             }
         }
 
@@ -36,6 +52,10 @@ namespace VideoUploader
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin DeleteAll");
+                }
                 using (var context = new ModelContext())
                 {
                     var userList = context.User;
@@ -48,7 +68,15 @@ namespace VideoUploader
             }
             catch (Exception ex)
             {
+                log.Error("DeleteAll : ", ex);
                 throw;
+            }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End DeleteAll");
+                }
             }
         }
 
@@ -57,6 +85,10 @@ namespace VideoUploader
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin Delete");
+                }
                 using (var context = new ModelContext())
                 {
                     var pers = context.User.Where(u => u.IdUser == user.IdUser).First();
@@ -66,7 +98,15 @@ namespace VideoUploader
             }
             catch (Exception ex)
             {
+                log.Error("Delete : ", ex);
                 throw;
+            }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End Delete");
+                }
             }
         }
 
@@ -75,6 +115,10 @@ namespace VideoUploader
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin GetList");
+                }
                 using (var context = new ModelContext())
                 {
                     return context.User.ToList();
@@ -82,7 +126,15 @@ namespace VideoUploader
             }
             catch (Exception ex)
             {
+                log.Error("GetList : ", ex);
                 throw;
+            }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End GetList");
+                }
             }
         }
 
@@ -91,6 +143,10 @@ namespace VideoUploader
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin FindById");
+                }
                 using (var context = new ModelContext())
                 {
                     var user = context.User.Where(u => u.IdUser == id);
@@ -99,7 +155,15 @@ namespace VideoUploader
             }
             catch (Exception ex)
             {
+                log.Error("FindById : ", ex);
                 throw;
+            }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End FindById");
+                }
             }
         }
 
@@ -108,6 +172,10 @@ namespace VideoUploader
         {
             try
             {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("Begin FindByCriteria");
+                }
                 using (var context = new ModelContext())
                 {
                     StringBuilder queryString = new StringBuilder(@"SELECT VALUE User FROM ModelContext.User as user");
@@ -151,13 +219,22 @@ namespace VideoUploader
                         sb.AndSearch("cast(user.GroupeIdGroupe as System.String)", user.GroupeIdGroupe.ToString());
                     }
                     queryString.Append(sb.getQueryString());
+                    log.Info("FindByCriteria requete : " +  queryString.ToString());
                     ObjectQuery<User> query = new ObjectQuery<User>(queryString.ToString(), context);
                     return query.ToList();
                 }
             }
             catch (Exception ex)
             {
+                log.Error("FindByCriteria : ", ex);
                 throw;
+            }
+            finally
+            {
+                if (log.IsDebugEnabled)
+                {
+                    log.Debug("End FindByCriteria");
+                }
             }
         }
     }
