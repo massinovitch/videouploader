@@ -45,21 +45,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Impl\BaseRepository.cs" />
+    <Compile Include="Impl\ElementRepository.cs" />
+    <Compile Include="Impl\GroupeRepository.cs" />
     <Compile Include="Interface\IBaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Impl\UserRepository.cs" />
     <Compile Include="Util\PredicateBuilder.cs" />
+    <Compile Include="Util\SelectBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="log4net.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VideoUploaderModel\VideoUploader.Model.csproj">
       <Project>{71CFA94E-86E0-46C5-8943-EDAA5D2A5047}</Project>
       <Name>VideoUploader.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="log4net.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
