@@ -13,11 +13,11 @@ using log4net;
 
 namespace VideoUploaderDAO.Impl
 {
-    public class GroupeRepository : BaseRepository<Groupe, EntitySearch>
+    public class GroupeRepository : BaseRepository<VUGroupe, EntitySearch>
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(GroupeRepository));
         //création d'un groupe
-        public override void Create(Groupe grp)
+        public override void Create(VUGroupe grp)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    context.AddToGroupe(grp);
+                    context.AddToVUGroupe(grp);
                     context.SaveChanges();
                 }
             }
@@ -56,7 +56,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    var grpList = context.Groupe;
+                    var grpList = context.VUGroupe;
                     foreach (var grp in grpList)
                     {
                         context.DeleteObject(grp);
@@ -79,7 +79,7 @@ namespace VideoUploaderDAO.Impl
         }
 
         //Supprimer un groupe
-        public override void Delete(Groupe grp)
+        public override void Delete(VUGroupe grp)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    var pers = context.Groupe.Where(u => u.IdGroupe == grp.IdGroupe).First();
+                    var pers = context.VUGroupe.Where(u => u.IdGroupe == grp.IdGroupe).First();
                     context.DeleteObject(pers);
                     context.SaveChanges();
                 }
@@ -109,7 +109,7 @@ namespace VideoUploaderDAO.Impl
         }
 
         //Récupérer tous les groupes
-        public override List<Groupe> GetList()
+        public override List<VUGroupe> GetList()
         {
             try
             {
@@ -119,7 +119,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    return context.Groupe.ToList();
+                    return context.VUGroupe.ToList();
                 }
             }
             catch (Exception ex)
@@ -137,7 +137,7 @@ namespace VideoUploaderDAO.Impl
         }
 
         //Récupérer un groupe avec son Id
-        public override Groupe FindById(int id)
+        public override VUGroupe FindById(int id)
         {
             try
             {
@@ -147,7 +147,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    var grp = context.Groupe.Where(u => u.IdGroupe == id);
+                    var grp = context.VUGroupe.Where(u => u.IdGroupe == id);
                     return grp.First();
                 }
             }
@@ -166,7 +166,7 @@ namespace VideoUploaderDAO.Impl
         }
 
         //Récupérer une liste d'groupes avec un critère de recherche
-        public override List<Groupe> FindByCriteria(EntitySearch criteria)
+        public override List<VUGroupe> FindByCriteria(EntitySearch criteria)
         {
             try
             {
@@ -178,20 +178,20 @@ namespace VideoUploaderDAO.Impl
                 {
 
                     StringBuilder queryString =
-                        new StringBuilder(@"SELECT VALUE Groupe FROM ModelContext.Groupe as grp");
+                        new StringBuilder(@"SELECT VALUE VUGroupe FROM ModelContext.VUGroupe as grp");
                     SelectBuilder sb = new SelectBuilder();
 
-                    Groupe grp = (Groupe)criteria.Entity;
+                    VUGroupe grp = (VUGroupe)criteria.Entity;
                     // Critère Nom
-                    if (grp.Nom != null && !grp.Equals(""))
+                    if (grp.Nom != null && !grp.Nom.Equals(""))
                     {
                         sb.AndSearchLike("grp.Nom", grp.Nom.ToString());
                     }
 
                     // Critère Description
-                    if (grp.Descritpion != null && !grp.Equals(""))
+                    if (grp.Description != null && !grp.Description.Equals(""))
                     {
-                        sb.AndSearchLike("grp.Descritpion", grp.Descritpion.ToString());
+                        sb.AndSearchLike("grp.Descritpion", grp.Description.ToString());
                     }
 
                     // Critère de date de creation
@@ -218,7 +218,7 @@ namespace VideoUploaderDAO.Impl
                     }
 
                     queryString.Append(sb.getQueryString());
-                    ObjectQuery<Groupe> query = new ObjectQuery<Groupe>(queryString.ToString(), context);
+                    ObjectQuery<VUGroupe> query = new ObjectQuery<VUGroupe>(queryString.ToString(), context);
                     return query.ToList();
                 }
             }
