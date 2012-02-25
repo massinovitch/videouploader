@@ -5,8 +5,8 @@
 -- -----------------------------------------------------------
 -- Entity Designer DDL Script for MySQL Server 4.1 and higher
 -- -----------------------------------------------------------
--- Date Created: 02/06/2012 23:14:07
--- Generated from EDMX file: C:\Users\malik\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderModel\Model.edmx
+-- Date Created: 02/25/2012 23:16:10
+-- Generated from EDMX file: C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderModel\Model.edmx
 -- Target version: 2.0.0.0
 -- --------------------------------------------------
 
@@ -44,9 +44,9 @@ SET foreign_key_checks = 1;
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'Droit'
+-- Creating table 'VUDroit'
 
-CREATE TABLE `Droit` (
+CREATE TABLE `VUDroit` (
     `IdDroit` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `LirePublic` bool  NOT NULL,
     `EcrirePublic` bool  NOT NULL,
@@ -57,20 +57,20 @@ CREATE TABLE `Droit` (
     `Admin` bool  NOT NULL
 );
 
--- Creating table 'Groupe'
+-- Creating table 'VUGroupe'
 
-CREATE TABLE `Groupe` (
+CREATE TABLE `VUGroupe` (
     `IdGroupe` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `Nom` longtext  NOT NULL,
-    `Descritpion` longtext  NULL,
+    `Description` longtext  NULL,
     `DateCreation` datetime  NOT NULL,
     `DateMAJ` datetime  NOT NULL,
     `DroitIdDroit` int  NOT NULL
 );
 
--- Creating table 'User'
+-- Creating table 'VUUser'
 
-CREATE TABLE `User` (
+CREATE TABLE `VUUser` (
     `IdUser` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `Nom` longtext  NOT NULL,
     `Prenom` longtext  NOT NULL,
@@ -81,9 +81,9 @@ CREATE TABLE `User` (
     `GroupeIdGroupe` int  NOT NULL
 );
 
--- Creating table 'Element'
+-- Creating table 'VUElement'
 
-CREATE TABLE `Element` (
+CREATE TABLE `VUElement` (
     `IdElement` bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `Nom` longtext  NOT NULL,
     `DateCreation` datetime  NOT NULL,
@@ -91,9 +91,9 @@ CREATE TABLE `Element` (
     `UserIdUser` int  NOT NULL
 );
 
--- Creating table 'Comment'
+-- Creating table 'VUComment'
 
-CREATE TABLE `Comment` (
+CREATE TABLE `VUComment` (
     `IdComment` bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `Contenu` longtext  NOT NULL,
     `DateCreation` datetime  NOT NULL,
@@ -101,20 +101,21 @@ CREATE TABLE `Comment` (
     `UserIdUser` int  NOT NULL
 );
 
--- Creating table 'Element_Item'
+-- Creating table 'VUElement_VUItem'
 
-CREATE TABLE `Element_Item` (
-    `Descriptin` longtext  NULL,
-    `Fichier` varbinary(100)  NULL,
+CREATE TABLE `VUElement_VUItem` (
+    `Description` longtext  NULL,
+    `FichierHD` varbinary(100)  NULL,
     `UrlHD` longtext  NULL,
     `UrlLD` longtext  NULL,
     `Type` longtext  NOT NULL,
+    `FichierLD` varbinary(100)  NULL,
     `IdElement` bigint  NOT NULL
 );
 
--- Creating table 'Element_Folder'
+-- Creating table 'VUElement_VUFolder'
 
-CREATE TABLE `Element_Folder` (
+CREATE TABLE `VUElement_VUFolder` (
     `IdElement` bigint  NOT NULL
 );
 
@@ -124,16 +125,16 @@ CREATE TABLE `Element_Folder` (
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on `IdElement` in table 'Element_Item'
+-- Creating primary key on `IdElement` in table 'VUElement_VUItem'
 
-ALTER TABLE `Element_Item`
-ADD CONSTRAINT `PK_Element_Item`
+ALTER TABLE `VUElement_VUItem`
+ADD CONSTRAINT `PK_VUElement_VUItem`
     PRIMARY KEY (`IdElement` );
 
--- Creating primary key on `IdElement` in table 'Element_Folder'
+-- Creating primary key on `IdElement` in table 'VUElement_VUFolder'
 
-ALTER TABLE `Element_Folder`
-ADD CONSTRAINT `PK_Element_Folder`
+ALTER TABLE `VUElement_VUFolder`
+ADD CONSTRAINT `PK_VUElement_VUFolder`
     PRIMARY KEY (`IdElement` );
 
 
@@ -142,96 +143,96 @@ ADD CONSTRAINT `PK_Element_Folder`
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on `DroitIdDroit` in table 'Groupe'
+-- Creating foreign key on `DroitIdDroit` in table 'VUGroupe'
 
-ALTER TABLE `Groupe`
+ALTER TABLE `VUGroupe`
 ADD CONSTRAINT `FK_DroitGroupe`
     FOREIGN KEY (`DroitIdDroit`)
-    REFERENCES `Droit`
+    REFERENCES `VUDroit`
         (`IdDroit`)
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DroitGroupe'
 
 CREATE INDEX `IX_FK_DroitGroupe` 
-    ON `Groupe`
+    ON `VUGroupe`
     (`DroitIdDroit`);
 
--- Creating foreign key on `GroupeIdGroupe` in table 'User'
+-- Creating foreign key on `GroupeIdGroupe` in table 'VUUser'
 
-ALTER TABLE `User`
+ALTER TABLE `VUUser`
 ADD CONSTRAINT `FK_GroupeUser`
     FOREIGN KEY (`GroupeIdGroupe`)
-    REFERENCES `Groupe`
+    REFERENCES `VUGroupe`
         (`IdGroupe`)
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_GroupeUser'
 
 CREATE INDEX `IX_FK_GroupeUser` 
-    ON `User`
+    ON `VUUser`
     (`GroupeIdGroupe`);
 
--- Creating foreign key on `UserIdUser` in table 'Element'
+-- Creating foreign key on `UserIdUser` in table 'VUElement'
 
-ALTER TABLE `Element`
+ALTER TABLE `VUElement`
 ADD CONSTRAINT `FK_UserFolder`
     FOREIGN KEY (`UserIdUser`)
-    REFERENCES `User`
+    REFERENCES `VUUser`
         (`IdUser`)
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserFolder'
 
 CREATE INDEX `IX_FK_UserFolder` 
-    ON `Element`
+    ON `VUElement`
     (`UserIdUser`);
 
--- Creating foreign key on `ItemIdElement` in table 'Comment'
+-- Creating foreign key on `ItemIdElement` in table 'VUComment'
 
-ALTER TABLE `Comment`
+ALTER TABLE `VUComment`
 ADD CONSTRAINT `FK_ItemComment`
     FOREIGN KEY (`ItemIdElement`)
-    REFERENCES `Element_Item`
+    REFERENCES `VUElement_VUItem`
         (`IdElement`)
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ItemComment'
 
 CREATE INDEX `IX_FK_ItemComment` 
-    ON `Comment`
+    ON `VUComment`
     (`ItemIdElement`);
 
--- Creating foreign key on `UserIdUser` in table 'Comment'
+-- Creating foreign key on `UserIdUser` in table 'VUComment'
 
-ALTER TABLE `Comment`
+ALTER TABLE `VUComment`
 ADD CONSTRAINT `FK_UserComment`
     FOREIGN KEY (`UserIdUser`)
-    REFERENCES `User`
+    REFERENCES `VUUser`
         (`IdUser`)
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserComment'
 
 CREATE INDEX `IX_FK_UserComment` 
-    ON `Comment`
+    ON `VUComment`
     (`UserIdUser`);
 
--- Creating foreign key on `IdElement` in table 'Element_Item'
+-- Creating foreign key on `IdElement` in table 'VUElement_VUItem'
 
-ALTER TABLE `Element_Item`
-ADD CONSTRAINT `FK_Item_inherits_Element`
+ALTER TABLE `VUElement_VUItem`
+ADD CONSTRAINT `FK_VUItem_inherits_VUElement`
     FOREIGN KEY (`IdElement`)
-    REFERENCES `Element`
+    REFERENCES `VUElement`
         (`IdElement`)
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating foreign key on `IdElement` in table 'Element_Folder'
+-- Creating foreign key on `IdElement` in table 'VUElement_VUFolder'
 
-ALTER TABLE `Element_Folder`
-ADD CONSTRAINT `FK_Folder_inherits_Element`
+ALTER TABLE `VUElement_VUFolder`
+ADD CONSTRAINT `FK_VUFolder_inherits_VUElement`
     FOREIGN KEY (`IdElement`)
-    REFERENCES `Element`
+    REFERENCES `VUElement`
         (`IdElement`)
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 

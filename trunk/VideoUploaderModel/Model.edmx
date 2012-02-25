@@ -6,43 +6,43 @@
     <edmx:StorageModels>
     <Schema Namespace="Model.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="ModelStoreContainer">
-    <EntitySet Name="Droit" EntityType="Model.Store.Droit" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Groupe" EntityType="Model.Store.Groupe" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="User" EntityType="Model.Store.User" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Element" EntityType="Model.Store.Element" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Comment" EntityType="Model.Store.Comment" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Element_Item" EntityType="Model.Store.Element_Item" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Element_Folder" EntityType="Model.Store.Element_Folder" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VUDroit" EntityType="Model.Store.VUDroit" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VUGroupe" EntityType="Model.Store.VUGroupe" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VUUser" EntityType="Model.Store.VUUser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VUElement" EntityType="Model.Store.VUElement" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VUComment" EntityType="Model.Store.VUComment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VUElement_VUItem" EntityType="Model.Store.VUElement_VUItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VUElement_VUFolder" EntityType="Model.Store.VUElement_VUFolder" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="DroitGroupe" Association="Model.Store.DroitGroupe">
-      <End Role="Droit" EntitySet="Droit" />
-      <End Role="Groupe" EntitySet="Groupe" />
+      <End Role="Droit" EntitySet="VUDroit" />
+      <End Role="Groupe" EntitySet="VUGroupe" />
     </AssociationSet>
     <AssociationSet Name="GroupeUser" Association="Model.Store.GroupeUser">
-      <End Role="Groupe" EntitySet="Groupe" />
-      <End Role="User" EntitySet="User" />
+      <End Role="Groupe" EntitySet="VUGroupe" />
+      <End Role="User" EntitySet="VUUser" />
     </AssociationSet>
     <AssociationSet Name="UserFolder" Association="Model.Store.UserFolder">
-      <End Role="User" EntitySet="User" />
-      <End Role="Folder" EntitySet="Element" />
+      <End Role="User" EntitySet="VUUser" />
+      <End Role="Folder" EntitySet="VUElement" />
     </AssociationSet>
     <AssociationSet Name="ItemComment" Association="Model.Store.ItemComment">
-      <End Role="Item" EntitySet="Element_Item" />
-      <End Role="Comment" EntitySet="Comment" />
+      <End Role="Item" EntitySet="VUElement_VUItem" />
+      <End Role="Comment" EntitySet="VUComment" />
     </AssociationSet>
     <AssociationSet Name="UserComment" Association="Model.Store.UserComment">
-      <End Role="User" EntitySet="User" />
-      <End Role="Comment" EntitySet="Comment" />
+      <End Role="User" EntitySet="VUUser" />
+      <End Role="Comment" EntitySet="VUComment" />
     </AssociationSet>
-    <AssociationSet Name="FK_Item_inherits_Element" Association="Model.Store.FK_Item_inherits_Element">
-      <End Role="Element" EntitySet="Element" />
-      <End Role="Item" EntitySet="Element_Item" />
+    <AssociationSet Name="FK_VUItem_inherits_VUElement" Association="Model.Store.FK_VUItem_inherits_VUElement">
+      <End Role="VUElement" EntitySet="VUElement" />
+      <End Role="VUItem" EntitySet="VUElement_VUItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_Folder_inherits_Element" Association="Model.Store.FK_Folder_inherits_Element">
-      <End Role="Element" EntitySet="Element" />
-      <End Role="Folder" EntitySet="Element_Folder" />
+    <AssociationSet Name="FK_VUFolder_inherits_VUElement" Association="Model.Store.FK_VUFolder_inherits_VUElement">
+      <End Role="VUElement" EntitySet="VUElement" />
+      <End Role="VUFolder" EntitySet="VUElement_VUFolder" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Droit">
+  <EntityType Name="VUDroit">
     <Key>
       <PropertyRef Name="IdDroit" />
     </Key>
@@ -55,18 +55,18 @@
     <Property Name="SuppPrive" Type="bool" Nullable="false" />
     <Property Name="Admin" Type="bool" Nullable="false" />
   </EntityType>
-  <EntityType Name="Groupe">
+  <EntityType Name="VUGroupe">
     <Key>
       <PropertyRef Name="IdGroupe" />
     </Key>
     <Property Name="IdGroupe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nom" Type="longtext" Nullable="false" />
-    <Property Name="Descritpion" Type="longtext" Nullable="true" />
+    <Property Name="Description" Type="longtext" Nullable="true" />
     <Property Name="DateCreation" Type="datetime" Nullable="false" />
     <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="DroitIdDroit" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="User">
+  <EntityType Name="VUUser">
     <Key>
       <PropertyRef Name="IdUser" />
     </Key>
@@ -79,7 +79,7 @@
     <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="GroupeIdGroupe" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Element">
+  <EntityType Name="VUElement">
     <Key>
       <PropertyRef Name="IdElement" />
     </Key>
@@ -89,7 +89,7 @@
     <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="UserIdUser" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Comment">
+  <EntityType Name="VUComment">
     <Key>
       <PropertyRef Name="IdComment" />
     </Key>
@@ -99,26 +99,27 @@
     <Property Name="ItemIdElement" Type="bigint" Nullable="false" />
     <Property Name="UserIdUser" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Element_Item">
+  <EntityType Name="VUElement_VUItem">
     <Key>
       <PropertyRef Name="IdElement" />
     </Key>
-    <Property Name="Descriptin" Type="longtext" Nullable="true" />
-    <Property Name="Fichier" Type="varbinary" Nullable="true" />
+    <Property Name="Description" Type="longtext" Nullable="true" />
+    <Property Name="FichierHD" Type="varbinary" Nullable="true" />
     <Property Name="UrlHD" Type="longtext" Nullable="true" />
     <Property Name="UrlLD" Type="longtext" Nullable="true" />
     <Property Name="Type" Type="longtext" Nullable="false" />
+    <Property Name="FichierLD" Type="varbinary" Nullable="true" />
     <Property Name="IdElement" Type="bigint" Nullable="false" />
   </EntityType>
-  <EntityType Name="Element_Folder">
+  <EntityType Name="VUElement_VUFolder">
     <Key>
       <PropertyRef Name="IdElement" />
     </Key>
     <Property Name="IdElement" Type="bigint" Nullable="false" />
   </EntityType>
   <Association Name="DroitGroupe">
-    <End Role="Droit" Type="Model.Store.Droit" Multiplicity="1" />
-    <End Role="Groupe" Type="Model.Store.Groupe" Multiplicity="*" />
+    <End Role="Droit" Type="Model.Store.VUDroit" Multiplicity="1" />
+    <End Role="Groupe" Type="Model.Store.VUGroupe" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Droit">
         <PropertyRef Name="IdDroit" />
@@ -129,8 +130,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="GroupeUser">
-    <End Role="Groupe" Type="Model.Store.Groupe" Multiplicity="1" />
-    <End Role="User" Type="Model.Store.User" Multiplicity="*" />
+    <End Role="Groupe" Type="Model.Store.VUGroupe" Multiplicity="1" />
+    <End Role="User" Type="Model.Store.VUUser" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Groupe">
         <PropertyRef Name="IdGroupe" />
@@ -141,8 +142,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="UserFolder">
-    <End Role="User" Type="Model.Store.User" Multiplicity="1" />
-    <End Role="Folder" Type="Model.Store.Element" Multiplicity="*" />
+    <End Role="User" Type="Model.Store.VUUser" Multiplicity="1" />
+    <End Role="Folder" Type="Model.Store.VUElement" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="IdUser" />
@@ -153,8 +154,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ItemComment">
-    <End Role="Item" Type="Model.Store.Element_Item" Multiplicity="1" />
-    <End Role="Comment" Type="Model.Store.Comment" Multiplicity="*" />
+    <End Role="Item" Type="Model.Store.VUElement_VUItem" Multiplicity="1" />
+    <End Role="Comment" Type="Model.Store.VUComment" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Item">
         <PropertyRef Name="IdElement" />
@@ -165,8 +166,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="UserComment">
-    <End Role="User" Type="Model.Store.User" Multiplicity="1" />
-    <End Role="Comment" Type="Model.Store.Comment" Multiplicity="*" />
+    <End Role="User" Type="Model.Store.VUUser" Multiplicity="1" />
+    <End Role="Comment" Type="Model.Store.VUComment" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="IdUser" />
@@ -176,26 +177,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Item_inherits_Element">
-    <End Role="Element" Type="Model.Store.Element" Multiplicity="1" />
-    <End Role="Item" Type="Model.Store.Element_Item" Multiplicity="0..1" />
+  <Association Name="FK_VUItem_inherits_VUElement">
+    <End Role="VUElement" Type="Model.Store.VUElement" Multiplicity="1" />
+    <End Role="VUItem" Type="Model.Store.VUElement_VUItem" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="Element">
+      <Principal Role="VUElement">
         <PropertyRef Name="IdElement" />
       </Principal>
-      <Dependent Role="Item">
+      <Dependent Role="VUItem">
         <PropertyRef Name="IdElement" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Folder_inherits_Element">
-    <End Role="Element" Type="Model.Store.Element" Multiplicity="1" />
-    <End Role="Folder" Type="Model.Store.Element_Folder" Multiplicity="0..1" />
+  <Association Name="FK_VUFolder_inherits_VUElement">
+    <End Role="VUElement" Type="Model.Store.VUElement" Multiplicity="1" />
+    <End Role="VUFolder" Type="Model.Store.VUElement_VUFolder" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="Element">
+      <Principal Role="VUElement">
         <PropertyRef Name="IdElement" />
       </Principal>
-      <Dependent Role="Folder">
+      <Dependent Role="VUFolder">
         <PropertyRef Name="IdElement" />
       </Dependent>
     </ReferentialConstraint>
@@ -205,33 +206,33 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="ModelContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Droit" EntityType="Model.Droit" />
-          <EntitySet Name="Groupe" EntityType="Model.Groupe" />
-          <EntitySet Name="User" EntityType="Model.User" />
-          <EntitySet Name="Element" EntityType="Model.Element" />
-          <EntitySet Name="Comment" EntityType="Model.Comment" />
+          <EntitySet Name="VUDroit" EntityType="Model.VUDroit" />
+          <EntitySet Name="VUGroupe" EntityType="Model.VUGroupe" />
+          <EntitySet Name="VUUser" EntityType="Model.VUUser" />
+          <EntitySet Name="VUElement" EntityType="Model.VUElement" />
+          <EntitySet Name="VUComment" EntityType="Model.VUComment" />
           <AssociationSet Name="DroitGroupe" Association="Model.DroitGroupe">
-            <End Role="Droit" EntitySet="Droit" />
-            <End Role="Groupe" EntitySet="Groupe" />
+            <End Role="Droit" EntitySet="VUDroit" />
+            <End Role="Groupe" EntitySet="VUGroupe" />
           </AssociationSet>
           <AssociationSet Name="GroupeUser" Association="Model.GroupeUser">
-            <End Role="Groupe" EntitySet="Groupe" />
-            <End Role="User" EntitySet="User" />
+            <End Role="Groupe" EntitySet="VUGroupe" />
+            <End Role="User" EntitySet="VUUser" />
           </AssociationSet>
           <AssociationSet Name="UserFolder" Association="Model.UserFolder">
-            <End Role="User" EntitySet="User" />
-            <End Role="Folder" EntitySet="Element" />
+            <End Role="User" EntitySet="VUUser" />
+            <End Role="Folder" EntitySet="VUElement" />
           </AssociationSet>
           <AssociationSet Name="ItemComment" Association="Model.ItemComment">
-            <End Role="Item" EntitySet="Element" />
-            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Item" EntitySet="VUElement" />
+            <End Role="Comment" EntitySet="VUComment" />
           </AssociationSet>
           <AssociationSet Name="UserComment" Association="Model.UserComment">
-            <End Role="User" EntitySet="User" />
-            <End Role="Comment" EntitySet="Comment" />
+            <End Role="User" EntitySet="VUUser" />
+            <End Role="Comment" EntitySet="VUComment" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Droit">
+        <EntityType Name="VUDroit">
           <Key>
             <PropertyRef Name="IdDroit" />
           </Key>
@@ -244,19 +245,19 @@
           <Property Type="Boolean" Name="SuppPrive" Nullable="false" />
           <Property Type="Boolean" Name="Admin" Nullable="false" />
         </EntityType>
-        <EntityType Name="Groupe">
+        <EntityType Name="VUGroupe">
           <Key>
             <PropertyRef Name="IdGroupe" />
           </Key>
           <Property Type="Int32" Name="IdGroupe" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Nom" Nullable="false" />
-          <Property Type="String" Name="Descritpion" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
           <Property Type="DateTime" Name="DateCreation" Nullable="false" />
           <Property Type="DateTime" Name="DateMAJ" Nullable="false" />
           <NavigationProperty Name="Droit" Relationship="Model.DroitGroupe" FromRole="Groupe" ToRole="Droit" />
           <Property Type="Int32" Name="DroitIdDroit" Nullable="false" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="VUUser">
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
@@ -270,7 +271,7 @@
           <NavigationProperty Name="Groupe" Relationship="Model.GroupeUser" FromRole="User" ToRole="Groupe" />
           <Property Type="Int32" Name="GroupeIdGroupe" Nullable="false" />
         </EntityType>
-        <EntityType Name="Element">
+        <EntityType Name="VUElement">
           <Key>
             <PropertyRef Name="IdElement" />
           </Key>
@@ -281,14 +282,15 @@
           <NavigationProperty Name="User" Relationship="Model.UserFolder" FromRole="Folder" ToRole="User" />
           <Property Type="Int32" Name="UserIdUser" Nullable="false" />
         </EntityType>
-        <EntityType Name="Item" BaseType="Model.Element">
-          <Property Type="String" Name="Descriptin" Nullable="true" />
-          <Property Type="Binary" Name="Fichier" Nullable="true" />
+        <EntityType Name="VUItem" BaseType="Model.VUElement">
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Binary" Name="FichierHD" Nullable="true" />
           <Property Type="String" Name="UrlHD" Nullable="true" />
           <Property Type="String" Name="UrlLD" Nullable="true" />
           <Property Type="String" Name="Type" Nullable="false" />
+          <Property Type="Binary" Name="FichierLD" Nullable="true" />
         </EntityType>
-        <EntityType Name="Comment">
+        <EntityType Name="VUComment">
           <Key>
             <PropertyRef Name="IdComment" />
           </Key>
@@ -301,8 +303,8 @@
           <Property Type="Int32" Name="UserIdUser" Nullable="false" />
         </EntityType>
         <Association Name="DroitGroupe">
-          <End Type="Model.Droit" Role="Droit" Multiplicity="1" />
-          <End Type="Model.Groupe" Role="Groupe" Multiplicity="*" />
+          <End Type="Model.VUDroit" Role="Droit" Multiplicity="1" />
+          <End Type="Model.VUGroupe" Role="Groupe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Droit">
               <PropertyRef Name="IdDroit" />
@@ -313,8 +315,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="GroupeUser">
-          <End Type="Model.Groupe" Role="Groupe" Multiplicity="1" />
-          <End Type="Model.User" Role="User" Multiplicity="*" />
+          <End Type="Model.VUGroupe" Role="Groupe" Multiplicity="1" />
+          <End Type="Model.VUUser" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Groupe">
               <PropertyRef Name="IdGroupe" />
@@ -325,8 +327,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserFolder">
-          <End Type="Model.User" Role="User" Multiplicity="1" />
-          <End Type="Model.Element" Role="Folder" Multiplicity="*" />
+          <End Type="Model.VUUser" Role="User" Multiplicity="1" />
+          <End Type="Model.VUElement" Role="Folder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="IdUser" />
@@ -336,10 +338,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Folder" BaseType="Model.Element" />
+        <EntityType Name="VUFolder" BaseType="Model.VUElement" />
         <Association Name="ItemComment">
-          <End Type="Model.Item" Role="Item" Multiplicity="1" />
-          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <End Type="Model.VUItem" Role="Item" Multiplicity="1" />
+          <End Type="Model.VUComment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Item">
               <PropertyRef Name="IdElement" />
@@ -350,8 +352,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserComment">
-          <End Type="Model.User" Role="User" Multiplicity="1" />
-          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <End Type="Model.VUUser" Role="User" Multiplicity="1" />
+          <End Type="Model.VUComment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="IdUser" />
@@ -367,9 +369,9 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContext">
-    <EntitySetMapping Name="Droit">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Droit)">
-        <MappingFragment StoreEntitySet="Droit">
+    <EntitySetMapping Name="VUDroit">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.VUDroit)">
+        <MappingFragment StoreEntitySet="VUDroit">
           <ScalarProperty Name="IdDroit" ColumnName="IdDroit" />
           <ScalarProperty Name="LirePublic" ColumnName="LirePublic" />
           <ScalarProperty Name="EcrirePublic" ColumnName="EcrirePublic" />
@@ -381,21 +383,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Groupe">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Groupe)">
-        <MappingFragment StoreEntitySet="Groupe">
+    <EntitySetMapping Name="VUGroupe">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.VUGroupe)">
+        <MappingFragment StoreEntitySet="VUGroupe">
           <ScalarProperty Name="IdGroupe" ColumnName="IdGroupe" />
           <ScalarProperty Name="Nom" ColumnName="Nom" />
-          <ScalarProperty Name="Descritpion" ColumnName="Descritpion" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
           <ScalarProperty Name="DateMAJ" ColumnName="DateMAJ" />
           <ScalarProperty Name="DroitIdDroit" ColumnName="DroitIdDroit" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="User">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.User)">
-        <MappingFragment StoreEntitySet="User">
+    <EntitySetMapping Name="VUUser">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.VUUser)">
+        <MappingFragment StoreEntitySet="VUUser">
           <ScalarProperty Name="IdUser" ColumnName="IdUser" />
           <ScalarProperty Name="Nom" ColumnName="Nom" />
           <ScalarProperty Name="Prenom" ColumnName="Prenom" />
@@ -407,9 +409,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Element">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Element)">
-        <MappingFragment StoreEntitySet="Element">
+    <EntitySetMapping Name="VUElement">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.VUElement)">
+        <MappingFragment StoreEntitySet="VUElement">
           <ScalarProperty Name="IdElement" ColumnName="IdElement" />
           <ScalarProperty Name="Nom" ColumnName="Nom" />
           <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
@@ -417,25 +419,26 @@
           <ScalarProperty Name="UserIdUser" ColumnName="UserIdUser" />
         </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Item)">
-        <MappingFragment StoreEntitySet="Element_Item">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.VUItem)">
+        <MappingFragment StoreEntitySet="VUElement_VUItem">
           <ScalarProperty Name="IdElement" ColumnName="IdElement" />
-          <ScalarProperty Name="Descriptin" ColumnName="Descriptin" />
-          <ScalarProperty Name="Fichier" ColumnName="Fichier" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FichierHD" ColumnName="FichierHD" />
           <ScalarProperty Name="UrlHD" ColumnName="UrlHD" />
           <ScalarProperty Name="UrlLD" ColumnName="UrlLD" />
           <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="FichierLD" ColumnName="FichierLD" />
         </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Folder)">
-        <MappingFragment StoreEntitySet="Element_Folder">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.VUFolder)">
+        <MappingFragment StoreEntitySet="VUElement_VUFolder">
           <ScalarProperty Name="IdElement" ColumnName="IdElement" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Comment">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Comment)">
-        <MappingFragment StoreEntitySet="Comment">
+    <EntitySetMapping Name="VUComment">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.VUComment)">
+        <MappingFragment StoreEntitySet="VUComment">
           <ScalarProperty Name="IdComment" ColumnName="IdComment" />
           <ScalarProperty Name="Contenu" ColumnName="Contenu" />
           <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
@@ -464,12 +467,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Model" ZoomLevel="94" >
-        <EntityTypeShape EntityType="Model.Droit" Width="1.875" PointX="0.75" PointY="0.75" Height="2.3848893229166666" />
-        <EntityTypeShape EntityType="Model.Groupe" Width="1.5" PointX="3.125" PointY="0.75" Height="1.9802864583333331" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="5.25" PointY="1.375" Height="2.3648893229166665" />
-        <EntityTypeShape EntityType="Model.Element" Width="1.5" PointX="7.875" PointY="1.375" Height="1.787985026041667" />
-        <EntityTypeShape EntityType="Model.Item" Width="1.5" PointX="6.5" PointY="4.5" Height="1.9802864583333326" />
-        <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="2.875" PointY="4.25" Height="2.3648893229166656" />
+        <EntityTypeShape EntityType="Model.VUDroit" Width="1.875" PointX="0.75" PointY="0.75" Height="2.3848893229166666" />
+        <EntityTypeShape EntityType="Model.VUGroupe" Width="1.5" PointX="3.125" PointY="0.75" Height="1.9802864583333331" />
+        <EntityTypeShape EntityType="Model.VUUser" Width="1.5" PointX="5.25" PointY="1.375" Height="2.3648893229166665" />
+        <EntityTypeShape EntityType="Model.VUElement" Width="1.5" PointX="7.875" PointY="1.375" Height="1.787985026041667" />
+        <EntityTypeShape EntityType="Model.VUItem" Width="1.5" PointX="6.5" PointY="4.5" Height="1.9802864583333326" />
+        <EntityTypeShape EntityType="Model.VUComment" Width="1.5" PointX="2.875" PointY="4.25" Height="2.3648893229166656" />
         <AssociationConnector Association="Model.DroitGroupe">
           <ConnectorPoint PointX="2.625" PointY="1.9324446614583335" />
           <ConnectorPoint PointX="3.125" PointY="1.9324446614583335" />
@@ -482,8 +485,8 @@
           <ConnectorPoint PointX="6.75" PointY="2.4612939453125" />
           <ConnectorPoint PointX="7.875" PointY="2.4612939453125" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="Model.Folder" Width="1.5" PointX="10" PointY="4.5" Height="1.038779296875" />
-        <InheritanceConnector EntityType="Model.Item" >
+        <EntityTypeShape EntityType="Model.VUFolder" Width="1.5" PointX="10" PointY="4.5" Height="1.038779296875" />
+        <InheritanceConnector EntityType="Model.VUItem" ManuallyRouted="false" >
           <ConnectorPoint PointX="8.625" PointY="3.547587890625" />
           <ConnectorPoint PointX="8.625" PointY="4.125" />
           <ConnectorPoint PointX="7.25" PointY="4.125" />
@@ -498,7 +501,12 @@
           <ConnectorPoint PointX="2.96875" PointY="3.6509407552083335" />
           <ConnectorPoint PointX="2.96875" PointY="4.25" />
         </AssociationConnector>
-        <InheritanceConnector EntityType="Model.Folder" />
+        <InheritanceConnector EntityType="Model.VUFolder" >
+          <ConnectorPoint PointX="8.625" PointY="3.547587890625" />
+          <ConnectorPoint PointX="8.625" PointY="4.125" />
+          <ConnectorPoint PointX="10.75" PointY="4.125" />
+          <ConnectorPoint PointX="10.75" PointY="4.5" />
+        </InheritanceConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

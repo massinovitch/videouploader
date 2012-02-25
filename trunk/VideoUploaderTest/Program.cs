@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using VideoUploaderModel;
 using VideoUploader;
+using VideoUploaderDAO.Impl;
 
 namespace VideoUploaderTest
 {
@@ -12,7 +13,6 @@ namespace VideoUploaderTest
         static void Main(string[] args)
         {
 
-            UserRepository userTest = new UserRepository();
 
             //var user = new User
             //{
@@ -26,6 +26,7 @@ namespace VideoUploaderTest
             //    Password = "pass"
             //};
             //userTest.Create(user);
+            /*UserRepository userTest = new UserRepository();
             var userVide = new User();
             var userSearch = new User
             {
@@ -39,7 +40,9 @@ namespace VideoUploaderTest
             {
                 Console.WriteLine("User Last Name: {0}; First Name: {1} ====== IdUser :: {2} ",
                         result.Nom, result.Prenom, result.IdUser);
-            }
+            }*/            
+            ItemRepository itemRepository = new ItemRepository();
+            List<VUItem> listElement = itemRepository.FindByCriteria(null);
             Console.ReadKey();
     }
     }

@@ -2,34 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using VideoUploader;
-using VideoUploaderModel;
-using VideoUploader.DAO;
-using System.Linq.Expressions;
-using VideoUploader.Util;
 using System.Data.Objects;
-using VideoUploaderDAO.Util;
 using log4net;
+using VideoUploaderModel;
+using VideoUploaderDAO.Util;
+using VideoUploader;
 
-namespace VideoUploader
+namespace VideoUploaderDAO.Impl
 {
-    public class UserRepository : BaseRepository <VUUser,EntitySearch>
+    public class ItemRepository : BaseRepository<VUItem, EntitySearch>
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(UserRepository));
-        //création d'un utilisateur
-        public override void Create(VUUser user)
+        private static readonly ILog log = LogManager.GetLogger(typeof(ItemRepository));
+        //création d'un element
+        public override void Create(VUItem itm)
         {
             try
             {
-                /*La construction de chaîne de caractères est très consommatrice en ressources.
-                Afin de ne pas en construire inutilement, vérifier que le logger est bien configuré avec un niveau de log suffisant*/
                 if (log.IsDebugEnabled)
                 {
                     log.Debug("Begin Create");
                 }
                 using (var context = new ModelContext())
                 {
-                    context.AddToVUUser(user);
+                    context.AddToVUElement(itm);
                     context.SaveChanges();
                 }
             }
@@ -47,7 +42,7 @@ namespace VideoUploader
             }
         }
 
-        //Supprimer tous les utilisateurs
+        //Supprimer tous les elements
         public override void DeleteAll()
         {
             try
@@ -58,10 +53,10 @@ namespace VideoUploader
                 }
                 using (var context = new ModelContext())
                 {
-                    var userList = context.VUUser;
-                    foreach (var user in userList)
+                    var itmList = context.VUElement.OfType<VUItem>();
+                    foreach (var itm in itmList)
                     {
-                        context.DeleteObject(user);
+                        context.DeleteObject(itm);
                     }
                     context.SaveChanges();
                 }
@@ -80,8 +75,8 @@ namespace VideoUploader
             }
         }
 
-        //Supprimer un utilisateur
-        public override void Delete(VUUser user)
+        //Supprimer un Item
+        public override void Delete(VUItem itm)
         {
             try
             {
@@ -91,7 +86,7 @@ namespace VideoUploader
                 }
                 using (var context = new ModelContext())
                 {
-                    var pers = context.VUUser.Where(u => u.IdUser == user.IdUser).First();
+                    var pers = context.VUElement.Where(u => u.IdElement == itm.IdElement).First();
                     context.DeleteObject(pers);
                     context.SaveChanges();
                 }
@@ -110,8 +105,8 @@ namespace VideoUploader
             }
         }
 
-        //Récupérer tous les utilisateurs
-        public override List<VUUser> GetList()
+        //Récupérer tous les items
+        public override List<VUItem> GetList()
         {
             try
             {
@@ -121,7 +116,7 @@ namespace VideoUploader
                 }
                 using (var context = new ModelContext())
                 {
-                    return context.VUUser.ToList();
+                    return context.VUElement.OfType<VUItem>().ToList();
                 }
             }
             catch (Exception ex)
@@ -138,8 +133,8 @@ namespace VideoUploader
             }
         }
 
-        //Récupérer un utilisateur avec son Id
-        public override VUUser FindById(int id)
+        //Récupérer un element avec son Id
+        public override VUItem FindById(int id)
         {
             try
             {
@@ -149,8 +144,8 @@ namespace VideoUploader
                 }
                 using (var context = new ModelContext())
                 {
-                    var user = context.VUUser.Where(u => u.IdUser == id);
-                    return user.First();
+                    var itm = context.VUElement.OfType<VUItem>().Where(u => u.IdElement == id);
+                    return itm.First();
                 }
             }
             catch (Exception ex)
@@ -167,8 +162,8 @@ namespace VideoUploader
             }
         }
 
-        //Récupérer une liste d'utilisateurs avec un critère de recherche
-        public override List<VUUser> FindByCriteria(EntitySearch criteria)
+        //Récupérer une liste d'elements avec un critère de recherche
+        public override List<VUItem> FindByCriteria(EntitySearch criteria)
         {
             try
             {
@@ -178,50 +173,12 @@ namespace VideoUploader
                 }
                 using (var context = new ModelContext())
                 {
-                    StringBuilder queryString = new StringBuilder(@"SELECT VALUE VUUser FROM ModelContext.User as user");
-                    SelectBuilder sb = new SelectBuilder();
-                    VUUser user = (VUUser)criteria.Entity;
-                    // Critère Nom
-                    if (user.Nom != null && !user.Nom.Equals(""))
-                    {
-                        sb.AndSearchLike("user.Nom", user.Nom.ToString());
-                    }
-                    // Critère Prenom
-                    if (user.Prenom != null && !user.Prenom.Equals(""))
-                    {
-                        sb.AndSearchLike("user.Prenom", user.Prenom.ToString());
-                    }
-                    // Critère Login
-                    if (user.Login != null && !user.Login.Equals(""))
-                    {
-                        sb.AndSearchLike("user.Login", user.Login.ToString());                        
-                    }
-                    // Critère de date de creation
-                    if (criteria.DateDebut != null && !criteria.DateDebut.Equals(""))
-                    {
-                        if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
-                        {
-                            sb.AndSearchBetween("cast(user.DateCreation as System.String)", criteria.DateDebut, criteria.DateFin);
-                        }
-                        else
-                        {
-                            sb.AndSearchAfter("cast(user.DateCreation as System.String)", criteria.DateDebut);
-                        }
-                    }
-                    else if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
-                    {
-                        sb.AndSearchBefore("cast(user.DateCreation as System.String)", criteria.DateFin);                        
-                    }
 
-                    // Critère Groupe
-                    if (user.GroupeIdGroupe != 0)
-                    {
-                        sb.AndSearch("cast(user.GroupeIdGroupe as System.String)", user.GroupeIdGroupe.ToString());
-                    }
-                    queryString.Append(sb.getQueryString());
-                    log.Info("FindByCriteria requete : " +  queryString.ToString());
-                    ObjectQuery<VUUser> query = new ObjectQuery<VUUser>(queryString.ToString(), context);
-                    return query.ToList();
+                    StringBuilder queryString =
+                        new StringBuilder(@"SELECT VALUE elt FROM ModelContext.VUElement as elt");
+                    ObjectQuery<VUItem> query = new ObjectQuery<VUItem>(queryString.ToString(), context).OfType<VUItem>();
+                    List<VUItem> elt = query.ToList();
+                    return null;
                 }
             }
             catch (Exception ex)

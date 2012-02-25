@@ -18,11 +18,11 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region Métadonnées de relation EDM
 
-[assembly: EdmRelationshipAttribute("Model", "DroitGroupe", "Droit", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.Droit), "Groupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.Groupe), true)]
-[assembly: EdmRelationshipAttribute("Model", "GroupeUser", "Groupe", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.Groupe), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.User), true)]
-[assembly: EdmRelationshipAttribute("Model", "UserFolder", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.User), "Folder", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.Element), true)]
-[assembly: EdmRelationshipAttribute("Model", "ItemComment", "Item", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.Item), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.Comment), true)]
-[assembly: EdmRelationshipAttribute("Model", "UserComment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.User), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.Comment), true)]
+[assembly: EdmRelationshipAttribute("Model", "DroitGroupe", "Droit", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUDroit), "Groupe", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUGroupe), true)]
+[assembly: EdmRelationshipAttribute("Model", "GroupeUser", "Groupe", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUGroupe), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUUser), true)]
+[assembly: EdmRelationshipAttribute("Model", "UserFolder", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUUser), "Folder", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUElement), true)]
+[assembly: EdmRelationshipAttribute("Model", "ItemComment", "Item", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUItem), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUComment), true)]
+[assembly: EdmRelationshipAttribute("Model", "UserComment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUUser), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUComment), true)]
 
 #endregion
 
@@ -77,124 +77,124 @@ namespace VideoUploaderModel
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        public ObjectSet<Droit> Droit
+        public ObjectSet<VUDroit> VUDroit
         {
             get
             {
-                if ((_Droit == null))
+                if ((_VUDroit == null))
                 {
-                    _Droit = base.CreateObjectSet<Droit>("Droit");
+                    _VUDroit = base.CreateObjectSet<VUDroit>("VUDroit");
                 }
-                return _Droit;
+                return _VUDroit;
             }
         }
-        private ObjectSet<Droit> _Droit;
+        private ObjectSet<VUDroit> _VUDroit;
     
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        public ObjectSet<Groupe> Groupe
+        public ObjectSet<VUGroupe> VUGroupe
         {
             get
             {
-                if ((_Groupe == null))
+                if ((_VUGroupe == null))
                 {
-                    _Groupe = base.CreateObjectSet<Groupe>("Groupe");
+                    _VUGroupe = base.CreateObjectSet<VUGroupe>("VUGroupe");
                 }
-                return _Groupe;
+                return _VUGroupe;
             }
         }
-        private ObjectSet<Groupe> _Groupe;
+        private ObjectSet<VUGroupe> _VUGroupe;
     
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        public ObjectSet<User> User
+        public ObjectSet<VUUser> VUUser
         {
             get
             {
-                if ((_User == null))
+                if ((_VUUser == null))
                 {
-                    _User = base.CreateObjectSet<User>("User");
+                    _VUUser = base.CreateObjectSet<VUUser>("VUUser");
                 }
-                return _User;
+                return _VUUser;
             }
         }
-        private ObjectSet<User> _User;
+        private ObjectSet<VUUser> _VUUser;
     
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        public ObjectSet<Element> Element
+        public ObjectSet<VUElement> VUElement
         {
             get
             {
-                if ((_Element == null))
+                if ((_VUElement == null))
                 {
-                    _Element = base.CreateObjectSet<Element>("Element");
+                    _VUElement = base.CreateObjectSet<VUElement>("VUElement");
                 }
-                return _Element;
+                return _VUElement;
             }
         }
-        private ObjectSet<Element> _Element;
+        private ObjectSet<VUElement> _VUElement;
     
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        public ObjectSet<Comment> Comment
+        public ObjectSet<VUComment> VUComment
         {
             get
             {
-                if ((_Comment == null))
+                if ((_VUComment == null))
                 {
-                    _Comment = base.CreateObjectSet<Comment>("Comment");
+                    _VUComment = base.CreateObjectSet<VUComment>("VUComment");
                 }
-                return _Comment;
+                return _VUComment;
             }
         }
-        private ObjectSet<Comment> _Comment;
+        private ObjectSet<VUComment> _VUComment;
 
         #endregion
         #region Méthodes AddTo
     
         /// <summary>
-        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet Droit. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
+        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet VUDroit. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
         /// </summary>
-        public void AddToDroit(Droit droit)
+        public void AddToVUDroit(VUDroit vUDroit)
         {
-            base.AddObject("Droit", droit);
+            base.AddObject("VUDroit", vUDroit);
         }
     
         /// <summary>
-        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet Groupe. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
+        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet VUGroupe. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
         /// </summary>
-        public void AddToGroupe(Groupe groupe)
+        public void AddToVUGroupe(VUGroupe vUGroupe)
         {
-            base.AddObject("Groupe", groupe);
+            base.AddObject("VUGroupe", vUGroupe);
         }
     
         /// <summary>
-        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet User. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
+        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet VUUser. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
         /// </summary>
-        public void AddToUser(User user)
+        public void AddToVUUser(VUUser vUUser)
         {
-            base.AddObject("User", user);
+            base.AddObject("VUUser", vUUser);
         }
     
         /// <summary>
-        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet Element. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
+        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet VUElement. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
         /// </summary>
-        public void AddToElement(Element element)
+        public void AddToVUElement(VUElement vUElement)
         {
-            base.AddObject("Element", element);
+            base.AddObject("VUElement", vUElement);
         }
     
         /// <summary>
-        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet Comment. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
+        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet VUComment. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
         /// </summary>
-        public void AddToComment(Comment comment)
+        public void AddToVUComment(VUComment vUComment)
         {
-            base.AddObject("Comment", comment);
+            base.AddObject("VUComment", vUComment);
         }
 
         #endregion
@@ -208,30 +208,30 @@ namespace VideoUploaderModel
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Comment")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="VUComment")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Comment : EntityObject
+    public partial class VUComment : EntityObject
     {
         #region Méthode de fabrique
     
         /// <summary>
-        /// Créez un nouvel objet Comment.
+        /// Créez un nouvel objet VUComment.
         /// </summary>
         /// <param name="idComment">Valeur initiale de la propriété IdComment.</param>
         /// <param name="contenu">Valeur initiale de la propriété Contenu.</param>
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="itemIdElement">Valeur initiale de la propriété ItemIdElement.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
-        public static Comment CreateComment(global::System.Int64 idComment, global::System.String contenu, global::System.DateTime dateCreation, global::System.Int64 itemIdElement, global::System.Int32 userIdUser)
+        public static VUComment CreateVUComment(global::System.Int64 idComment, global::System.String contenu, global::System.DateTime dateCreation, global::System.Int64 itemIdElement, global::System.Int32 userIdUser)
         {
-            Comment comment = new Comment();
-            comment.IdComment = idComment;
-            comment.Contenu = contenu;
-            comment.DateCreation = dateCreation;
-            comment.ItemIdElement = itemIdElement;
-            comment.UserIdUser = userIdUser;
-            return comment;
+            VUComment vUComment = new VUComment();
+            vUComment.IdComment = idComment;
+            vUComment.Contenu = contenu;
+            vUComment.DateCreation = dateCreation;
+            vUComment.ItemIdElement = itemIdElement;
+            vUComment.UserIdUser = userIdUser;
+            return vUComment;
         }
 
         #endregion
@@ -371,15 +371,15 @@ namespace VideoUploaderModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "ItemComment", "Item")]
-        public Item Item
+        public VUItem Item
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Item>("Model.ItemComment", "Item").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUItem>("Model.ItemComment", "Item").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Item>("Model.ItemComment", "Item").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUItem>("Model.ItemComment", "Item").Value = value;
             }
         }
         /// <summary>
@@ -387,17 +387,17 @@ namespace VideoUploaderModel
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Item> ItemReference
+        public EntityReference<VUItem> ItemReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Item>("Model.ItemComment", "Item");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUItem>("Model.ItemComment", "Item");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Item>("Model.ItemComment", "Item", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VUItem>("Model.ItemComment", "Item", value);
                 }
             }
         }
@@ -409,15 +409,15 @@ namespace VideoUploaderModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "UserComment", "User")]
-        public User User
+        public VUUser User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model.UserComment", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUUser>("Model.UserComment", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model.UserComment", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUUser>("Model.UserComment", "User").Value = value;
             }
         }
         /// <summary>
@@ -425,17 +425,17 @@ namespace VideoUploaderModel
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<VUUser> UserReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model.UserComment", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUUser>("Model.UserComment", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Model.UserComment", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VUUser>("Model.UserComment", "User", value);
                 }
             }
         }
@@ -446,15 +446,15 @@ namespace VideoUploaderModel
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Droit")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="VUDroit")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Droit : EntityObject
+    public partial class VUDroit : EntityObject
     {
         #region Méthode de fabrique
     
         /// <summary>
-        /// Créez un nouvel objet Droit.
+        /// Créez un nouvel objet VUDroit.
         /// </summary>
         /// <param name="idDroit">Valeur initiale de la propriété IdDroit.</param>
         /// <param name="lirePublic">Valeur initiale de la propriété LirePublic.</param>
@@ -464,18 +464,18 @@ namespace VideoUploaderModel
         /// <param name="ecrirePrive">Valeur initiale de la propriété EcrirePrive.</param>
         /// <param name="suppPrive">Valeur initiale de la propriété SuppPrive.</param>
         /// <param name="admin">Valeur initiale de la propriété Admin.</param>
-        public static Droit CreateDroit(global::System.Int32 idDroit, global::System.Boolean lirePublic, global::System.Boolean ecrirePublic, global::System.Boolean suppPublic, global::System.Boolean lirePrive, global::System.Boolean ecrirePrive, global::System.Boolean suppPrive, global::System.Boolean admin)
+        public static VUDroit CreateVUDroit(global::System.Int32 idDroit, global::System.Boolean lirePublic, global::System.Boolean ecrirePublic, global::System.Boolean suppPublic, global::System.Boolean lirePrive, global::System.Boolean ecrirePrive, global::System.Boolean suppPrive, global::System.Boolean admin)
         {
-            Droit droit = new Droit();
-            droit.IdDroit = idDroit;
-            droit.LirePublic = lirePublic;
-            droit.EcrirePublic = ecrirePublic;
-            droit.SuppPublic = suppPublic;
-            droit.LirePrive = lirePrive;
-            droit.EcrirePrive = ecrirePrive;
-            droit.SuppPrive = suppPrive;
-            droit.Admin = admin;
-            return droit;
+            VUDroit vUDroit = new VUDroit();
+            vUDroit.IdDroit = idDroit;
+            vUDroit.LirePublic = lirePublic;
+            vUDroit.EcrirePublic = ecrirePublic;
+            vUDroit.SuppPublic = suppPublic;
+            vUDroit.LirePrive = lirePrive;
+            vUDroit.EcrirePrive = ecrirePrive;
+            vUDroit.SuppPrive = suppPrive;
+            vUDroit.Admin = admin;
+            return vUDroit;
         }
 
         #endregion
@@ -683,32 +683,32 @@ namespace VideoUploaderModel
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Element")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="VUElement")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    [KnownTypeAttribute(typeof(Item))]
-    [KnownTypeAttribute(typeof(Folder))]
-    public partial class Element : EntityObject
+    [KnownTypeAttribute(typeof(VUItem))]
+    [KnownTypeAttribute(typeof(VUFolder))]
+    public partial class VUElement : EntityObject
     {
         #region Méthode de fabrique
     
         /// <summary>
-        /// Créez un nouvel objet Element.
+        /// Créez un nouvel objet VUElement.
         /// </summary>
         /// <param name="idElement">Valeur initiale de la propriété IdElement.</param>
         /// <param name="nom">Valeur initiale de la propriété Nom.</param>
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
-        public static Element CreateElement(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser)
+        public static VUElement CreateVUElement(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser)
         {
-            Element element = new Element();
-            element.IdElement = idElement;
-            element.Nom = nom;
-            element.DateCreation = dateCreation;
-            element.DateMAJ = dateMAJ;
-            element.UserIdUser = userIdUser;
-            return element;
+            VUElement vUElement = new VUElement();
+            vUElement.IdElement = idElement;
+            vUElement.Nom = nom;
+            vUElement.DateCreation = dateCreation;
+            vUElement.DateMAJ = dateMAJ;
+            vUElement.UserIdUser = userIdUser;
+            return vUElement;
         }
 
         #endregion
@@ -848,15 +848,15 @@ namespace VideoUploaderModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "UserFolder", "User")]
-        public User User
+        public VUUser User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model.UserFolder", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUUser>("Model.UserFolder", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model.UserFolder", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUUser>("Model.UserFolder", "User").Value = value;
             }
         }
         /// <summary>
@@ -864,17 +864,17 @@ namespace VideoUploaderModel
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<VUUser> UserReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model.UserFolder", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUUser>("Model.UserFolder", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Model.UserFolder", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VUUser>("Model.UserFolder", "User", value);
                 }
             }
         }
@@ -885,30 +885,30 @@ namespace VideoUploaderModel
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Folder")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="VUFolder")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Folder : Element
+    public partial class VUFolder : VUElement
     {
         #region Méthode de fabrique
     
         /// <summary>
-        /// Créez un nouvel objet Folder.
+        /// Créez un nouvel objet VUFolder.
         /// </summary>
         /// <param name="idElement">Valeur initiale de la propriété IdElement.</param>
         /// <param name="nom">Valeur initiale de la propriété Nom.</param>
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
-        public static Folder CreateFolder(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser)
+        public static VUFolder CreateVUFolder(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser)
         {
-            Folder folder = new Folder();
-            folder.IdElement = idElement;
-            folder.Nom = nom;
-            folder.DateCreation = dateCreation;
-            folder.DateMAJ = dateMAJ;
-            folder.UserIdUser = userIdUser;
-            return folder;
+            VUFolder vUFolder = new VUFolder();
+            vUFolder.IdElement = idElement;
+            vUFolder.Nom = nom;
+            vUFolder.DateCreation = dateCreation;
+            vUFolder.DateMAJ = dateMAJ;
+            vUFolder.UserIdUser = userIdUser;
+            return vUFolder;
         }
 
         #endregion
@@ -918,30 +918,30 @@ namespace VideoUploaderModel
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Groupe")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="VUGroupe")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Groupe : EntityObject
+    public partial class VUGroupe : EntityObject
     {
         #region Méthode de fabrique
     
         /// <summary>
-        /// Créez un nouvel objet Groupe.
+        /// Créez un nouvel objet VUGroupe.
         /// </summary>
         /// <param name="idGroupe">Valeur initiale de la propriété IdGroupe.</param>
         /// <param name="nom">Valeur initiale de la propriété Nom.</param>
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="droitIdDroit">Valeur initiale de la propriété DroitIdDroit.</param>
-        public static Groupe CreateGroupe(global::System.Int32 idGroupe, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 droitIdDroit)
+        public static VUGroupe CreateVUGroupe(global::System.Int32 idGroupe, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 droitIdDroit)
         {
-            Groupe groupe = new Groupe();
-            groupe.IdGroupe = idGroupe;
-            groupe.Nom = nom;
-            groupe.DateCreation = dateCreation;
-            groupe.DateMAJ = dateMAJ;
-            groupe.DroitIdDroit = droitIdDroit;
-            return groupe;
+            VUGroupe vUGroupe = new VUGroupe();
+            vUGroupe.IdGroupe = idGroupe;
+            vUGroupe.Nom = nom;
+            vUGroupe.DateCreation = dateCreation;
+            vUGroupe.DateMAJ = dateMAJ;
+            vUGroupe.DroitIdDroit = droitIdDroit;
+            return vUGroupe;
         }
 
         #endregion
@@ -1003,24 +1003,24 @@ namespace VideoUploaderModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Descritpion
+        public global::System.String Description
         {
             get
             {
-                return _Descritpion;
+                return _Description;
             }
             set
             {
-                OnDescritpionChanging(value);
-                ReportPropertyChanging("Descritpion");
-                _Descritpion = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Descritpion");
-                OnDescritpionChanged();
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
             }
         }
-        private global::System.String _Descritpion;
-        partial void OnDescritpionChanging(global::System.String value);
-        partial void OnDescritpionChanged();
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
     
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
@@ -1105,15 +1105,15 @@ namespace VideoUploaderModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "DroitGroupe", "Droit")]
-        public Droit Droit
+        public VUDroit Droit
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Droit>("Model.DroitGroupe", "Droit").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUDroit>("Model.DroitGroupe", "Droit").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Droit>("Model.DroitGroupe", "Droit").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUDroit>("Model.DroitGroupe", "Droit").Value = value;
             }
         }
         /// <summary>
@@ -1121,17 +1121,17 @@ namespace VideoUploaderModel
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Droit> DroitReference
+        public EntityReference<VUDroit> DroitReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Droit>("Model.DroitGroupe", "Droit");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUDroit>("Model.DroitGroupe", "Droit");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Droit>("Model.DroitGroupe", "Droit", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VUDroit>("Model.DroitGroupe", "Droit", value);
                 }
             }
         }
@@ -1142,15 +1142,15 @@ namespace VideoUploaderModel
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Item")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="VUItem")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Item : Element
+    public partial class VUItem : VUElement
     {
         #region Méthode de fabrique
     
         /// <summary>
-        /// Créez un nouvel objet Item.
+        /// Créez un nouvel objet VUItem.
         /// </summary>
         /// <param name="idElement">Valeur initiale de la propriété IdElement.</param>
         /// <param name="nom">Valeur initiale de la propriété Nom.</param>
@@ -1158,16 +1158,16 @@ namespace VideoUploaderModel
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
         /// <param name="type">Valeur initiale de la propriété Type.</param>
-        public static Item CreateItem(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser, global::System.String type)
+        public static VUItem CreateVUItem(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser, global::System.String type)
         {
-            Item item = new Item();
-            item.IdElement = idElement;
-            item.Nom = nom;
-            item.DateCreation = dateCreation;
-            item.DateMAJ = dateMAJ;
-            item.UserIdUser = userIdUser;
-            item.Type = type;
-            return item;
+            VUItem vUItem = new VUItem();
+            vUItem.IdElement = idElement;
+            vUItem.Nom = nom;
+            vUItem.DateCreation = dateCreation;
+            vUItem.DateMAJ = dateMAJ;
+            vUItem.UserIdUser = userIdUser;
+            vUItem.Type = type;
+            return vUItem;
         }
 
         #endregion
@@ -1178,48 +1178,48 @@ namespace VideoUploaderModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Descriptin
+        public global::System.String Description
         {
             get
             {
-                return _Descriptin;
+                return _Description;
             }
             set
             {
-                OnDescriptinChanging(value);
-                ReportPropertyChanging("Descriptin");
-                _Descriptin = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Descriptin");
-                OnDescriptinChanged();
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
             }
         }
-        private global::System.String _Descriptin;
-        partial void OnDescriptinChanging(global::System.String value);
-        partial void OnDescriptinChanged();
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
     
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Byte[] Fichier
+        public global::System.Byte[] FichierHD
         {
             get
             {
-                return StructuralObject.GetValidValue(_Fichier);
+                return StructuralObject.GetValidValue(_FichierHD);
             }
             set
             {
-                OnFichierChanging(value);
-                ReportPropertyChanging("Fichier");
-                _Fichier = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Fichier");
-                OnFichierChanged();
+                OnFichierHDChanging(value);
+                ReportPropertyChanging("FichierHD");
+                _FichierHD = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FichierHD");
+                OnFichierHDChanged();
             }
         }
-        private global::System.Byte[] _Fichier;
-        partial void OnFichierChanging(global::System.Byte[] value);
-        partial void OnFichierChanged();
+        private global::System.Byte[] _FichierHD;
+        partial void OnFichierHDChanging(global::System.Byte[] value);
+        partial void OnFichierHDChanged();
     
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
@@ -1292,6 +1292,30 @@ namespace VideoUploaderModel
         private global::System.String _Type;
         partial void OnTypeChanging(global::System.String value);
         partial void OnTypeChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] FichierLD
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_FichierLD);
+            }
+            set
+            {
+                OnFichierLDChanging(value);
+                ReportPropertyChanging("FichierLD");
+                _FichierLD = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FichierLD");
+                OnFichierLDChanged();
+            }
+        }
+        private global::System.Byte[] _FichierLD;
+        partial void OnFichierLDChanging(global::System.Byte[] value);
+        partial void OnFichierLDChanged();
 
         #endregion
     
@@ -1300,15 +1324,15 @@ namespace VideoUploaderModel
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="User")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="VUUser")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class User : EntityObject
+    public partial class VUUser : EntityObject
     {
         #region Méthode de fabrique
     
         /// <summary>
-        /// Créez un nouvel objet User.
+        /// Créez un nouvel objet VUUser.
         /// </summary>
         /// <param name="idUser">Valeur initiale de la propriété IdUser.</param>
         /// <param name="nom">Valeur initiale de la propriété Nom.</param>
@@ -1318,18 +1342,18 @@ namespace VideoUploaderModel
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="groupeIdGroupe">Valeur initiale de la propriété GroupeIdGroupe.</param>
-        public static User CreateUser(global::System.Int32 idUser, global::System.String nom, global::System.String prenom, global::System.String login, global::System.String password, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 groupeIdGroupe)
+        public static VUUser CreateVUUser(global::System.Int32 idUser, global::System.String nom, global::System.String prenom, global::System.String login, global::System.String password, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 groupeIdGroupe)
         {
-            User user = new User();
-            user.IdUser = idUser;
-            user.Nom = nom;
-            user.Prenom = prenom;
-            user.Login = login;
-            user.Password = password;
-            user.DateCreation = dateCreation;
-            user.DateMAJ = dateMAJ;
-            user.GroupeIdGroupe = groupeIdGroupe;
-            return user;
+            VUUser vUUser = new VUUser();
+            vUUser.IdUser = idUser;
+            vUUser.Nom = nom;
+            vUUser.Prenom = prenom;
+            vUUser.Login = login;
+            vUUser.Password = password;
+            vUUser.DateCreation = dateCreation;
+            vUUser.DateMAJ = dateMAJ;
+            vUUser.GroupeIdGroupe = groupeIdGroupe;
+            return vUUser;
         }
 
         #endregion
@@ -1541,15 +1565,15 @@ namespace VideoUploaderModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "GroupeUser", "Groupe")]
-        public Groupe Groupe
+        public VUGroupe Groupe
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Groupe>("Model.GroupeUser", "Groupe").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUGroupe>("Model.GroupeUser", "Groupe").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Groupe>("Model.GroupeUser", "Groupe").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUGroupe>("Model.GroupeUser", "Groupe").Value = value;
             }
         }
         /// <summary>
@@ -1557,17 +1581,17 @@ namespace VideoUploaderModel
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Groupe> GroupeReference
+        public EntityReference<VUGroupe> GroupeReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Groupe>("Model.GroupeUser", "Groupe");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUGroupe>("Model.GroupeUser", "Groupe");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Groupe>("Model.GroupeUser", "Groupe", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VUGroupe>("Model.GroupeUser", "Groupe", value);
                 }
             }
         }
