@@ -178,7 +178,7 @@ namespace VideoUploaderDAO.Impl
                 {
 
                     StringBuilder queryString =
-                        new StringBuilder(@"SELECT VALUE VUGroupe FROM ModelContext.VUGroupe as grp");
+                        new StringBuilder(@"SELECT VALUE grp FROM ModelContext.VUGroupe as grp");
                     SelectBuilder sb = new SelectBuilder();
 
                     VUGroupe grp = (VUGroupe)criteria.Entity;

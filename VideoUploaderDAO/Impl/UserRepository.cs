@@ -178,7 +178,7 @@ namespace VideoUploader
                 }
                 using (var context = new ModelContext())
                 {
-                    StringBuilder queryString = new StringBuilder(@"SELECT VALUE VUUser FROM ModelContext.User as user");
+                    StringBuilder queryString = new StringBuilder(@"SELECT VALUE user FROM ModelContext.VUUser as user");
                     SelectBuilder sb = new SelectBuilder();
                     VUUser user = (VUUser)criteria.Entity;
                     // Critère Nom
