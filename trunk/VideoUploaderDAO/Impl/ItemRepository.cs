@@ -175,8 +175,38 @@ namespace VideoUploaderDAO.Impl
                 {
 
                     StringBuilder queryString =
-                        new StringBuilder(@"SELECT VALUE elt FROM ModelContext.VUElement as elt");
+                        new StringBuilder(@"SELECT VALUE elt FROM OFTYPE(VUElement,VideoUploaderModel.VUItem) as elt");
+                    SelectBuilder sb = new SelectBuilder();
+                    VUItem item = (VUItem)criteria.Entity;
+                    // Critère Nom
+                    if (item.Nom != null && !item.Nom.Equals(""))
+                    {
+                        sb.AndSearchLike("elt.Nom", item.Nom.ToString());
+                    }
+                    // Critère Prenom
+                    if (item.Type != null && !item.Type.Equals(""))
+                    {
+                        sb.AndSearchLike("elt.Type", item.Type.ToString());
+                    }
+                    // Critère de date de creation
+                    if (criteria.DateDebut != null && !criteria.DateDebut.Equals(""))
+                    {
+                        if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
+                        {
+                            sb.AndSearchBetween("cast(elt.DateCreation as System.String)", criteria.DateDebut, criteria.DateFin);
+                        }
+                        else
+                        {
+                            sb.AndSearchAfter("cast(elt.DateCreation as System.String)", criteria.DateDebut);
+                        }
+                    }
+                    else if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
+                    {
+                        sb.AndSearchBefore("cast(elt.DateCreation as System.String)", criteria.DateFin);
+                    }
+                    queryString.Append(sb.getQueryString());
                     ObjectQuery<VUItem> query = new ObjectQuery<VUItem>(queryString.ToString(), context).OfType<VUItem>();
+
                     List<VUItem> elt = query.ToList();
                     return null;
                 }

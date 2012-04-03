@@ -23,6 +23,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "UserFolder", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUUser), "Folder", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUElement), true)]
 [assembly: EdmRelationshipAttribute("Model", "ItemComment", "Item", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUItem), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUComment), true)]
 [assembly: EdmRelationshipAttribute("Model", "UserComment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUUser), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUComment), true)]
+[assembly: EdmRelationshipAttribute("Model", "VUFolderVUElement", "VUFolder", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(VideoUploaderModel.VUFolder), "VUElement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUElement), true)]
 
 #endregion
 
@@ -457,23 +458,11 @@ namespace VideoUploaderModel
         /// Créez un nouvel objet VUDroit.
         /// </summary>
         /// <param name="idDroit">Valeur initiale de la propriété IdDroit.</param>
-        /// <param name="lirePublic">Valeur initiale de la propriété LirePublic.</param>
-        /// <param name="ecrirePublic">Valeur initiale de la propriété EcrirePublic.</param>
-        /// <param name="suppPublic">Valeur initiale de la propriété SuppPublic.</param>
-        /// <param name="lirePrive">Valeur initiale de la propriété LirePrive.</param>
-        /// <param name="ecrirePrive">Valeur initiale de la propriété EcrirePrive.</param>
-        /// <param name="suppPrive">Valeur initiale de la propriété SuppPrive.</param>
         /// <param name="admin">Valeur initiale de la propriété Admin.</param>
-        public static VUDroit CreateVUDroit(global::System.Int32 idDroit, global::System.Boolean lirePublic, global::System.Boolean ecrirePublic, global::System.Boolean suppPublic, global::System.Boolean lirePrive, global::System.Boolean ecrirePrive, global::System.Boolean suppPrive, global::System.Boolean admin)
+        public static VUDroit CreateVUDroit(global::System.Int32 idDroit, global::System.Boolean admin)
         {
             VUDroit vUDroit = new VUDroit();
             vUDroit.IdDroit = idDroit;
-            vUDroit.LirePublic = lirePublic;
-            vUDroit.EcrirePublic = ecrirePublic;
-            vUDroit.SuppPublic = suppPublic;
-            vUDroit.LirePrive = lirePrive;
-            vUDroit.EcrirePrive = ecrirePrive;
-            vUDroit.SuppPrive = suppPrive;
             vUDroit.Admin = admin;
             return vUDroit;
         }
@@ -507,150 +496,6 @@ namespace VideoUploaderModel
         private global::System.Int32 _IdDroit;
         partial void OnIdDroitChanging(global::System.Int32 value);
         partial void OnIdDroitChanged();
-    
-        /// <summary>
-        /// Aucune documentation sur les métadonnées n'est disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean LirePublic
-        {
-            get
-            {
-                return _LirePublic;
-            }
-            set
-            {
-                OnLirePublicChanging(value);
-                ReportPropertyChanging("LirePublic");
-                _LirePublic = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LirePublic");
-                OnLirePublicChanged();
-            }
-        }
-        private global::System.Boolean _LirePublic;
-        partial void OnLirePublicChanging(global::System.Boolean value);
-        partial void OnLirePublicChanged();
-    
-        /// <summary>
-        /// Aucune documentation sur les métadonnées n'est disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean EcrirePublic
-        {
-            get
-            {
-                return _EcrirePublic;
-            }
-            set
-            {
-                OnEcrirePublicChanging(value);
-                ReportPropertyChanging("EcrirePublic");
-                _EcrirePublic = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EcrirePublic");
-                OnEcrirePublicChanged();
-            }
-        }
-        private global::System.Boolean _EcrirePublic;
-        partial void OnEcrirePublicChanging(global::System.Boolean value);
-        partial void OnEcrirePublicChanged();
-    
-        /// <summary>
-        /// Aucune documentation sur les métadonnées n'est disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean SuppPublic
-        {
-            get
-            {
-                return _SuppPublic;
-            }
-            set
-            {
-                OnSuppPublicChanging(value);
-                ReportPropertyChanging("SuppPublic");
-                _SuppPublic = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SuppPublic");
-                OnSuppPublicChanged();
-            }
-        }
-        private global::System.Boolean _SuppPublic;
-        partial void OnSuppPublicChanging(global::System.Boolean value);
-        partial void OnSuppPublicChanged();
-    
-        /// <summary>
-        /// Aucune documentation sur les métadonnées n'est disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean LirePrive
-        {
-            get
-            {
-                return _LirePrive;
-            }
-            set
-            {
-                OnLirePriveChanging(value);
-                ReportPropertyChanging("LirePrive");
-                _LirePrive = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LirePrive");
-                OnLirePriveChanged();
-            }
-        }
-        private global::System.Boolean _LirePrive;
-        partial void OnLirePriveChanging(global::System.Boolean value);
-        partial void OnLirePriveChanged();
-    
-        /// <summary>
-        /// Aucune documentation sur les métadonnées n'est disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean EcrirePrive
-        {
-            get
-            {
-                return _EcrirePrive;
-            }
-            set
-            {
-                OnEcrirePriveChanging(value);
-                ReportPropertyChanging("EcrirePrive");
-                _EcrirePrive = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EcrirePrive");
-                OnEcrirePriveChanged();
-            }
-        }
-        private global::System.Boolean _EcrirePrive;
-        partial void OnEcrirePriveChanging(global::System.Boolean value);
-        partial void OnEcrirePriveChanged();
-    
-        /// <summary>
-        /// Aucune documentation sur les métadonnées n'est disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean SuppPrive
-        {
-            get
-            {
-                return _SuppPrive;
-            }
-            set
-            {
-                OnSuppPriveChanging(value);
-                ReportPropertyChanging("SuppPrive");
-                _SuppPrive = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SuppPrive");
-                OnSuppPriveChanged();
-            }
-        }
-        private global::System.Boolean _SuppPrive;
-        partial void OnSuppPriveChanging(global::System.Boolean value);
-        partial void OnSuppPriveChanged();
     
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
@@ -836,6 +681,30 @@ namespace VideoUploaderModel
         private global::System.Int32 _UserIdUser;
         partial void OnUserIdUserChanging(global::System.Int32 value);
         partial void OnUserIdUserChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> VUFolderIdElement
+        {
+            get
+            {
+                return _VUFolderIdElement;
+            }
+            set
+            {
+                OnVUFolderIdElementChanging(value);
+                ReportPropertyChanging("VUFolderIdElement");
+                _VUFolderIdElement = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VUFolderIdElement");
+                OnVUFolderIdElementChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _VUFolderIdElement;
+        partial void OnVUFolderIdElementChanging(Nullable<global::System.Int64> value);
+        partial void OnVUFolderIdElementChanged();
 
         #endregion
     

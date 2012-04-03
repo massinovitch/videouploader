@@ -27,6 +27,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
+                    // il faut plutot utiliser ça : context.VUGroupe.AddObject(grp);
                     context.AddToVUGroupe(grp);
                     context.SaveChanges();
                 }
@@ -191,7 +192,7 @@ namespace VideoUploaderDAO.Impl
                     // Critère Description
                     if (grp.Description != null && !grp.Description.Equals(""))
                     {
-                        sb.AndSearchLike("grp.Descritpion", grp.Description.ToString());
+                        sb.AndSearchLike("grp.Description", grp.Description.ToString());
                     }
 
                     // Critère de date de creation
@@ -214,7 +215,7 @@ namespace VideoUploaderDAO.Impl
                     // Critère Droit, si on recherche les groupes qui ont un droit admin par exemple
                     if (grp.DroitIdDroit != 0)
                     {
-                        sb.AndSearch("cast(user.DroitIdDroit as System.String)", grp.DroitIdDroit.ToString());
+                        sb.AndSearch("cast(grp.DroitIdDroit as System.String)", grp.DroitIdDroit.ToString());
                     }
 
                     queryString.Append(sb.getQueryString());
