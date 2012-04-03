@@ -51,7 +51,7 @@ namespace VideoUploaderDAO.Util
         //Ajouter un critère de recherche champ like '%valeur%'
         private void SearchLike(String field, String value)
         {
-            additionalClauses.Append(" ").Append(field).Append(" ").Append(OperatorEnum.LIKE.ToString()).Append("'").Append("%").Append(value).Append("%").Append("'");
+            additionalClauses.Append(" ").Append(field).Append(" ").Append(OperatorEnum.LIKE.ToString()).Append(" '").Append("%").Append(value).Append("%").Append("'");
         }
 
         //recherche avec l'opérateur IN

@@ -5,7 +5,7 @@
 -- -----------------------------------------------------------
 -- Entity Designer DDL Script for MySQL Server 4.1 and higher
 -- -----------------------------------------------------------
--- Date Created: 02/25/2012 23:16:10
+-- Date Created: 03/12/2012 17:25:39
 -- Generated from EDMX file: C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderModel\Model.edmx
 -- Target version: 2.0.0.0
 -- --------------------------------------------------
@@ -19,25 +19,26 @@ USE `videouploader`;
 -- NOTE: if the constraint does not exist, an ignorable error will be reported.
 -- --------------------------------------------------
 
---    ALTER TABLE `Groupe` DROP CONSTRAINT `FK_DroitGroupe`;
---    ALTER TABLE `User` DROP CONSTRAINT `FK_GroupeUser`;
---    ALTER TABLE `Element` DROP CONSTRAINT `FK_UserFolder`;
---    ALTER TABLE `Comment` DROP CONSTRAINT `FK_ItemComment`;
---    ALTER TABLE `Comment` DROP CONSTRAINT `FK_UserComment`;
---    ALTER TABLE `Element_Item` DROP CONSTRAINT `FK_Item_inherits_Element`;
---    ALTER TABLE `Element_Folder` DROP CONSTRAINT `FK_Folder_inherits_Element`;
+--    ALTER TABLE `VUGroupe` DROP CONSTRAINT `FK_DroitGroupe`;
+--    ALTER TABLE `VUUser` DROP CONSTRAINT `FK_GroupeUser`;
+--    ALTER TABLE `VUElement` DROP CONSTRAINT `FK_UserFolder`;
+--    ALTER TABLE `VUComment` DROP CONSTRAINT `FK_ItemComment`;
+--    ALTER TABLE `VUComment` DROP CONSTRAINT `FK_UserComment`;
+--    ALTER TABLE `VUElement` DROP CONSTRAINT `FK_VUFolderVUElement`;
+--    ALTER TABLE `VUElement_VUItem` DROP CONSTRAINT `FK_VUItem_inherits_VUElement`;
+--    ALTER TABLE `VUElement_VUFolder` DROP CONSTRAINT `FK_VUFolder_inherits_VUElement`;
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 SET foreign_key_checks = 0;
-    DROP TABLE IF EXISTS `Droit`;
-    DROP TABLE IF EXISTS `Groupe`;
-    DROP TABLE IF EXISTS `User`;
-    DROP TABLE IF EXISTS `Element`;
-    DROP TABLE IF EXISTS `Comment`;
-    DROP TABLE IF EXISTS `Element_Item`;
-    DROP TABLE IF EXISTS `Element_Folder`;
+    DROP TABLE IF EXISTS `VUDroit`;
+    DROP TABLE IF EXISTS `VUGroupe`;
+    DROP TABLE IF EXISTS `VUUser`;
+    DROP TABLE IF EXISTS `VUElement`;
+    DROP TABLE IF EXISTS `VUComment`;
+    DROP TABLE IF EXISTS `VUElement_VUItem`;
+    DROP TABLE IF EXISTS `VUElement_VUFolder`;
 SET foreign_key_checks = 1;
 
 -- --------------------------------------------------
@@ -48,12 +49,6 @@ SET foreign_key_checks = 1;
 
 CREATE TABLE `VUDroit` (
     `IdDroit` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `LirePublic` bool  NOT NULL,
-    `EcrirePublic` bool  NOT NULL,
-    `SuppPublic` bool  NOT NULL,
-    `LirePrive` bool  NOT NULL,
-    `EcrirePrive` bool  NOT NULL,
-    `SuppPrive` bool  NOT NULL,
     `Admin` bool  NOT NULL
 );
 
@@ -88,7 +83,8 @@ CREATE TABLE `VUElement` (
     `Nom` longtext  NOT NULL,
     `DateCreation` datetime  NOT NULL,
     `DateMAJ` datetime  NOT NULL,
-    `UserIdUser` int  NOT NULL
+    `UserIdUser` int  NOT NULL,
+    `VUFolderIdElement` bigint  NULL
 );
 
 -- Creating table 'VUComment'
@@ -217,6 +213,21 @@ ADD CONSTRAINT `FK_UserComment`
 CREATE INDEX `IX_FK_UserComment` 
     ON `VUComment`
     (`UserIdUser`);
+
+-- Creating foreign key on `VUFolderIdElement` in table 'VUElement'
+
+ALTER TABLE `VUElement`
+ADD CONSTRAINT `FK_VUFolderVUElement`
+    FOREIGN KEY (`VUFolderIdElement`)
+    REFERENCES `VUElement_VUFolder`
+        (`IdElement`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_VUFolderVUElement'
+
+CREATE INDEX `IX_FK_VUFolderVUElement` 
+    ON `VUElement`
+    (`VUFolderIdElement`);
 
 -- Creating foreign key on `IdElement` in table 'VUElement_VUItem'
 

@@ -33,6 +33,10 @@
       <End Role="User" EntitySet="VUUser" />
       <End Role="Comment" EntitySet="VUComment" />
     </AssociationSet>
+    <AssociationSet Name="VUFolderVUElement" Association="Model.Store.VUFolderVUElement">
+      <End Role="VUFolder" EntitySet="VUElement_VUFolder" />
+      <End Role="VUElement" EntitySet="VUElement" />
+    </AssociationSet>
     <AssociationSet Name="FK_VUItem_inherits_VUElement" Association="Model.Store.FK_VUItem_inherits_VUElement">
       <End Role="VUElement" EntitySet="VUElement" />
       <End Role="VUItem" EntitySet="VUElement_VUItem" />
@@ -47,12 +51,6 @@
       <PropertyRef Name="IdDroit" />
     </Key>
     <Property Name="IdDroit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="LirePublic" Type="bool" Nullable="false" />
-    <Property Name="EcrirePublic" Type="bool" Nullable="false" />
-    <Property Name="SuppPublic" Type="bool" Nullable="false" />
-    <Property Name="LirePrive" Type="bool" Nullable="false" />
-    <Property Name="EcrirePrive" Type="bool" Nullable="false" />
-    <Property Name="SuppPrive" Type="bool" Nullable="false" />
     <Property Name="Admin" Type="bool" Nullable="false" />
   </EntityType>
   <EntityType Name="VUGroupe">
@@ -88,6 +86,7 @@
     <Property Name="DateCreation" Type="datetime" Nullable="false" />
     <Property Name="DateMAJ" Type="datetime" Nullable="false" />
     <Property Name="UserIdUser" Type="int" Nullable="false" />
+    <Property Name="VUFolderIdElement" Type="bigint" Nullable="true" />
   </EntityType>
   <EntityType Name="VUComment">
     <Key>
@@ -177,6 +176,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="VUFolderVUElement">
+    <End Role="VUFolder" Type="Model.Store.VUElement_VUFolder" Multiplicity="0..1" />
+    <End Role="VUElement" Type="Model.Store.VUElement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VUFolder">
+        <PropertyRef Name="IdElement" />
+      </Principal>
+      <Dependent Role="VUElement">
+        <PropertyRef Name="VUFolderIdElement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_VUItem_inherits_VUElement">
     <End Role="VUElement" Type="Model.Store.VUElement" Multiplicity="1" />
     <End Role="VUItem" Type="Model.Store.VUElement_VUItem" Multiplicity="0..1" />
@@ -231,18 +242,16 @@
             <End Role="User" EntitySet="VUUser" />
             <End Role="Comment" EntitySet="VUComment" />
           </AssociationSet>
+          <AssociationSet Name="VUFolderVUElement" Association="Model.VUFolderVUElement">
+            <End Role="VUFolder" EntitySet="VUElement" />
+            <End Role="VUElement" EntitySet="VUElement" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="VUDroit">
           <Key>
             <PropertyRef Name="IdDroit" />
           </Key>
           <Property Type="Int32" Name="IdDroit" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Boolean" Name="LirePublic" Nullable="false" />
-          <Property Type="Boolean" Name="EcrirePublic" Nullable="false" />
-          <Property Type="Boolean" Name="SuppPublic" Nullable="false" />
-          <Property Type="Boolean" Name="LirePrive" Nullable="false" />
-          <Property Type="Boolean" Name="EcrirePrive" Nullable="false" />
-          <Property Type="Boolean" Name="SuppPrive" Nullable="false" />
           <Property Type="Boolean" Name="Admin" Nullable="false" />
         </EntityType>
         <EntityType Name="VUGroupe">
@@ -281,6 +290,7 @@
           <Property Type="DateTime" Name="DateMAJ" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Model.UserFolder" FromRole="Folder" ToRole="User" />
           <Property Type="Int32" Name="UserIdUser" Nullable="false" />
+          <Property Type="Int64" Name="VUFolderIdElement" Nullable="true" />
         </EntityType>
         <EntityType Name="VUItem" BaseType="Model.VUElement">
           <Property Type="String" Name="Description" Nullable="true" />
@@ -363,6 +373,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="VUFolderVUElement">
+          <End Type="Model.VUFolder" Role="VUFolder" Multiplicity="0..1" />
+          <End Type="Model.VUElement" Role="VUElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VUFolder">
+              <PropertyRef Name="IdElement" />
+            </Principal>
+            <Dependent Role="VUElement">
+              <PropertyRef Name="VUFolderIdElement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -373,12 +395,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.VUDroit)">
         <MappingFragment StoreEntitySet="VUDroit">
           <ScalarProperty Name="IdDroit" ColumnName="IdDroit" />
-          <ScalarProperty Name="LirePublic" ColumnName="LirePublic" />
-          <ScalarProperty Name="EcrirePublic" ColumnName="EcrirePublic" />
-          <ScalarProperty Name="SuppPublic" ColumnName="SuppPublic" />
-          <ScalarProperty Name="LirePrive" ColumnName="LirePrive" />
-          <ScalarProperty Name="EcrirePrive" ColumnName="EcrirePrive" />
-          <ScalarProperty Name="SuppPrive" ColumnName="SuppPrive" />
           <ScalarProperty Name="Admin" ColumnName="Admin" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -417,6 +433,7 @@
           <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
           <ScalarProperty Name="DateMAJ" ColumnName="DateMAJ" />
           <ScalarProperty Name="UserIdUser" ColumnName="UserIdUser" />
+          <ScalarProperty Name="VUFolderIdElement" ColumnName="VUFolderIdElement" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.VUItem)">
@@ -467,15 +484,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Model" ZoomLevel="94" >
-        <EntityTypeShape EntityType="Model.VUDroit" Width="1.875" PointX="0.75" PointY="0.75" Height="2.3848893229166666" />
+        <EntityTypeShape EntityType="Model.VUDroit" Width="1.875" PointX="0.75" PointY="0.75" Height="1.4033821614583331" />
         <EntityTypeShape EntityType="Model.VUGroupe" Width="1.5" PointX="3.125" PointY="0.75" Height="1.9802864583333331" />
         <EntityTypeShape EntityType="Model.VUUser" Width="1.5" PointX="5.25" PointY="1.375" Height="2.3648893229166665" />
         <EntityTypeShape EntityType="Model.VUElement" Width="1.5" PointX="7.875" PointY="1.375" Height="1.787985026041667" />
         <EntityTypeShape EntityType="Model.VUItem" Width="1.5" PointX="6.5" PointY="4.5" Height="1.9802864583333326" />
         <EntityTypeShape EntityType="Model.VUComment" Width="1.5" PointX="2.875" PointY="4.25" Height="2.3648893229166656" />
         <AssociationConnector Association="Model.DroitGroupe">
-          <ConnectorPoint PointX="2.625" PointY="1.9324446614583335" />
-          <ConnectorPoint PointX="3.125" PointY="1.9324446614583335" />
+          <ConnectorPoint PointX="2.625" PointY="1.4516910807291665" />
+          <ConnectorPoint PointX="3.125" PointY="1.4516910807291665" />
         </AssociationConnector>
         <AssociationConnector Association="Model.GroupeUser">
           <ConnectorPoint PointX="4.625" PointY="2.2449446614583337" />
@@ -502,11 +519,18 @@
           <ConnectorPoint PointX="2.96875" PointY="4.25" />
         </AssociationConnector>
         <InheritanceConnector EntityType="Model.VUFolder" >
-          <ConnectorPoint PointX="8.625" PointY="3.547587890625" />
+          <ConnectorPoint PointX="8.625" PointY="3.7398893229166683" />
           <ConnectorPoint PointX="8.625" PointY="4.125" />
+          <ConnectorPoint PointX="10.260414166666665" PointY="4.1249999999999991" />
+          <ConnectorPoint PointX="10.427080833333333" PointY="4.125" />
           <ConnectorPoint PointX="10.75" PointY="4.125" />
           <ConnectorPoint PointX="10.75" PointY="4.5" />
         </InheritanceConnector>
+        <AssociationConnector Association="Model.VUFolderVUElement">
+          <ConnectorPoint PointX="10.3437475" PointY="4.5" />
+          <ConnectorPoint PointX="10.3437475" PointY="2.5574446614583337" />
+          <ConnectorPoint PointX="9.375" PointY="2.5574446614583337" />
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
