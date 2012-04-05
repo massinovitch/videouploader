@@ -24,6 +24,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "ItemComment", "Item", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUItem), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUComment), true)]
 [assembly: EdmRelationshipAttribute("Model", "UserComment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUUser), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUComment), true)]
 [assembly: EdmRelationshipAttribute("Model", "VUFolderVUElement", "VUFolder", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(VideoUploaderModel.VUFolder), "VUElement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUElement), true)]
+[assembly: EdmRelationshipAttribute("Model", "VUDroitElementVUElement", "VUDroitElement", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(VideoUploaderModel.VUDroitElement), "VUElement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(VideoUploaderModel.VUElement), true)]
 
 #endregion
 
@@ -154,6 +155,22 @@ namespace VideoUploaderModel
             }
         }
         private ObjectSet<VUComment> _VUComment;
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        public ObjectSet<VUDroitElement> VUDroitElement
+        {
+            get
+            {
+                if ((_VUDroitElement == null))
+                {
+                    _VUDroitElement = base.CreateObjectSet<VUDroitElement>("VUDroitElement");
+                }
+                return _VUDroitElement;
+            }
+        }
+        private ObjectSet<VUDroitElement> _VUDroitElement;
 
         #endregion
         #region Méthodes AddTo
@@ -196,6 +213,14 @@ namespace VideoUploaderModel
         public void AddToVUComment(VUComment vUComment)
         {
             base.AddObject("VUComment", vUComment);
+        }
+    
+        /// <summary>
+        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet VUDroitElement. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
+        /// </summary>
+        public void AddToVUDroitElement(VUDroitElement vUDroitElement)
+        {
+            base.AddObject("VUDroitElement", vUDroitElement);
         }
 
         #endregion
@@ -528,6 +553,205 @@ namespace VideoUploaderModel
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="VUDroitElement")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class VUDroitElement : EntityObject
+    {
+        #region Méthode de fabrique
+    
+        /// <summary>
+        /// Créez un nouvel objet VUDroitElement.
+        /// </summary>
+        /// <param name="idVUDroitElement">Valeur initiale de la propriété IdVUDroitElement.</param>
+        public static VUDroitElement CreateVUDroitElement(global::System.Int32 idVUDroitElement)
+        {
+            VUDroitElement vUDroitElement = new VUDroitElement();
+            vUDroitElement.IdVUDroitElement = idVUDroitElement;
+            return vUDroitElement;
+        }
+
+        #endregion
+        #region Propriétés primitives
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IdVUDroitElement
+        {
+            get
+            {
+                return _IdVUDroitElement;
+            }
+            set
+            {
+                if (_IdVUDroitElement != value)
+                {
+                    OnIdVUDroitElementChanging(value);
+                    ReportPropertyChanging("IdVUDroitElement");
+                    _IdVUDroitElement = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IdVUDroitElement");
+                    OnIdVUDroitElementChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IdVUDroitElement;
+        partial void OnIdVUDroitElementChanging(global::System.Int32 value);
+        partial void OnIdVUDroitElementChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> EcrireUser
+        {
+            get
+            {
+                return _EcrireUser;
+            }
+            set
+            {
+                OnEcrireUserChanging(value);
+                ReportPropertyChanging("EcrireUser");
+                _EcrireUser = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EcrireUser");
+                OnEcrireUserChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _EcrireUser;
+        partial void OnEcrireUserChanging(Nullable<global::System.Boolean> value);
+        partial void OnEcrireUserChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> LireUser
+        {
+            get
+            {
+                return _LireUser;
+            }
+            set
+            {
+                OnLireUserChanging(value);
+                ReportPropertyChanging("LireUser");
+                _LireUser = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LireUser");
+                OnLireUserChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _LireUser;
+        partial void OnLireUserChanging(Nullable<global::System.Boolean> value);
+        partial void OnLireUserChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> EcrireGroupe
+        {
+            get
+            {
+                return _EcrireGroupe;
+            }
+            set
+            {
+                OnEcrireGroupeChanging(value);
+                ReportPropertyChanging("EcrireGroupe");
+                _EcrireGroupe = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EcrireGroupe");
+                OnEcrireGroupeChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _EcrireGroupe;
+        partial void OnEcrireGroupeChanging(Nullable<global::System.Boolean> value);
+        partial void OnEcrireGroupeChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> LireGroupe
+        {
+            get
+            {
+                return _LireGroupe;
+            }
+            set
+            {
+                OnLireGroupeChanging(value);
+                ReportPropertyChanging("LireGroupe");
+                _LireGroupe = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LireGroupe");
+                OnLireGroupeChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _LireGroupe;
+        partial void OnLireGroupeChanging(Nullable<global::System.Boolean> value);
+        partial void OnLireGroupeChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> EcrireAutre
+        {
+            get
+            {
+                return _EcrireAutre;
+            }
+            set
+            {
+                OnEcrireAutreChanging(value);
+                ReportPropertyChanging("EcrireAutre");
+                _EcrireAutre = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EcrireAutre");
+                OnEcrireAutreChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _EcrireAutre;
+        partial void OnEcrireAutreChanging(Nullable<global::System.Boolean> value);
+        partial void OnEcrireAutreChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> LireAutre
+        {
+            get
+            {
+                return _LireAutre;
+            }
+            set
+            {
+                OnLireAutreChanging(value);
+                ReportPropertyChanging("LireAutre");
+                _LireAutre = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LireAutre");
+                OnLireAutreChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _LireAutre;
+        partial void OnLireAutreChanging(Nullable<global::System.Boolean> value);
+        partial void OnLireAutreChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// Aucune documentation sur les métadonnées n'est disponible.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="VUElement")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -545,7 +769,8 @@ namespace VideoUploaderModel
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
-        public static VUElement CreateVUElement(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser)
+        /// <param name="vUDroitElementIdVUDroitElement">Valeur initiale de la propriété VUDroitElementIdVUDroitElement.</param>
+        public static VUElement CreateVUElement(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser, global::System.Int32 vUDroitElementIdVUDroitElement)
         {
             VUElement vUElement = new VUElement();
             vUElement.IdElement = idElement;
@@ -553,6 +778,7 @@ namespace VideoUploaderModel
             vUElement.DateCreation = dateCreation;
             vUElement.DateMAJ = dateMAJ;
             vUElement.UserIdUser = userIdUser;
+            vUElement.VUDroitElementIdVUDroitElement = vUDroitElementIdVUDroitElement;
             return vUElement;
         }
 
@@ -705,6 +931,30 @@ namespace VideoUploaderModel
         private Nullable<global::System.Int64> _VUFolderIdElement;
         partial void OnVUFolderIdElementChanging(Nullable<global::System.Int64> value);
         partial void OnVUFolderIdElementChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 VUDroitElementIdVUDroitElement
+        {
+            get
+            {
+                return _VUDroitElementIdVUDroitElement;
+            }
+            set
+            {
+                OnVUDroitElementIdVUDroitElementChanging(value);
+                ReportPropertyChanging("VUDroitElementIdVUDroitElement");
+                _VUDroitElementIdVUDroitElement = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VUDroitElementIdVUDroitElement");
+                OnVUDroitElementIdVUDroitElementChanged();
+            }
+        }
+        private global::System.Int32 _VUDroitElementIdVUDroitElement;
+        partial void OnVUDroitElementIdVUDroitElementChanging(global::System.Int32 value);
+        partial void OnVUDroitElementIdVUDroitElementChanged();
 
         #endregion
     
@@ -747,6 +997,44 @@ namespace VideoUploaderModel
                 }
             }
         }
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "VUDroitElementVUElement", "VUDroitElement")]
+        public VUDroitElement VUDroitElement
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUDroitElement>("Model.VUDroitElementVUElement", "VUDroitElement").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUDroitElement>("Model.VUDroitElementVUElement", "VUDroitElement").Value = value;
+            }
+        }
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<VUDroitElement> VUDroitElementReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VUDroitElement>("Model.VUDroitElementVUElement", "VUDroitElement");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VUDroitElement>("Model.VUDroitElementVUElement", "VUDroitElement", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -769,7 +1057,8 @@ namespace VideoUploaderModel
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
-        public static VUFolder CreateVUFolder(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser)
+        /// <param name="vUDroitElementIdVUDroitElement">Valeur initiale de la propriété VUDroitElementIdVUDroitElement.</param>
+        public static VUFolder CreateVUFolder(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser, global::System.Int32 vUDroitElementIdVUDroitElement)
         {
             VUFolder vUFolder = new VUFolder();
             vUFolder.IdElement = idElement;
@@ -777,6 +1066,7 @@ namespace VideoUploaderModel
             vUFolder.DateCreation = dateCreation;
             vUFolder.DateMAJ = dateMAJ;
             vUFolder.UserIdUser = userIdUser;
+            vUFolder.VUDroitElementIdVUDroitElement = vUDroitElementIdVUDroitElement;
             return vUFolder;
         }
 
@@ -1026,8 +1316,9 @@ namespace VideoUploaderModel
         /// <param name="dateCreation">Valeur initiale de la propriété DateCreation.</param>
         /// <param name="dateMAJ">Valeur initiale de la propriété DateMAJ.</param>
         /// <param name="userIdUser">Valeur initiale de la propriété UserIdUser.</param>
+        /// <param name="vUDroitElementIdVUDroitElement">Valeur initiale de la propriété VUDroitElementIdVUDroitElement.</param>
         /// <param name="type">Valeur initiale de la propriété Type.</param>
-        public static VUItem CreateVUItem(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser, global::System.String type)
+        public static VUItem CreateVUItem(global::System.Int64 idElement, global::System.String nom, global::System.DateTime dateCreation, global::System.DateTime dateMAJ, global::System.Int32 userIdUser, global::System.Int32 vUDroitElementIdVUDroitElement, global::System.String type)
         {
             VUItem vUItem = new VUItem();
             vUItem.IdElement = idElement;
@@ -1035,6 +1326,7 @@ namespace VideoUploaderModel
             vUItem.DateCreation = dateCreation;
             vUItem.DateMAJ = dateMAJ;
             vUItem.UserIdUser = userIdUser;
+            vUItem.VUDroitElementIdVUDroitElement = vUDroitElementIdVUDroitElement;
             vUItem.Type = type;
             return vUItem;
         }

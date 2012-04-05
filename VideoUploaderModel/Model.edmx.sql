@@ -5,14 +5,11 @@
 -- -----------------------------------------------------------
 -- Entity Designer DDL Script for MySQL Server 4.1 and higher
 -- -----------------------------------------------------------
--- Date Created: 03/12/2012 17:25:39
+-- Date Created: 04/05/2012 23:24:56
 -- Generated from EDMX file: C:\Users\IBM_ADMIN\Documents\Visual Studio 2010\Projects\VideoUploader\VideoUploaderModel\Model.edmx
 -- Target version: 2.0.0.0
 -- --------------------------------------------------
 
-DROP DATABASE IF EXISTS `videouploader`;
-CREATE DATABASE `videouploader`;
-USE `videouploader`;
 
 -- --------------------------------------------------
 -- Dropping existing FOREIGN KEY constraints
@@ -25,6 +22,7 @@ USE `videouploader`;
 --    ALTER TABLE `VUComment` DROP CONSTRAINT `FK_ItemComment`;
 --    ALTER TABLE `VUComment` DROP CONSTRAINT `FK_UserComment`;
 --    ALTER TABLE `VUElement` DROP CONSTRAINT `FK_VUFolderVUElement`;
+--    ALTER TABLE `VUElement` DROP CONSTRAINT `FK_VUDroitElementVUElement`;
 --    ALTER TABLE `VUElement_VUItem` DROP CONSTRAINT `FK_VUItem_inherits_VUElement`;
 --    ALTER TABLE `VUElement_VUFolder` DROP CONSTRAINT `FK_VUFolder_inherits_VUElement`;
 
@@ -37,6 +35,7 @@ SET foreign_key_checks = 0;
     DROP TABLE IF EXISTS `VUUser`;
     DROP TABLE IF EXISTS `VUElement`;
     DROP TABLE IF EXISTS `VUComment`;
+    DROP TABLE IF EXISTS `VUDroitElement`;
     DROP TABLE IF EXISTS `VUElement_VUItem`;
     DROP TABLE IF EXISTS `VUElement_VUFolder`;
 SET foreign_key_checks = 1;
@@ -84,7 +83,8 @@ CREATE TABLE `VUElement` (
     `DateCreation` datetime  NOT NULL,
     `DateMAJ` datetime  NOT NULL,
     `UserIdUser` int  NOT NULL,
-    `VUFolderIdElement` bigint  NULL
+    `VUFolderIdElement` bigint  NULL,
+    `VUDroitElementIdVUDroitElement` int  NOT NULL
 );
 
 -- Creating table 'VUComment'
@@ -95,6 +95,18 @@ CREATE TABLE `VUComment` (
     `DateCreation` datetime  NOT NULL,
     `ItemIdElement` bigint  NOT NULL,
     `UserIdUser` int  NOT NULL
+);
+
+-- Creating table 'VUDroitElement'
+
+CREATE TABLE `VUDroitElement` (
+    `IdVUDroitElement` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `EcrireUser` bool  NULL,
+    `LireUser` bool  NULL,
+    `EcrireGroupe` bool  NULL,
+    `LireGroupe` bool  NULL,
+    `EcrireAutre` bool  NULL,
+    `LireAutre` bool  NULL
 );
 
 -- Creating table 'VUElement_VUItem'
@@ -228,6 +240,21 @@ ADD CONSTRAINT `FK_VUFolderVUElement`
 CREATE INDEX `IX_FK_VUFolderVUElement` 
     ON `VUElement`
     (`VUFolderIdElement`);
+
+-- Creating foreign key on `VUDroitElementIdVUDroitElement` in table 'VUElement'
+
+ALTER TABLE `VUElement`
+ADD CONSTRAINT `FK_VUDroitElementVUElement`
+    FOREIGN KEY (`VUDroitElementIdVUDroitElement`)
+    REFERENCES `VUDroitElement`
+        (`IdVUDroitElement`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_VUDroitElementVUElement'
+
+CREATE INDEX `IX_FK_VUDroitElementVUElement` 
+    ON `VUElement`
+    (`VUDroitElementIdVUDroitElement`);
 
 -- Creating foreign key on `IdElement` in table 'VUElement_VUItem'
 
