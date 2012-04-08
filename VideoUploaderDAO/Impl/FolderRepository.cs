@@ -2,22 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using VideoUploader;
-using VideoUploaderModel;
-using VideoUploader.DAO;
-using System.Linq.Expressions;
-using VideoUploader.Util;
-using System.Data.Objects;
-using VideoUploaderDAO.Util;
 using log4net;
+using VideoUploaderModel;
+using VideoUploaderDAO.Util;
+using System.Data.Objects;
+using VideoUploader;
 
 namespace VideoUploaderDAO.Impl
 {
-    public class GroupeRepository : BaseRepository<VUGroupe, EntitySearch>
+    public class FolderRepository : BaseRepository<VUFolder, EntitySearch>
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(GroupeRepository));
-        //création d'un groupe
-        public override void Create(VUGroupe grp)
+        private static readonly ILog log = LogManager.GetLogger(typeof(ItemRepository));
+        //création d'un element
+        public override void Create(VUFolder folder)
         {
             try
             {
@@ -27,8 +24,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    // il faut plutot utiliser ça : context.VUGroupe.AddObject(grp);
-                    context.VUGroupe.AddObject(grp);
+                    context.VUElement.AddObject(folder);
                     context.SaveChanges();
                 }
             }
@@ -46,7 +42,7 @@ namespace VideoUploaderDAO.Impl
             }
         }
 
-        //Supprimer tous les groupe
+        //Supprimer tous les elements
         public override void DeleteAll()
         {
             try
@@ -57,10 +53,10 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    var grpList = context.VUGroupe;
-                    foreach (var grp in grpList)
+                    var folderList = context.VUElement.OfType<VUFolder>();
+                    foreach (var folder in folderList)
                     {
-                        context.DeleteObject(grp);
+                        context.DeleteObject(folder);
                     }
                     context.SaveChanges();
                 }
@@ -79,8 +75,8 @@ namespace VideoUploaderDAO.Impl
             }
         }
 
-        //Supprimer un groupe
-        public override void Delete(VUGroupe grp)
+        //Supprimer un Item
+        public override void Delete(VUFolder folder)
         {
             try
             {
@@ -90,7 +86,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    var pers = context.VUGroupe.Where(u => u.IdGroupe == grp.IdGroupe).First();
+                    var pers = context.VUElement.Where(u => u.IdElement == folder.IdElement).First();
                     context.DeleteObject(pers);
                     context.SaveChanges();
                 }
@@ -109,8 +105,8 @@ namespace VideoUploaderDAO.Impl
             }
         }
 
-        //Récupérer tous les groupes
-        public override List<VUGroupe> GetList()
+        //Récupérer tous les items
+        public override List<VUFolder> GetList()
         {
             try
             {
@@ -120,7 +116,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    return context.VUGroupe.ToList();
+                    return context.VUElement.OfType<VUFolder>().ToList();
                 }
             }
             catch (Exception ex)
@@ -137,8 +133,8 @@ namespace VideoUploaderDAO.Impl
             }
         }
 
-        //Récupérer un groupe avec son Id
-        public override VUGroupe FindById(int id)
+        //Récupérer un element avec son Id
+        public override VUFolder FindById(int id)
         {
             try
             {
@@ -148,8 +144,8 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    var grp = context.VUGroupe.Where(u => u.IdGroupe == id);
-                    return grp.First();
+                    var folder = context.VUElement.OfType<VUFolder>().Where(u => u.IdElement == id);
+                    return folder.First();
                 }
             }
             catch (Exception ex)
@@ -166,8 +162,8 @@ namespace VideoUploaderDAO.Impl
             }
         }
 
-        //Récupérer une liste d'groupes avec un critère de recherche
-        public override List<VUGroupe> FindByCriteria(EntitySearch criteria)
+        //Récupérer une liste d'elements avec un critère de recherche
+        public override List<VUFolder> FindByCriteria(EntitySearch criteria)
         {
             try
             {
@@ -179,47 +175,32 @@ namespace VideoUploaderDAO.Impl
                 {
 
                     StringBuilder queryString =
-                        new StringBuilder(@"SELECT VALUE grp FROM ModelContext.VUGroupe as grp");
+                        new StringBuilder(@"SELECT VALUE elt FROM OFTYPE(VUElement,VideoUploaderModel.VUFolder) as elt");
                     SelectBuilder sb = new SelectBuilder();
-
-                    VUGroupe grp = (VUGroupe)criteria.Entity;
+                    VUFolder folder = (VUFolder)criteria.Entity;
                     // Critère Nom
-                    if (grp.Nom != null && !grp.Nom.Equals(""))
+                    if (folder.Nom != null && !folder.Nom.Equals(""))
                     {
-                        sb.AndSearchLike("grp.Nom", grp.Nom.ToString());
+                        sb.AndSearchLike("elt.Nom", folder.Nom.ToString());
                     }
-
-                    // Critère Description
-                    if (grp.Description != null && !grp.Description.Equals(""))
-                    {
-                        sb.AndSearchLike("grp.Description", grp.Description.ToString());
-                    }
-
                     // Critère de date de creation
                     if (criteria.DateDebut != null && !criteria.DateDebut.Equals(""))
                     {
                         if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
                         {
-                            sb.AndSearchBetween("cast(grp.DateCreation as System.String)", criteria.DateDebut, criteria.DateFin);
+                            sb.AndSearchBetween("cast(elt.DateCreation as System.String)", criteria.DateDebut, criteria.DateFin);
                         }
                         else
                         {
-                            sb.AndSearchAfter("cast(grp.DateCreation as System.String)", criteria.DateDebut);
+                            sb.AndSearchAfter("cast(elt.DateCreation as System.String)", criteria.DateDebut);
                         }
                     }
                     else if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
                     {
-                        sb.AndSearchBefore("cast(grp.DateCreation as System.String)", criteria.DateFin);
+                        sb.AndSearchBefore("cast(elt.DateCreation as System.String)", criteria.DateFin);
                     }
-
-                    // Critère Droit, si on recherche les groupes qui ont un droit admin par exemple
-                    if (grp.DroitIdDroit != 0)
-                    {
-                        sb.AndSearch("cast(grp.DroitIdDroit as System.String)", grp.DroitIdDroit.ToString());
-                    }
-
                     queryString.Append(sb.getQueryString());
-                    ObjectQuery<VUGroupe> query = new ObjectQuery<VUGroupe>(queryString.ToString(), context);
+                    ObjectQuery<VUFolder> query = new ObjectQuery<VUFolder>(queryString.ToString(), context).OfType<VUFolder>();
                     return query.ToList();
                 }
             }
@@ -236,5 +217,6 @@ namespace VideoUploaderDAO.Impl
                 }
             }
         }
+
     }
 }

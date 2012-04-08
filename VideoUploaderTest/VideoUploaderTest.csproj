@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Impl\CommentRepositoryTest.cs" />
+    <Compile Include="Impl\DroitRepositoryTest.cs" />
+    <Compile Include="Impl\FolderRepositoryTest.cs" />
     <Compile Include="Impl\GroupeRepositoryTest.cs" />
     <Compile Include="Impl\ItemRepositoryTest.cs" />
     <Compile Include="Impl\UserRepositoryTest.cs" />

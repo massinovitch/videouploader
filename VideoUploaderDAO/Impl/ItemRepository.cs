@@ -24,7 +24,7 @@ namespace VideoUploaderDAO.Impl
                 }
                 using (var context = new ModelContext())
                 {
-                    context.AddToVUElement(itm);
+                    context.VUElement.AddObject(itm);
                     context.SaveChanges();
                 }
             }
@@ -206,9 +206,7 @@ namespace VideoUploaderDAO.Impl
                     }
                     queryString.Append(sb.getQueryString());
                     ObjectQuery<VUItem> query = new ObjectQuery<VUItem>(queryString.ToString(), context).OfType<VUItem>();
-
-                    List<VUItem> elt = query.ToList();
-                    return null;
+                    return  query.ToList();
                 }
             }
             catch (Exception ex)

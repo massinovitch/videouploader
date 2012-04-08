@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using VideoUploaderModel;
 using VideoUploaderDAO.Impl;
+using System.IO;
 namespace VideoUploaderTest.Impl
 {
     class ItemRepositoryTest
     {
-        static void Main(string[] args)
+ /*       static void Main(string[] args)
         {
             try
             {
@@ -27,7 +28,13 @@ namespace VideoUploaderTest.Impl
                 //grpRT.DeleteAll();
                 EntitySearch entitySearch = new EntitySearch(itm, "", "");
 
-                List<VUItem> grpList = itmRT.FindByCriteria(entitySearch);
+                VUItem grpList = itmRT.FindById(1);
+                Byte[] blob = grpList.FichierHD;
+                FileStream fs = new FileStream(@"c:\massiFavoris.html", FileMode.Create, FileAccess.Write);
+
+                fs.Write(blob, 0, blob.Length);
+                fs.Close();
+                Console.WriteLine();
 
             }
             catch (Exception ex)
@@ -36,6 +43,6 @@ namespace VideoUploaderTest.Impl
             }
 
         }
-
+        */
     }
 }
