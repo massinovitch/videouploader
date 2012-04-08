@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Impl\BaseRepository.cs" />
+    <Compile Include="Impl\CommentRepository.cs" />
+    <Compile Include="Impl\DroitGroupeRepository.cs" />
+    <Compile Include="Impl\FolderRepository.cs" />
     <Compile Include="Impl\ItemRepository.cs" />
     <Compile Include="Impl\GroupeRepository.cs" />
     <Compile Include="Interface\IBaseRepository.cs" />

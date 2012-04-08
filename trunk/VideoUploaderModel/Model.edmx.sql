@@ -113,11 +113,11 @@ CREATE TABLE `VUDroitElement` (
 
 CREATE TABLE `VUElement_VUItem` (
     `Description` longtext  NULL,
-    `FichierHD` varbinary(100)  NULL,
+    `FichierHD` LONGBLOB  NULL,
     `UrlHD` longtext  NULL,
     `UrlLD` longtext  NULL,
     `Type` longtext  NOT NULL,
-    `FichierLD` varbinary(100)  NULL,
+    `FichierLD` LONGBLOB  NULL,
     `IdElement` bigint  NOT NULL
 );
 

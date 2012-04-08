@@ -29,7 +29,7 @@ namespace VideoUploader
                 }
                 using (var context = new ModelContext())
                 {
-                    context.AddToVUUser(user);
+                    context.VUUser.AddObject(user);
                     context.SaveChanges();
                 }
             }
