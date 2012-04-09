@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using VideoUploaderModel;
-using VideoUploader;
 using log4net;
-using System.Data.Objects;
-using VideoUploaderDAO.Util;
+using VideoUploaderDAO.Impl;
+using VideoUploaderModel;
 
-namespace VideoUploaderDAO.Impl
+namespace VideoUploaderService.Impl
 {
-    public class DroitGroupeRepository : BaseRepository<VUDroit, EntitySearch>
+    class DroitGroupeRepositoryService
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(DroitGroupeRepository));
+        private static readonly ILog log = LogManager.GetLogger(typeof(DroitGroupeRepositoryService));
         //création d'un groupe
-        public override void Create(VUDroit grp)
+        public override void Create(VUDroit droit)
         {
             try
             {
@@ -22,12 +20,8 @@ namespace VideoUploaderDAO.Impl
                 {
                     log.Debug("Begin Create");
                 }
-                using (var context = new ModelContext())
-                {
-                    // il faut plutot utiliser ça : context.VUDroit.AddObject(grp);
-                    context.VUDroit.AddObject(grp);
-                    context.SaveChanges();
-                }
+                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
+                droitGroupeRepositoryDao.Create(droit);
             }
             catch (Exception ex)
             {
@@ -52,15 +46,8 @@ namespace VideoUploaderDAO.Impl
                 {
                     log.Debug("Begin DeleteAll");
                 }
-                using (var context = new ModelContext())
-                {
-                    var grpList = context.VUDroit;
-                    foreach (var grp in grpList)
-                    {
-                        context.DeleteObject(grp);
-                    }
-                    context.SaveChanges();
-                }
+                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
+                droitGroupeRepositoryDao.DeleteAll();
             }
             catch (Exception ex)
             {
@@ -77,7 +64,7 @@ namespace VideoUploaderDAO.Impl
         }
 
         //Supprimer un groupe
-        public override void Delete(VUDroit grp)
+        public override void Delete(VUDroit droit)
         {
             try
             {
@@ -85,12 +72,8 @@ namespace VideoUploaderDAO.Impl
                 {
                     log.Debug("Begin Delete");
                 }
-                using (var context = new ModelContext())
-                {
-                    var pers = context.VUDroit.Where(u => u.IdDroit == grp.IdDroit).First();
-                    context.DeleteObject(pers);
-                    context.SaveChanges();
-                }
+                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
+                droitGroupeRepositoryDao.Delete(droit);
             }
             catch (Exception ex)
             {
@@ -115,10 +98,8 @@ namespace VideoUploaderDAO.Impl
                 {
                     log.Debug("Begin GetList");
                 }
-                using (var context = new ModelContext())
-                {
-                    return context.VUDroit.ToList();
-                }
+                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
+                return droitGroupeRepositoryDao.GetList();
             }
             catch (Exception ex)
             {
@@ -143,11 +124,8 @@ namespace VideoUploaderDAO.Impl
                 {
                     log.Debug("Begin FindById");
                 }
-                using (var context = new ModelContext())
-                {
-                    var grp = context.VUDroit.Where(u => u.IdDroit == id);
-                    return grp.First();
-                }
+                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
+                return droitGroupeRepositoryDao.FindById(id);
             }
             catch (Exception ex)
             {
@@ -172,38 +150,8 @@ namespace VideoUploaderDAO.Impl
                 {
                     log.Debug("Begin FindByCriteria");
                 }
-                using (var context = new ModelContext())
-                {
-
-                    StringBuilder queryString =
-                        new StringBuilder(@"SELECT VALUE grp FROM ModelContext.VUDroit as grp");
-                    SelectBuilder sb = new SelectBuilder();
-
-                    VUDroit grp = (VUDroit)criteria.Entity;
-                    // Critère Nom
-                    sb.AndSearch("cast(grp.Admin as System.String)", grp.Admin.ToString());
-
-                    // Critère de date de creation
-                    if (criteria.DateDebut != null && !criteria.DateDebut.Equals(""))
-                    {
-                        if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
-                        {
-                            sb.AndSearchBetween("cast(grp.DateCreation as System.String)", criteria.DateDebut, criteria.DateFin);
-                        }
-                        else
-                        {
-                            sb.AndSearchAfter("cast(grp.DateCreation as System.String)", criteria.DateDebut);
-                        }
-                    }
-                    else if (criteria.DateFin != null && !criteria.DateFin.Equals(""))
-                    {
-                        sb.AndSearchBefore("cast(grp.DateCreation as System.String)", criteria.DateFin);
-                    }
-
-                    queryString.Append(sb.getQueryString());
-                    ObjectQuery<VUDroit> query = new ObjectQuery<VUDroit>(queryString.ToString(), context);
-                    return query.ToList();
-                }
+                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
+                return droitGroupeRepositoryDao.FindByCriteria(criteria);
             }
             catch (Exception ex)
             {

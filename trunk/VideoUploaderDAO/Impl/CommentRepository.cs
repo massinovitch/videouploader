@@ -12,7 +12,7 @@ namespace VideoUploaderDAO.Impl
 {
     public class CommentRepository : BaseRepository<VUComment, EntitySearch>
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(GroupeRepository));
+        private static readonly ILog log = LogManager.GetLogger(typeof(CommentRepository));
         //création d'un groupe
         public override void Create(VUComment commentaire)
         {
