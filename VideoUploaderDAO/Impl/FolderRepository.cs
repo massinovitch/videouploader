@@ -12,7 +12,7 @@ namespace VideoUploaderDAO.Impl
 {
     public class FolderRepository : BaseRepository<VUFolder, EntitySearch>
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(ItemRepository));
+        private static readonly ILog log = LogManager.GetLogger(typeof(FolderRepository));
         //création d'un element
         public override void Create(VUFolder folder)
         {
