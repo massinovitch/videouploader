@@ -8,7 +8,7 @@ using VideoUploader;
 
 namespace VideoUploaderService.Impl
 {
-    class UserRepositoryService
+    public class UserRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(UserRepositoryService));
         //création d'un utilisateur

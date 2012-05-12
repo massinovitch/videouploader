@@ -8,11 +8,11 @@ using VideoUploaderModel;
 
 namespace VideoUploaderService.Impl
 {
-    class DroitGroupeRepositoryService
+    public class DroitGroupeRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(DroitGroupeRepositoryService));
         //création d'un groupe
-        public override void Create(VUDroit droit)
+        public void Create(VUDroit droit)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace VideoUploaderService.Impl
         }
 
         //Supprimer tous les groupe
-        public override void DeleteAll()
+        public void DeleteAll()
         {
             try
             {
@@ -64,7 +64,7 @@ namespace VideoUploaderService.Impl
         }
 
         //Supprimer un groupe
-        public override void Delete(VUDroit droit)
+        public void Delete(VUDroit droit)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace VideoUploaderService.Impl
         }
 
         //Récupérer tous les groupes
-        public override List<VUDroit> GetList()
+        public List<VUDroit> GetList()
         {
             try
             {
@@ -116,7 +116,7 @@ namespace VideoUploaderService.Impl
         }
 
         //Récupérer un groupe avec son Id
-        public override VUDroit FindById(int id)
+        public VUDroit FindById(int id)
         {
             try
             {
@@ -142,7 +142,7 @@ namespace VideoUploaderService.Impl
         }
 
         //Récupérer une liste d'groupes avec un critère de recherche
-        public override List<VUDroit> FindByCriteria(EntitySearch criteria)
+        public List<VUDroit> FindByCriteria(EntitySearch criteria)
         {
             try
             {

@@ -9,7 +9,7 @@ using VideoUploaderModel;
 
 namespace VideoUploaderService.Impl
 {
-    class CommentRepositoryService
+    public class CommentRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(CommentRepositoryService));
         //création d'un groupe
@@ -117,7 +117,7 @@ namespace VideoUploaderService.Impl
         }
 
         //Récupérer un groupe avec son Id
-        public override VUComment FindById(int id)
+        public VUComment FindById(int id)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace VideoUploaderService.Impl
         }
 
         //Récupérer une liste d'groupes avec un critère de recherche
-        public override List<VUComment> FindByCriteria(EntitySearch criteria)
+        public List<VUComment> FindByCriteria(EntitySearch criteria)
         {
             try
             {

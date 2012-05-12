@@ -8,7 +8,7 @@ using VideoUploaderModel;
 
 namespace VideoUploaderService.Impl
 {
-    class GroupeRepositoryService
+    public class GroupeRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(GroupeRepositoryService));
         //création d'un groupe

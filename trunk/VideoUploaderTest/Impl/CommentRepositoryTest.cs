@@ -9,7 +9,7 @@ namespace VideoUploaderTest.Impl
 {
     class CommentRepositoryTest
     {
-                     static void Main(string[] args)
+                   /*  static void Main(string[] args)
                         {
                             try
                             {
@@ -34,7 +34,7 @@ namespace VideoUploaderTest.Impl
                                 Console.WriteLine(ex.Message);
                             }
 
-                        }
+                        }*/
                         
 
     }
