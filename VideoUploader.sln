@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoUploader.Ftp", "VideoU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoUploaderService", "VideoUploaderService\VideoUploaderService.csproj", "{281F09D7-9ECE-4430-8CA0-DFE84C5345C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoUploader.Mvc", "VideoUploader.Mvc\VideoUploader.Mvc.csproj", "{EC779020-2BED-49A7-82E9-7547D37808C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,16 @@ Global
 		{281F09D7-9ECE-4430-8CA0-DFE84C5345C3}.Release|Mixed Platforms.Build.0 = Release|x86
 		{281F09D7-9ECE-4430-8CA0-DFE84C5345C3}.Release|x86.ActiveCfg = Release|x86
 		{281F09D7-9ECE-4430-8CA0-DFE84C5345C3}.Release|x86.Build.0 = Release|x86
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EC779020-2BED-49A7-82E9-7547D37808C4}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

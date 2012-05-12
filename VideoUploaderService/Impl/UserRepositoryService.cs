@@ -11,6 +11,32 @@ namespace VideoUploaderService.Impl
     public class UserRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(UserRepositoryService));
+        private UserRepository userRepository;
+
+        public UserRepository UserRepository
+        {
+            get { return userRepository; }
+            set { userRepository = value; }
+        }
+        private static volatile UserRepositoryService instance;
+        private static object syncRoot = new Object();
+
+        private UserRepositoryService() { }
+
+        public static UserRepositoryService getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new UserRepositoryService();
+                }
+            }
+
+            return instance;
+        }
+
         //création d'un utilisateur
         public void Create(VUUser user)
         {
@@ -22,7 +48,6 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Create");
                 }
-                UserRepository userRepository = new UserRepository();
                 userRepository.Create(user);
             }
             catch (Exception ex)
@@ -48,7 +73,6 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin DeleteAll");
                 }
-                UserRepository userRepository = new UserRepository();
                 userRepository.DeleteAll();
             }
             catch (Exception ex)
@@ -74,7 +98,6 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Delete");
                 }
-                UserRepository userRepository = new UserRepository();
                 userRepository.Delete(user);
             }
             catch (Exception ex)
@@ -100,7 +123,6 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin GetList");
                 }
-                UserRepository userRepository = new UserRepository();
                 return userRepository.GetList();
             }
             catch (Exception ex)
@@ -126,7 +148,6 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindById");
                 }
-                UserRepository userRepository = new UserRepository();
                 return userRepository.FindById(id);
             }
             catch (Exception ex)
@@ -152,7 +173,6 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindByCriteria");
                 }
-                UserRepository userRepository = new UserRepository();
                 return userRepository.FindByCriteria(criteria);
             }
             catch (Exception ex)

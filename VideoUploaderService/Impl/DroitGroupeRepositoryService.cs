@@ -11,6 +11,32 @@ namespace VideoUploaderService.Impl
     public class DroitGroupeRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(DroitGroupeRepositoryService));
+        private DroitGroupeRepository droitGroupeRepository;
+
+        public DroitGroupeRepository DroitGroupeRepository
+        {
+            get { return droitGroupeRepository; }
+            set { droitGroupeRepository = value; }
+        }
+        private static volatile DroitGroupeRepositoryService instance;
+        private static object syncRoot = new Object();
+
+        private DroitGroupeRepositoryService() { }
+
+        public static DroitGroupeRepositoryService getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new DroitGroupeRepositoryService();
+                }
+            }
+
+            return instance;
+        }
+
         //création d'un groupe
         public void Create(VUDroit droit)
         {
@@ -20,8 +46,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Create");
                 }
-                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
-                droitGroupeRepositoryDao.Create(droit);
+                droitGroupeRepository.Create(droit);
             }
             catch (Exception ex)
             {
@@ -46,8 +71,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin DeleteAll");
                 }
-                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
-                droitGroupeRepositoryDao.DeleteAll();
+                droitGroupeRepository.DeleteAll();
             }
             catch (Exception ex)
             {
@@ -72,8 +96,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Delete");
                 }
-                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
-                droitGroupeRepositoryDao.Delete(droit);
+                droitGroupeRepository.Delete(droit);
             }
             catch (Exception ex)
             {
@@ -98,8 +121,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin GetList");
                 }
-                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
-                return droitGroupeRepositoryDao.GetList();
+                return droitGroupeRepository.GetList();
             }
             catch (Exception ex)
             {
@@ -124,8 +146,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindById");
                 }
-                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
-                return droitGroupeRepositoryDao.FindById(id);
+                return droitGroupeRepository.FindById(id);
             }
             catch (Exception ex)
             {
@@ -150,8 +171,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindByCriteria");
                 }
-                DroitGroupeRepository droitGroupeRepositoryDao = new DroitGroupeRepository();
-                return droitGroupeRepositoryDao.FindByCriteria(criteria);
+                return droitGroupeRepository.FindByCriteria(criteria);
             }
             catch (Exception ex)
             {

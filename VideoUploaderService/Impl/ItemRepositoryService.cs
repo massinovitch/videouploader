@@ -11,6 +11,32 @@ namespace VideoUploaderService.Impl
     public class ItemRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(ItemRepositoryService));
+        private ItemRepository itemRepository;
+
+        public ItemRepository ItemRepository
+        {
+            get { return itemRepository; }
+            set { itemRepository = value; }
+        }
+        private static volatile ItemRepositoryService instance;
+        private static object syncRoot = new Object();
+
+        private ItemRepositoryService() { }
+
+        public static ItemRepositoryService getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new ItemRepositoryService();
+                }
+            }
+
+            return instance;
+        }
+
         //création d'un element
         public void Create(VUItem itm)
         {
@@ -20,8 +46,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Create");
                 }
-                ItemRepository itemRepositoryDao = new ItemRepository();
-                itemRepositoryDao.Create(itm);
+                itemRepository.Create(itm);
             }
             catch (Exception ex)
             {
@@ -46,8 +71,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin DeleteAll");
                 }
-                ItemRepository itemRepositoryDao = new ItemRepository();
-                itemRepositoryDao.DeleteAll();
+                itemRepository.DeleteAll();
             }
             catch (Exception ex)
             {
@@ -72,8 +96,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Delete");
                 }
-                ItemRepository itemRepositoryDao = new ItemRepository();
-                itemRepositoryDao.Delete(itm);
+                itemRepository.Delete(itm);
             }
             catch (Exception ex)
             {
@@ -98,8 +121,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin GetList");
                 }
-                ItemRepository itemRepositoryDao = new ItemRepository();
-                return itemRepositoryDao.GetList();
+                return itemRepository.GetList();
             }
             catch (Exception ex)
             {
@@ -124,8 +146,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindById");
                 }
-                ItemRepository itemRepositoryDao = new ItemRepository();
-                return itemRepositoryDao.FindById(id);
+                return itemRepository.FindById(id);
             }
             catch (Exception ex)
             {
@@ -150,8 +171,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindByCriteria");
                 }
-                ItemRepository itemRepositoryDao = new ItemRepository();
-                return itemRepositoryDao.FindByCriteria(criteria);
+                return itemRepository.FindByCriteria(criteria);
             }
             catch (Exception ex)
             {

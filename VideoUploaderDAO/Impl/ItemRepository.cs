@@ -13,6 +13,25 @@ namespace VideoUploaderDAO.Impl
     public class ItemRepository : BaseRepository<VUItem, EntitySearch>
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(ItemRepository));
+        private static volatile ItemRepository instance;
+        private static object syncRoot = new Object();
+
+        private ItemRepository() { }
+
+        public static ItemRepository getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new ItemRepository();
+                }
+            }
+
+            return instance;
+        }
+
         //création d'un element
         public override void Create(VUItem itm)
         {

@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\AbstractServiceFactory.cs" />
+    <Compile Include="Factory\ServiceFactory.cs" />
     <Compile Include="Impl\CommentRepositoryService.cs" />
     <Compile Include="Impl\DroitGroupeRepositoryService.cs" />
     <Compile Include="Impl\FolderRepositoryService.cs" />
@@ -61,7 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
     <None Include="log4net.config">
       <SubType>Designer</SubType>
     </None>
