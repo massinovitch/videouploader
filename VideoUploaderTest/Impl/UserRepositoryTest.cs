@@ -9,7 +9,7 @@ namespace VideoUploaderTest.Impl
 {
     class UserRepositoryTest
     {
- /*             static void Main(string[] args)
+             static void Main(string[] args)
                 {
                     try
                     {
@@ -67,7 +67,7 @@ namespace VideoUploaderTest.Impl
 
                 }
    
-         */
+         
     }
 
 

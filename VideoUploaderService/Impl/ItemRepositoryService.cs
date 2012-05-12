@@ -8,7 +8,7 @@ using VideoUploaderDAO.Impl;
 
 namespace VideoUploaderService.Impl
 {
-    class ItemRepositoryService
+    public class ItemRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(ItemRepositoryService));
         //création d'un element
