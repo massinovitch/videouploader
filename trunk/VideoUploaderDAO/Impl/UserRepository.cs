@@ -16,6 +16,25 @@ namespace VideoUploader
     public class UserRepository : BaseRepository <VUUser,EntitySearch>
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(UserRepository));
+        private static volatile UserRepository instance;
+        private static object syncRoot = new Object();
+
+        private UserRepository() { }
+
+        public static UserRepository getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new UserRepository();
+                }
+            }
+
+            return instance;
+        }
+
         //création d'un utilisateur
         public override void Create(VUUser user)
         {

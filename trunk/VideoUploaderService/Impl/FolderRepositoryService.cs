@@ -11,6 +11,32 @@ namespace VideoUploaderService.Impl
     public class FolderRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(FolderRepositoryService));
+        private FolderRepository folderRepository;
+
+        public FolderRepository FolderRepository
+        {
+            get { return folderRepository; }
+            set { folderRepository = value; }
+        }
+        private static volatile FolderRepositoryService instance;
+        private static object syncRoot = new Object();
+
+        private FolderRepositoryService() { }
+
+        public static FolderRepositoryService getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new FolderRepositoryService();
+                }
+            }
+
+            return instance;
+        }
+
         //création d'un element
         public void Create(VUFolder folder)
         {
@@ -20,8 +46,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Create");
                 }
-                FolderRepository folderRepositoryDao = new FolderRepository();
-                folderRepositoryDao.Create(folder);
+                folderRepository.Create(folder);
             }
             catch (Exception ex)
             {
@@ -46,8 +71,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin DeleteAll");
                 }
-                FolderRepository folderRepositoryDao = new FolderRepository();
-                folderRepositoryDao.DeleteAll();
+                folderRepository.DeleteAll();
             }
             catch (Exception ex)
             {
@@ -72,8 +96,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Delete");
                 }
-                FolderRepository folderRepositoryDao = new FolderRepository();
-                folderRepositoryDao.Delete(folder);
+                folderRepository.Delete(folder);
             }
             catch (Exception ex)
             {
@@ -98,8 +121,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin GetList");
                 }
-                FolderRepository folderRepositoryDao = new FolderRepository();
-                return folderRepositoryDao.GetList();
+                return folderRepository.GetList();
             }
             catch (Exception ex)
             {
@@ -124,8 +146,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindById");
                 }
-                FolderRepository folderRepositoryDao = new FolderRepository();
-                return folderRepositoryDao.FindById(id);
+                return folderRepository.FindById(id);
             }
             catch (Exception ex)
             {
@@ -150,8 +171,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindByCriteria");
                 }
-                FolderRepository folderRepositoryDao = new FolderRepository();
-                return folderRepositoryDao.FindByCriteria(criteria);
+                return folderRepository.FindByCriteria(criteria);
             }
             catch (Exception ex)
             {

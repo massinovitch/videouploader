@@ -13,6 +13,33 @@ namespace VideoUploaderService.Impl
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(CommentRepositoryService));
         //création d'un groupe
+        private CommentRepository commentRepository;
+
+        public CommentRepository CommentRepository
+        {
+            get { return commentRepository; }
+            set { commentRepository = value; }
+        }
+
+        private static volatile CommentRepositoryService instance;
+        private static object syncRoot = new Object();
+
+        private CommentRepositoryService() { }
+
+        public static CommentRepositoryService getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new CommentRepositoryService();
+                }
+            }
+
+            return instance;
+        }
+
         public void Create(VUComment commentaire)
         {
             try
@@ -21,8 +48,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Create");
                 }
-                CommentRepository commentRepositoryDao = new CommentRepository();
-                commentRepositoryDao.Create(commentaire);
+                commentRepository.Create(commentaire);
             }
             catch (Exception ex)
             {
@@ -47,8 +73,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin DeleteAll");
                 }
-                CommentRepository commentRepositoryDao = new CommentRepository();
-                commentRepositoryDao.DeleteAll();
+                commentRepository.DeleteAll();
             }
             catch (Exception ex)
             {
@@ -73,8 +98,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Delete");
                 }
-                CommentRepository commentRepositoryDao = new CommentRepository();
-                commentRepositoryDao.Delete(commentaire);
+                commentRepository.Delete(commentaire);
             }
             catch (Exception ex)
             {
@@ -99,8 +123,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin GetList");
                 }
-                CommentRepository commentRepositoryDao = new CommentRepository();
-                return commentRepositoryDao.GetList();
+                return commentRepository.GetList();
             }
             catch (Exception ex)
             {
@@ -125,8 +148,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindById");
                 }
-                CommentRepository commentRepositoryDao = new CommentRepository();
-                return commentRepositoryDao.FindById(id);
+                return commentRepository.FindById(id);
             }
             catch (Exception ex)
             {
@@ -151,8 +173,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindByCriteria");
                 }
-                CommentRepository commentRepositoryDao = new CommentRepository();
-                return commentRepositoryDao.FindByCriteria(criteria);
+                return commentRepository.FindByCriteria(criteria);
             }
             catch (Exception ex)
             {

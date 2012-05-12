@@ -11,6 +11,32 @@ namespace VideoUploaderService.Impl
     public class GroupeRepositoryService
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(GroupeRepositoryService));
+        private GroupeRepository groupeRepository;
+
+        public GroupeRepository GroupeRepository
+        {
+            get { return groupeRepository; }
+            set { groupeRepository = value; }
+        }
+        private static volatile GroupeRepositoryService instance;
+        private static object syncRoot = new Object();
+
+        private GroupeRepositoryService() { }
+
+        public static GroupeRepositoryService getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new GroupeRepositoryService();
+                }
+            }
+
+            return instance;
+        }
+
         //création d'un groupe
         public void Create(VUGroupe grp)
         {
@@ -20,8 +46,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Create");
                 }
-                GroupeRepository groupeRepositoryDao = new GroupeRepository();
-                groupeRepositoryDao.Create(grp);
+                groupeRepository.Create(grp);
             }
             catch (Exception ex)
             {
@@ -46,8 +71,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin DeleteAll");
                 }
-                GroupeRepository groupeRepositoryDao = new GroupeRepository();
-                groupeRepositoryDao.DeleteAll();
+                groupeRepository.DeleteAll();
             }
             catch (Exception ex)
             {
@@ -72,8 +96,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin Delete");
                 }
-                GroupeRepository groupeRepositoryDao = new GroupeRepository();
-                groupeRepositoryDao.Delete(grp);
+                groupeRepository.Delete(grp);
             }
             catch (Exception ex)
             {
@@ -98,8 +121,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin GetList");
                 }
-                GroupeRepository groupeRepositoryDao = new GroupeRepository();
-                return groupeRepositoryDao.GetList();
+                return groupeRepository.GetList();
             }
             catch (Exception ex)
             {
@@ -124,8 +146,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindById");
                 }
-                GroupeRepository groupeRepositoryDao = new GroupeRepository();
-                return groupeRepositoryDao.FindById(id);
+                return groupeRepository.FindById(id);
             }
             catch (Exception ex)
             {
@@ -150,8 +171,7 @@ namespace VideoUploaderService.Impl
                 {
                     log.Debug("Begin FindByCriteria");
                 }
-                GroupeRepository groupeRepositoryDao = new GroupeRepository();
-                return groupeRepositoryDao.FindByCriteria(criteria);
+                return groupeRepository.FindByCriteria(criteria);
             }
             catch (Exception ex)
             {

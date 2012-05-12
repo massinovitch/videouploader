@@ -13,6 +13,25 @@ namespace VideoUploaderDAO.Impl
     public class CommentRepository : BaseRepository<VUComment, EntitySearch>
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(CommentRepository));
+
+        private static volatile CommentRepository instance;
+        private static object syncRoot = new Object();
+
+        private CommentRepository() { }
+
+        public static CommentRepository getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new CommentRepository();
+                }
+            }
+
+            return instance;
+        }
         //création d'un groupe
         public override void Create(VUComment commentaire)
         {

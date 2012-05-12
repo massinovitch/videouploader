@@ -13,6 +13,25 @@ namespace VideoUploaderDAO.Impl
     public class DroitGroupeRepository : BaseRepository<VUDroit, EntitySearch>
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(DroitGroupeRepository));
+        private static volatile DroitGroupeRepository instance;
+        private static object syncRoot = new Object();
+
+        private DroitGroupeRepository() { }
+
+        public static DroitGroupeRepository getInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new DroitGroupeRepository();
+                }
+            }
+
+            return instance;
+        }
+
         //création d'un groupe
         public override void Create(VUDroit grp)
         {
